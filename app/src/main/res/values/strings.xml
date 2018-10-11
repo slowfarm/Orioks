@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ORIOKS 2.0</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="main">Главная</string>
+    <string name="events">Контрольные мероприятия</string>
+    <string name="audience">Аудитроия:</string>
+    <string name="time">Время:</string>
+    <string name="teacher">Преподаватель:</string>
+    <string name="affair">Пара:</string>
+    <string name="exam_date">Дата экзамена:</string>
+    <string name="department">Кафедра:</string>
+    <string name="form">Форма:</string>
+    <string name="teachers_name">Имя преподавателя</string>
+    <string name="_1100">1100</string>
+    <string name="subject">Предмет</string>
+    <string name="_0000">00:00</string>
+</resources>
