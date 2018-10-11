@@ -41,7 +41,7 @@ public class SchedulerFragmentPagerAdapter extends PagerAdapter {
                 dataList = StorageHelper.getInstance().getSchedulersDataCurrentDay(currentWeek, getDayOfWeek());
                 break;
             case 1:
-                dataList = StorageHelper.getInstance().getSchedulersDataCurrentDay(currentWeek+1, getNextDayOfWeek());
+                dataList = StorageHelper.getInstance().getSchedulersDataCurrentDay(currentWeek, getNextDayOfWeek());
                 break;
                 default:
                     dataList = StorageHelper.getInstance().getSchedulersDataCurrentWeek(position-2);
