@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Логин"
+            android:hint="@string/login"
             android:inputType="textPersonName"
             tools:text="Логин" />
     </android.support.design.widget.TextInputLayout>
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Пароль"
+            android:hint="@string/password"
             android:inputType="textPassword"
             tools:text="Пароль" />
     </android.support.design.widget.TextInputLayout>

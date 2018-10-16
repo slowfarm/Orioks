@@ -44,19 +44,21 @@ public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineAdapter.Vi
         else
             holder.value.setText("-");
 
+        holder.valueFrom.setText(String.valueOf(disciplinesList.get(position).getMaxGrade()));
+
         if(progress >= 0)
             holder.progressBar.setProgress((int) progress);
         else
             holder.progressBar.setProgress(0);
 
         if(progress < 50) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#e54304"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FF7535"));
         } else if(progress < 70) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#ff8d00"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#F1C40F"));
         } else if(progress < 85) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#41c300"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#9ACB31"));
         } else {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#008b00"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#28D002"));
         }
     }
 
@@ -70,12 +72,14 @@ public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineAdapter.Vi
         private final TextView name;
         private final CircularProgressBar progressBar;
         private final TextView value;
+        private final TextView valueFrom;
 
         ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.text_view);
             progressBar = itemView.findViewById(R.id.progress_bar);
             value = itemView.findViewById(R.id.value);
+            valueFrom = itemView.findViewById(R.id.value_from);
             itemView.setOnClickListener(view-> view.getContext()
                     .startActivity(
                             new Intent(view.getContext(), EventsActivity.class)

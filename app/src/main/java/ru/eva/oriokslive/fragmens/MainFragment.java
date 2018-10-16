@@ -52,10 +52,12 @@ public class MainFragment extends Fragment implements OnDisciplinesRecieved, Swi
 
     @Override
     public void onResponse(List<Disciplines> disciplinesList) {
-        if(disciplinesList.size() == 0)
+        if(disciplinesList == null) {
             RetrofitHelper.getInstance().getAccessToken(StorageHelper.getInstance().getLoginAndPassword(view.getContext()));
-        StorageHelper.getInstance().setDisciplines(disciplinesList);
-        adapter.addItems(disciplinesList);
+        } else {
+            StorageHelper.getInstance().setDisciplines(disciplinesList);
+            adapter.addItems(disciplinesList);
+        }
         swipeRefreshLayout.setRefreshing(false);
     }
 

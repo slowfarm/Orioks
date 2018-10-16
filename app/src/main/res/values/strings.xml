@@ -19,4 +19,8 @@
     <string name="_1100">1100</string>
     <string name="subject">Предмет</string>
     <string name="_0000">00:00</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="week">Неделя:</string>
+    <string name="_0_0">0.0</string>
 </resources>

@@ -31,7 +31,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.discipline_list_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.events_list_item, parent, false));
     }
 
     @Override
@@ -43,20 +43,24 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         else
             holder.value.setText("-");
 
+        holder.valueFrom.setText(String.valueOf(disciplinesList.get(position).getMaxGrade()));
+
         if(progress >= 0)
             holder.progressBar.setProgress((int) progress);
         else
             holder.progressBar.setProgress(0);
 
         if(progress < 50) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#e54304"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FF7535"));
         } else if(progress < 70) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#ff8d00"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#F1C40F"));
         } else if(progress < 85) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#41c300"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#9ACB31"));
         } else {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#008b00"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#28D002"));
         }
+
+        holder.week.setText(disciplinesList.get(position).getWeek());
     }
 
     @Override
@@ -69,12 +73,16 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         private final TextView name;
         private final CircularProgressBar progressBar;
         private final TextView value;
+        private final TextView week;
+        private final TextView valueFrom;
 
         ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.text_view);
             progressBar = itemView.findViewById(R.id.progress_bar);
             value = itemView.findViewById(R.id.value);
+            week = itemView.findViewById(R.id.week);
+            valueFrom = itemView.findViewById(R.id.value_from);
         }
     }
 }
