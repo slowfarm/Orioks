@@ -24,7 +24,7 @@ import ru.eva.oriokslive.interfaces.OnViewPagerChangeListener;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        OnViewPagerChangeListener, Contract.View {
+        OnViewPagerChangeListener, ContractMainActivity.View {
 
     private MainFragment mainFragment;
     private StudentFragment studentFragment;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
     private TextView value;
     private CircularProgressBar progressBar;
 
-    private Contract.Presenter mPresenter;
+    private ContractMainActivity.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Главная");
+        toolbar.setTitle("Обучение");
         setSupportActionBar(toolbar);
 
         mainFragment = new MainFragment();
@@ -71,10 +71,10 @@ public class MainActivity extends AppCompatActivity
         fTrans = getFragmentManager().beginTransaction();
         fTrans.replace(R.id.frame_layout, mainFragment).commit();
 
-        mPresenter = new Presenter(this);
-        mPresenter.setCurrentWeek(this);
+        mPresenter = new PresenterMainActivity(this);
+        mPresenter.setCurrentWeek();
         mPresenter.getStudent();
-        mPresenter.setStudent(this);
+        mPresenter.setStudent();
     }
 
     @Override
@@ -112,17 +112,17 @@ public class MainActivity extends AppCompatActivity
         menu.getItem(0).setVisible(false);
         switch (item.getItemId()) {
             case R.id.nav_main:
-                toolbar.setTitle("Главная");
+                toolbar.setTitle("Обучение");
                 fTrans.replace(R.id.frame_layout, mainFragment);
-                break;
-            case R.id.nav_student:
-                toolbar.setTitle("О студенте");
-                fTrans.replace(R.id.frame_layout, studentFragment);
                 break;
             case  R.id.nav_scheduler:
                 toolbar.setTitle("Сегодня");
                 fTrans.replace(R.id.frame_layout, schedulerFragment);
                 menu.getItem(0).setVisible(true);
+                break;
+            case R.id.nav_student:
+                toolbar.setTitle("О студенте");
+                fTrans.replace(R.id.frame_layout, studentFragment);
                 break;
         }
         fTrans.commit();

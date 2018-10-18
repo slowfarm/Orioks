@@ -1,6 +1,4 @@
-package ru.eva.oriokslive.activities.Events;
-
-import android.content.Context;
+package ru.eva.oriokslive.activities.Event;
 
 import java.util.List;
 
@@ -9,7 +7,7 @@ import ru.eva.oriokslive.interfaces.OnEventsRecieved;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 import ru.eva.oriokslive.models.orioks.Events;
 
-class Contract {
+class ContractEventActivity {
     interface View {
         void setRecyclerView(List<Events> data);
 
@@ -30,7 +28,7 @@ class Contract {
 
         void getToolbarTitle();
 
-        void getEvents(Context context);
+        void getEvents();
     }
 
     interface Repository {
@@ -38,7 +36,7 @@ class Contract {
 
         Disciplines getDiscipline(int id);
 
-        void getEventList(Context context, int id, OnEventsRecieved onEventsRecieved);
+        void getEventList(int id, OnEventsRecieved onEventsRecieved);
 
         void setEventList(List<Events> eventsList);
     }

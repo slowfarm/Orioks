@@ -1,6 +1,4 @@
-package ru.eva.oriokslive.activities.Events;
-
-import android.content.Context;
+package ru.eva.oriokslive.activities.Event;
 
 import java.util.List;
 
@@ -8,14 +6,14 @@ import ru.eva.oriokslive.helpers.DialogHelper;
 import ru.eva.oriokslive.interfaces.OnEventsRecieved;
 import ru.eva.oriokslive.models.orioks.Events;
 
-class Presenter implements Contract.Presenter, OnEventsRecieved {
-    private Contract.View mView;
-    private Contract.Repository mRepository;
+class PresenterEventActivity implements ContractEventActivity.Presenter, OnEventsRecieved {
+    private ContractEventActivity.View mView;
+    private ContractEventActivity.Repository mRepository;
     private int id;
 
-    Presenter(Contract.View mView, int id) {
+    PresenterEventActivity(ContractEventActivity.View mView, int id) {
         this.mView = mView;
-        this.mRepository = new Repository();
+        this.mRepository = new RepositoryEventActivity();
         this.id = id;
     }
 
@@ -35,8 +33,8 @@ class Presenter implements Contract.Presenter, OnEventsRecieved {
     }
 
     @Override
-    public void getEvents(Context context) {
-        mRepository.getEventList(context, id, this);
+    public void getEvents() {
+        mRepository.getEventList(id, this);
     }
 
     @Override

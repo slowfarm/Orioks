@@ -26,7 +26,7 @@
         </activity>
 
         <activity
-            android:name=".activities.Events.EventsActivity"
+            android:name=".activities.Event.EventActivity"
             android:label="@string/events"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

@@ -1,7 +1,5 @@
 package ru.eva.oriokslive.fragmens.Scheduler;
 
-import android.content.Context;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,23 +9,23 @@ import java.util.Locale;
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
-class Presenter implements Contract.Presenter, OnSchedulersReceived {
-    private Contract.View mView;
-    private Contract.Repository mRepository;
+class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter, OnSchedulersReceived {
+    private ContractSchedulerFragment.View mView;
+    private ContractSchedulerFragment.Repository mRepository;
 
 
-    public Presenter(Contract.View mView) {
+    public PresenterSchedulerFragment(ContractSchedulerFragment.View mView) {
         this.mView = mView;
-        mRepository = new Repository();
+        mRepository = new RepositorySchedulerFragment();
     }
 
     @Override
-    public void getCurrentDay(Context context) {
+    public void getCurrentDay() {
         mView.setPagerAdapter(calculateCurrentDay());
     }
 
     @Override
-    public void checkSchedulerIsEmpty(Context context) {
+    public void checkSchedulerIsEmpty() {
         if(mRepository.getSchedulersDataCurrentWeek(getCurrentWeek()).size() == 0) {
            mRepository.getSchedule(this);
         }

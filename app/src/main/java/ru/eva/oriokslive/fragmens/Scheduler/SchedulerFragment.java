@@ -12,20 +12,19 @@ import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.adapters.SchedulerFragmentPagerAdapter;
 import ru.eva.oriokslive.interfaces.OnViewPagerChangeListener;
 
-public class SchedulerFragment extends Fragment implements Contract.View {
+public class SchedulerFragment extends Fragment implements ContractSchedulerFragment.View {
 
     private OnViewPagerChangeListener onViewPagerChangeListener;
     private ViewPager viewPager;
     private View view;
-    private Contract.Presenter mPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_scheduler, container, false);
-        mPresenter = new Presenter(this);
-        mPresenter.getCurrentDay(view.getContext());
+        ContractSchedulerFragment.Presenter mPresenter = new PresenterSchedulerFragment(this);
+        mPresenter.getCurrentDay();
 
-        mPresenter.checkSchedulerIsEmpty(view.getContext());
+        mPresenter.checkSchedulerIsEmpty();
         return view;
     }
 

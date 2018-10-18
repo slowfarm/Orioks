@@ -2,7 +2,7 @@ package ru.eva.oriokslive.fragmens.Student;
 
 import ru.eva.oriokslive.models.orioks.Student;
 
-class Contract {
+class ContractStudentFragment {
     interface View {
 
         void setStudent(Student student);

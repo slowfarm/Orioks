@@ -10,7 +10,7 @@
     <string name="events">Контрольные мероприятия</string>
     <string name="audience">Аудитроия:</string>
     <string name="time">Время:</string>
-    <string name="teacher">Преподаватель:</string>
+    <string name="teacher">Преподаватели:</string>
     <string name="affair">Пара:</string>
     <string name="exam_date">Дата экзамена:</string>
     <string name="department">Кафедра:</string>
@@ -32,11 +32,12 @@
     <string name="group">Группа:</string>
     <string name="cathedra">Кафедра:</string>
     <string name="cource">Курс:</string>
-    <string name="id">ID:</string>
+    <string name="id">Номер зачетной книжки:</string>
     <string name="semester">Семестр:</string>
     <string name="direction">Направление:</string>
     <string name="profile">Профиль:</string>
     <string name="year">Год:</string>
     <string name="logout">Выйти</string>
     <string name="refresh">Обновить</string>
+    <string name="studying">Обучение</string>
 </resources>

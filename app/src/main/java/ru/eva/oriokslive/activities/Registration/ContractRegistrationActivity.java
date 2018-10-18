@@ -1,11 +1,9 @@
 package ru.eva.oriokslive.activities.Registration;
 
-import android.content.Context;
-
 import ru.eva.oriokslive.interfaces.OnTokenRecieved;
 import ru.eva.oriokslive.models.orioks.AccessToken;
 
-class Contract {
+class ContractRegistrationActivity {
     interface View {
         void startActivity();
 
@@ -15,7 +13,7 @@ class Contract {
     interface Presenter {
         void checkAccessToken();
 
-        void onButtonWasClicked(String login, String password, Context context);
+        void onButtonWasClicked(String login, String password);
     }
 
     interface Repository {

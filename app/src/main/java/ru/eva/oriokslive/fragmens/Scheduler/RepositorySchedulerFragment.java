@@ -8,7 +8,7 @@ import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
 import ru.eva.oriokslive.models.schedule.Data;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
-class Repository implements Contract.Repository {
+class RepositorySchedulerFragment implements ContractSchedulerFragment.Repository {
     @Override
     public List<Data> getSchedulersDataCurrentWeek(int currentWeek) {
         return StorageHelper.getInstance().getSchedulersDataCurrentWeek(currentWeek);

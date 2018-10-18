@@ -5,13 +5,13 @@ import java.util.List;
 import ru.eva.oriokslive.interfaces.OnDisciplinesRecieved;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 
-class Presenter implements Contract.Presenter, OnDisciplinesRecieved {
-    private Contract.View mView;
-    private Contract.Repository mRepository;
+class PresenterMainFragment implements ContractMainFragment.Presenter, OnDisciplinesRecieved {
+    private ContractMainFragment.View mView;
+    private ContractMainFragment.Repository mRepository;
 
-    public Presenter(Contract.View mView) {
+    public PresenterMainFragment(ContractMainFragment.View mView) {
         this.mView = mView;
-        mRepository = new Repository();
+        mRepository = new RepositoryMainFragment();
     }
 
     @Override

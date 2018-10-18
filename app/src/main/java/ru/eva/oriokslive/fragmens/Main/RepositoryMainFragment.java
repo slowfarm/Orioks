@@ -7,7 +7,7 @@ import ru.eva.oriokslive.helpers.StorageHelper;
 import ru.eva.oriokslive.interfaces.OnDisciplinesRecieved;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 
-class Repository implements Contract.Repository {
+class RepositoryMainFragment implements ContractMainFragment.Repository {
     @Override
     public List<Disciplines> getDisciplineList() {
         return StorageHelper.getInstance().getDisciplines();

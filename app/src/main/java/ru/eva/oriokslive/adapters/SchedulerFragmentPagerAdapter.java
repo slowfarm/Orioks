@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -33,25 +34,18 @@ public class SchedulerFragmentPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
 
         View viewItem = inflater.inflate(R.layout.scheduler_pager_item, container, false);
-        Log.d("dayOf", getDayOfWeek()+"");
-        List<Data> dataList;
+        List<Data> dataList = new ArrayList<>();
+        dataList.add(new Data());
         switch (position) {
             case 0:
-                dataList = StorageHelper.getInstance().getSchedulersDataCurrentDay(currentWeek, getDayOfWeek());
+                dataList.addAll(StorageHelper.getInstance().getSchedulersDataCurrentDay(currentWeek, getDayOfWeek()));
                 break;
             case 1:
-                dataList = StorageHelper.getInstance().getSchedulersDataCurrentDay(currentWeek, getNextDayOfWeek());
+                dataList.addAll(StorageHelper.getInstance().getSchedulersDataCurrentDay(currentWeek, getNextDayOfWeek()));
                 break;
                 default:
-                    dataList = StorageHelper.getInstance().getSchedulersDataCurrentWeek(position-2);
-                    dataList.add(0, new Data());
-                    int listSize = dataList.size();
-                    for(int i = 1; i< listSize; i++) {
-                        if(!dataList.get(i).getDay().equals(dataList.get(i+1).getDay())) {
-                            dataList.add(i+1, new Data());
-                            i++;
-                        }
-                    }
+                    dataList.addAll(StorageHelper.getInstance().getSchedulersDataCurrentWeek(position-2));
+                    fillDataList(dataList);
                     break;
         }
         SchedulerFragmentAdapter adapter = new SchedulerFragmentAdapter(dataList);
@@ -88,5 +82,15 @@ public class SchedulerFragmentPagerAdapter extends PagerAdapter {
             return 1;
         else
             return getDayOfWeek()+1;
+    }
+
+    private void fillDataList(List<Data> dataList) {
+        int listSize = dataList.size();
+        for(int i = 1; i< listSize; i++) {
+            if(!dataList.get(i).getDay().equals(dataList.get(i+1).getDay())) {
+                dataList.add(i+1, new Data());
+                i++;
+            }
+        }
     }
 }

@@ -2,14 +2,14 @@ package ru.eva.oriokslive.fragmens.Student;
 
 import ru.eva.oriokslive.models.orioks.Student;
 
-class Presenter implements Contract.Presenter {
-    private Contract.View mView;
-    private Contract.Repository mRepository;
+class PresenterStudentFragment implements ContractStudentFragment.Presenter {
+    private ContractStudentFragment.View mView;
+    private ContractStudentFragment.Repository mRepository;
 
 
-    public Presenter(Contract.View mView) {
+    public PresenterStudentFragment(ContractStudentFragment.View mView) {
         this.mView = mView;
-        mRepository = new Repository();
+        mRepository = new RepositoryStudentFragment();
     }
 
     @Override

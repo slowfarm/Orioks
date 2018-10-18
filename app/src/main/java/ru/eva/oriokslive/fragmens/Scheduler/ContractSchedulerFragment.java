@@ -1,14 +1,12 @@
 package ru.eva.oriokslive.fragmens.Scheduler;
 
-import android.content.Context;
-
 import java.util.List;
 
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
 import ru.eva.oriokslive.models.schedule.Data;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
-class Contract {
+class ContractSchedulerFragment {
     interface View {
 
         void setPagerAdapter(int currentDay);
@@ -18,9 +16,9 @@ class Contract {
 
     interface Presenter {
 
-        void getCurrentDay(Context context);
+        void getCurrentDay();
 
-        void checkSchedulerIsEmpty(Context context);
+        void checkSchedulerIsEmpty();
     }
 
     interface Repository {

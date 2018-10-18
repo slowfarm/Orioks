@@ -11,9 +11,9 @@ import android.widget.Toast;
 import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.activities.Main.MainActivity;
 
-public class RegistrationActivity extends AppCompatActivity implements Contract.View {
+public class RegistrationActivity extends AppCompatActivity implements ContractRegistrationActivity.View {
 
-    private Contract.Presenter mPresenter;
+    private ContractRegistrationActivity.Presenter mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,13 +23,12 @@ public class RegistrationActivity extends AppCompatActivity implements Contract.
         EditText password = findViewById(R.id.password);
         Button button = findViewById(R.id.button);
 
-        mPresenter = new Presenter(this);
+        mPresenter = new PresenterRegistrationActivity(this);
         mPresenter.checkAccessToken();
 
         button.setOnClickListener(view-> mPresenter.onButtonWasClicked(
                 login.getText().toString(),
-                password.getText().toString(),
-                this));
+                password.getText().toString()));
     }
 
 

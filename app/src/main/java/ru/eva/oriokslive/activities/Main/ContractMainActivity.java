@@ -5,7 +5,7 @@ import android.content.Context;
 import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.models.orioks.Student;
 
-class Contract {
+class ContractMainActivity {
     interface View {
         void showCurrentWeek(String currentWeek, float progress, String value);
 
@@ -19,13 +19,13 @@ class Contract {
     }
 
     interface Presenter {
-        void setCurrentWeek(Context context);
+        void setCurrentWeek();
 
         void setViewPagerToPosition();
 
         void getStudent();
 
-        void setStudent(Context context);
+        void setStudent();
 
         void getToolbarTitle(int position);
     }
@@ -34,7 +34,7 @@ class Contract {
 
         Student getStudent();
 
-        void updateStudent(Context context, OnStudentRecieved onStudentRecieved);
+        void updateStudent(OnStudentRecieved onStudentRecieved);
 
         void setStudent(Student student);
     }

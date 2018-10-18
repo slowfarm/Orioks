@@ -1,6 +1,4 @@
-package ru.eva.oriokslive.activities.Events;
-
-import android.content.Context;
+package ru.eva.oriokslive.activities.Event;
 
 import java.util.List;
 
@@ -10,7 +8,7 @@ import ru.eva.oriokslive.interfaces.OnEventsRecieved;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 import ru.eva.oriokslive.models.orioks.Events;
 
-class Repository implements Contract.Repository {
+class RepositoryEventActivity implements ContractEventActivity.Repository {
     @Override
     public List<Events> getEventList(int id) {
         return StorageHelper.getInstance().getEventsList(id);
@@ -22,7 +20,7 @@ class Repository implements Contract.Repository {
     }
 
     @Override
-    public void getEventList(Context context, int id, OnEventsRecieved onEventsRecieved) {
+    public void getEventList(int id, OnEventsRecieved onEventsRecieved) {
         RetrofitHelper.getInstance().setOnEventsRecieved(onEventsRecieved);
         RetrofitHelper.getInstance().getEvents(StorageHelper.getInstance().getAccessToken(), id);
     }

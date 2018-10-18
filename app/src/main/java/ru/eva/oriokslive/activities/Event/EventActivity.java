@@ -1,4 +1,4 @@
-package ru.eva.oriokslive.activities.Events;
+package ru.eva.oriokslive.activities.Event;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,10 +19,10 @@ import ru.eva.oriokslive.models.orioks.Disciplines;
 import ru.eva.oriokslive.models.orioks.Events;
 
 
-public class EventsActivity extends AppCompatActivity implements Contract.View {
+public class EventActivity extends AppCompatActivity implements ContractEventActivity.View {
 
     private EventsAdapter adapter;
-    private Contract.Presenter mPresenter;
+    private ContractEventActivity.Presenter mPresenter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +32,10 @@ public class EventsActivity extends AppCompatActivity implements Contract.View {
         String intExtraName = "id";
         int id = intent.getIntExtra(intExtraName, 0);
 
-        mPresenter = new Presenter(this, id);
+        mPresenter = new PresenterEventActivity(this, id);
         mPresenter.getToolbarTitle();
         mPresenter.getRecyclerView();
-        mPresenter.getEvents(this);
+        mPresenter.getEvents();
     }
 
 

@@ -14,8 +14,8 @@ import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.activities.Registration.RegistrationActivity;
 import ru.eva.oriokslive.models.orioks.Student;
 
-public class StudentFragment extends Fragment implements Contract.View {
-    private Contract.Presenter mPresenter;
+public class StudentFragment extends Fragment implements ContractStudentFragment.View {
+    private ContractStudentFragment.Presenter mPresenter;
     private TextView name;
     private TextView group;
     private TextView department;
@@ -41,7 +41,7 @@ public class StudentFragment extends Fragment implements Contract.View {
         year = view.findViewById(R.id.year);
         Button button = view.findViewById(R.id.exit);
 
-        mPresenter = new Presenter(this);
+        mPresenter = new PresenterStudentFragment(this);
         mPresenter.getStudent();
 
         button.setOnClickListener(v-> mPresenter.onButtonWasClicked());

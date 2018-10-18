@@ -5,7 +5,7 @@ import ru.eva.oriokslive.helpers.StorageHelper;
 import ru.eva.oriokslive.interfaces.OnTokenRecieved;
 import ru.eva.oriokslive.models.orioks.AccessToken;
 
-public class Repository implements Contract.Repository {
+public class RepositoryRegistrationActivity implements ContractRegistrationActivity.Repository {
     @Override
     public String getAccessToken() {
         return StorageHelper.getInstance().getAccessToken();

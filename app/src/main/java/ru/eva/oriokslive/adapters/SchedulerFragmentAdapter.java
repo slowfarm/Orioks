@@ -47,8 +47,12 @@ class SchedulerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 break;
             case 1:
                 ViewHolder1 holder1 = (ViewHolder1)viewHolder;
-                if(dataList.size() != 1)
+                if(dataList.size() != 1) {
                     holder1.dayOfWeek.setText(getDayOfWeek(position));
+                }
+                else {
+                    holder1.dayOfWeek.setText("Нет занятий");
+                }
                 break;
         }
 

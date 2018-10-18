@@ -1,7 +1,5 @@
 package ru.eva.oriokslive.activities.Main;
 
-import android.content.Context;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,18 +9,18 @@ import java.util.Locale;
 import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.models.orioks.Student;
 
-class Presenter implements Contract.Presenter, OnStudentRecieved {
+class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudentRecieved {
 
-    private Contract.View mView;
-    private Contract.Repository mRepository;
+    private ContractMainActivity.View mView;
+    private ContractMainActivity.Repository mRepository;
 
-    Presenter(Contract.View mView) {
+    PresenterMainActivity(ContractMainActivity.View mView) {
         this.mView = mView;
-        this.mRepository = new Repository();
+        this.mRepository = new RepositoryMainActivity();
     }
 
     @Override
-    public void setCurrentWeek(Context context) {
+    public void setCurrentWeek() {
         int currentWeek = getCurrentWeek();
         mView.showCurrentWeek(String.valueOf(currentWeek), getProgress(), getCurrentValue(currentWeek));
     }
@@ -41,8 +39,8 @@ class Presenter implements Contract.Presenter, OnStudentRecieved {
     }
 
     @Override
-    public void setStudent(Context context) {
-        mRepository.updateStudent(context, this);
+    public void setStudent() {
+        mRepository.updateStudent(this);
 
     }
 

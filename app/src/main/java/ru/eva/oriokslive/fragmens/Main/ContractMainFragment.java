@@ -5,7 +5,7 @@ import java.util.List;
 import ru.eva.oriokslive.interfaces.OnDisciplinesRecieved;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 
-class Contract {
+class ContractMainFragment {
     interface View {
 
         void setRecyclerView(List<Disciplines> disciplineList);

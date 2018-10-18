@@ -18,7 +18,7 @@ import ru.eva.oriokslive.helpers.RetrofitHelper;
 import ru.eva.oriokslive.helpers.StorageHelper;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 
-public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, Contract.View {
+public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, ContractMainFragment.View {
 
     private DisciplineAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -31,7 +31,7 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         swipeRefreshLayout = view.findViewById(R.id.container);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        Contract.Presenter mPresenter = new Presenter(this);
+        ContractMainFragment.Presenter mPresenter = new PresenterMainFragment(this);
         mPresenter.getDisciplineList();
         mPresenter.setDisciplineList();
 

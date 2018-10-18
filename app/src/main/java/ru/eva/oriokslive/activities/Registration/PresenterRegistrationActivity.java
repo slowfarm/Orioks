@@ -1,18 +1,17 @@
 package ru.eva.oriokslive.activities.Registration;
 
-import android.content.Context;
 import android.util.Base64;
 
 import ru.eva.oriokslive.interfaces.OnTokenRecieved;
 import ru.eva.oriokslive.models.orioks.AccessToken;
 
-public class Presenter implements Contract.Presenter, OnTokenRecieved {
-    private Contract.View mView;
-    private Contract.Repository mRepository;
+public class PresenterRegistrationActivity implements ContractRegistrationActivity.Presenter, OnTokenRecieved {
+    private ContractRegistrationActivity.View mView;
+    private ContractRegistrationActivity.Repository mRepository;
 
-    Presenter(Contract.View mView) {
+    PresenterRegistrationActivity(ContractRegistrationActivity.View mView) {
         this.mView = mView;
-        mRepository = new Repository();
+        mRepository = new RepositoryRegistrationActivity();
     }
 
     @Override
@@ -23,7 +22,7 @@ public class Presenter implements Contract.Presenter, OnTokenRecieved {
     }
 
     @Override
-    public void onButtonWasClicked(String login, String password, Context context) {
+    public void onButtonWasClicked(String login, String password) {
         if(login.equals("")) {
             mView.showToast("Пожалуйста, введите логин");
         } else if(password.equals("")) {

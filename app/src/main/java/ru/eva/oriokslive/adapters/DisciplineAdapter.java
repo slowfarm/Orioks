@@ -13,7 +13,7 @@ import com.budiyev.android.circularprogressbar.CircularProgressBar;
 import java.util.List;
 
 import ru.eva.oriokslive.R;
-import ru.eva.oriokslive.activities.Events.EventsActivity;
+import ru.eva.oriokslive.activities.Event.EventActivity;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 
 public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineAdapter.ViewHolder> {
@@ -82,7 +82,7 @@ public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineAdapter.Vi
             valueFrom = itemView.findViewById(R.id.value_from);
             itemView.setOnClickListener(view-> view.getContext()
                     .startActivity(
-                            new Intent(view.getContext(), EventsActivity.class)
+                            new Intent(view.getContext(), EventActivity.class)
                                     .putExtra("id", disciplinesList.get(getAdapterPosition()).getId())));
         }
     }
