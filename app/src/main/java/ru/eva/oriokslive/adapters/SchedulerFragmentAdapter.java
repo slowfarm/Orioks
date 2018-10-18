@@ -1,8 +1,5 @@
 package ru.eva.oriokslive.adapters;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

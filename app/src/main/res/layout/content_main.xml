@@ -5,6 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/frame_layout"
-    tools:context=".activities.MainActivity"
+    tools:context=".activities.Main.MainActivity"
     tools:showIn="@layout/app_bar_main">
 </FrameLayout>

@@ -23,4 +23,20 @@
     <string name="password">Пароль</string>
     <string name="week">Неделя:</string>
     <string name="_0_0">0.0</string>
+    <string name="about_student">О студенте</string>
+    <string name="schedule">Расписание</string>
+    <string name="log_in">Войти</string>
+    <string name="_5">5</string>
+    <string name="information">Информация</string>
+    <string name="name">Имя:</string>
+    <string name="group">Группа:</string>
+    <string name="cathedra">Кафедра:</string>
+    <string name="cource">Курс:</string>
+    <string name="id">ID:</string>
+    <string name="semester">Семестр:</string>
+    <string name="direction">Направление:</string>
+    <string name="profile">Профиль:</string>
+    <string name="year">Год:</string>
+    <string name="logout">Выйти</string>
+    <string name="refresh">Обновить</string>
 </resources>

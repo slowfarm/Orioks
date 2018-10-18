@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.RegistrationActivity"
+            android:name=".activities.Registration.RegistrationActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoStatusBar">
             <intent-filter>
@@ -26,12 +26,12 @@
         </activity>
 
         <activity
-            android:name=".activities.EventsActivity"
+            android:name=".activities.Events.EventsActivity"
             android:label="@string/events"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.Main.MainActivity"
             android:label="@string/main"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

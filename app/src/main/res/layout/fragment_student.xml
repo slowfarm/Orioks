@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginLeft="16dp"
     android:layout_marginTop="8dp"
     android:layout_marginRight="16dp"
@@ -17,14 +18,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Имя: "
+            android:text="@string/name"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            tools:text="TextView" />
     </LinearLayout>
 
     <LinearLayout
@@ -36,14 +37,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Группа: "
+            android:text="@string/group"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            tools:text="TextView" />
     </LinearLayout>
 
     <LinearLayout
@@ -55,14 +56,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Кафедра: "
+            android:text="@string/cathedra"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/department"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            tools:text="TextView" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,14 +75,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Курс: "
+            android:text="@string/cource"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/course"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            tools:text="TextView" />
     </LinearLayout>
 
     <LinearLayout
@@ -93,14 +94,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ID: "
+            android:text="@string/id"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            tools:text="TextView" />
     </LinearLayout>
 
     <LinearLayout
@@ -112,14 +113,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Семестр: "
+            android:text="@string/semester"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/semester"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            tools:text="TextView" />
     </LinearLayout>
 
     <LinearLayout
@@ -131,14 +132,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Направление: "
+            android:text="@string/direction"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/direction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            tools:text="TextView" />
     </LinearLayout>
 
     <LinearLayout
@@ -150,14 +151,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Профиль: "
+            android:text="@string/profile"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            tools:text="TextView" />
     </LinearLayout>
 
     <LinearLayout
@@ -169,14 +170,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Год: "
+            android:text="@string/year"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            tools:text="TextView" />
     </LinearLayout>
 
     <Button
@@ -184,5 +185,5 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Выйти" />
+        android:text="@string/logout" />
 </LinearLayout>

@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.models.orioks.Disciplines;
-import ru.eva.oriokslive.models.orioks.Events;
 import ru.eva.oriokslive.models.schedule.Data;
 
 public class DialogHelper {

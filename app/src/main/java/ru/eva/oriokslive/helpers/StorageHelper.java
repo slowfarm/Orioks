@@ -1,24 +1,21 @@
 package ru.eva.oriokslive.helpers;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
+import ru.eva.oriokslive.models.orioks.AccessToken;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 import ru.eva.oriokslive.models.orioks.Events;
 import ru.eva.oriokslive.models.orioks.Student;
-import ru.eva.oriokslive.models.schedule.Clazz;
 import ru.eva.oriokslive.models.schedule.Data;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
 public class StorageHelper {
 
     private static volatile StorageHelper instance;
-    private final String table = "data";
 
     public static StorageHelper getInstance() {
         if (instance == null)
@@ -26,16 +23,23 @@ public class StorageHelper {
         return instance;
     }
 
-    public void setAccessToken(Context context, String accessToken) {
-        SharedPreferences sharedPref = context.getSharedPreferences(table, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("accessToken", accessToken);
-        editor.apply();
+    public void setAccessToken(AccessToken accessToken) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(realm1 -> {
+            realm.delete(AccessToken.class);
+            realm.insert(accessToken);
+        });
     }
 
-    public String getAccessToken(Context context) {
-        SharedPreferences sharedPref = context.getSharedPreferences(table, Context.MODE_PRIVATE);
-        return sharedPref.getString("accessToken", null);
+    public String getAccessToken() {
+        Realm realm = Realm.getDefaultInstance();
+        AccessToken accessToken = realm.where(AccessToken.class).findFirst();
+        if(accessToken != null) {
+            return accessToken.getToken();
+        }
+        else {
+            return null;
+        }
     }
 
     public void setStudent(Student student) {
@@ -82,26 +86,9 @@ public class StorageHelper {
         });
     }
 
-    public void clearTables(Context context) {
-        SharedPreferences sharedPref = context.getSharedPreferences(table, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("accessToken", null);
-        editor.putString("loginAndPassword", null);
-        editor.apply();
+    public void clearTables() {
         Realm realm = Realm.getDefaultInstance();
-        realm.executeTransactionAsync(realm1 -> realm1.deleteAll());
-    }
-
-    public void setLoginAndPassword(Context context, String loginAndPassword) {
-        SharedPreferences sharedPref = context.getSharedPreferences(table, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("loginAndPassword", loginAndPassword);
-        editor.apply();
-    }
-
-    public String getLoginAndPassword(Context context) {
-        SharedPreferences sharedPref = context.getSharedPreferences(table, Context.MODE_PRIVATE);
-        return sharedPref.getString("loginAndPassword", null);
+        realm.executeTransaction(realm1 -> realm1.deleteAll());
     }
 
     public void setSchedulers(Schedulers schedulers) {
@@ -132,17 +119,5 @@ public class StorageHelper {
             dataList = new ArrayList<>();
         Log.d("tagddayNumber", value+"  "+dataList.size()+"");
         return dataList;
-    }
-
-    public void setCurrentWeek(Context context, int currentWeek) {
-        SharedPreferences sharedPref = context.getSharedPreferences(table, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("currentWeek", currentWeek);
-        editor.apply();
-    }
-
-    public int getCurrentWeek(Context context) {
-        SharedPreferences sharedPref = context.getSharedPreferences(table, Context.MODE_PRIVATE);
-        return sharedPref.getInt("currentWeek", 0);
     }
 }

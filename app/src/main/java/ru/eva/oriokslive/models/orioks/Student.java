@@ -46,8 +46,8 @@ public class Student extends RealmObject {
         this.error = error;
     }
 
-    public Integer getCourse() {
-        return course;
+    public String getCourse() {
+        return String.valueOf(course);
     }
 
     public void setCourse(Integer course) {
@@ -86,8 +86,8 @@ public class Student extends RealmObject {
         this.recordBookId = recordBookId;
     }
 
-    public Integer getSemester() {
-        return semester;
+    public String getSemester() {
+        return String.valueOf(semester);
     }
 
     public void setSemester(Integer semester) {

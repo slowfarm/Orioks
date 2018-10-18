@@ -12,7 +12,6 @@ import com.budiyev.android.circularprogressbar.CircularProgressBar;
 import java.util.List;
 
 import ru.eva.oriokslive.R;
-import ru.eva.oriokslive.helpers.DialogHelper;
 import ru.eva.oriokslive.models.orioks.Events;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {

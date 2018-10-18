@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/side_nav_bar"
     android:gravity="bottom"
     android:orientation="vertical"
@@ -32,7 +33,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="100"
+                tools:text="100"
                 app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
                 app:layout_constraintEnd_toEndOf="@+id/progress_bar"
                 app:layout_constraintHorizontal_bias="0.571"
@@ -72,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="4dp"
-            android:text="1 знаменатель" />
+            tools:text="1 знаменатель" />
 
     </LinearLayout>
 

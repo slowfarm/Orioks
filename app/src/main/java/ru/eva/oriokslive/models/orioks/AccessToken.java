@@ -2,7 +2,9 @@ package ru.eva.oriokslive.models.orioks;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AccessToken {
+import io.realm.RealmObject;
+
+public class AccessToken extends RealmObject {
 
     @SerializedName("token")
     private String token;
