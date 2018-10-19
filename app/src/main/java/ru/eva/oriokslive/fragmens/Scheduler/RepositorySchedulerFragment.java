@@ -1,18 +1,11 @@
 package ru.eva.oriokslive.fragmens.Scheduler;
 
-import java.util.List;
-
 import ru.eva.oriokslive.helpers.RetrofitHelper;
 import ru.eva.oriokslive.helpers.StorageHelper;
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
-import ru.eva.oriokslive.models.schedule.Data;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
 class RepositorySchedulerFragment implements ContractSchedulerFragment.Repository {
-    @Override
-    public List<Data> getSchedulersDataCurrentWeek(int currentWeek) {
-        return StorageHelper.getInstance().getSchedulersDataCurrentWeek(currentWeek);
-    }
 
     @Override
     public void getSchedule(OnSchedulersReceived onSchedulersReceived) {
@@ -23,5 +16,10 @@ class RepositorySchedulerFragment implements ContractSchedulerFragment.Repositor
     @Override
     public void setSchedule(Schedulers schedulers) {
         StorageHelper.getInstance().setSchedulers(schedulers);
+    }
+
+    @Override
+    public Schedulers getLocalSchedule() {
+        return StorageHelper.getInstance().getSchedule();
     }
 }

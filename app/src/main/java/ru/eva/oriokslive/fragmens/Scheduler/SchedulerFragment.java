@@ -24,7 +24,7 @@ public class SchedulerFragment extends Fragment implements ContractSchedulerFrag
         ContractSchedulerFragment.Presenter mPresenter = new PresenterSchedulerFragment(this);
         mPresenter.getCurrentDay();
 
-        mPresenter.checkSchedulerIsEmpty();
+        mPresenter.getSchedule();
         return view;
     }
 

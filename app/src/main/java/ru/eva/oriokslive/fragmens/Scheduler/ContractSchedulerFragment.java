@@ -18,15 +18,15 @@ class ContractSchedulerFragment {
 
         void getCurrentDay();
 
-        void checkSchedulerIsEmpty();
+        void getSchedule();
     }
 
     interface Repository {
 
-        List<Data> getSchedulersDataCurrentWeek(int currentWeek);
-
         void getSchedule(OnSchedulersReceived onSchedulersReceived);
 
         void setSchedule(Schedulers schedulers);
+
+        Schedulers getLocalSchedule();
     }
 }

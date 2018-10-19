@@ -21,7 +21,6 @@
             android:id="@+id/imageView3"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_weight="1"
             app:srcCompat="@drawable/ic_create_black" />
 
         <TextView
@@ -57,7 +56,6 @@
             android:id="@+id/imageView4"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_weight="1"
             app:srcCompat="@drawable/ic_school_black"
             tools:ignore="VectorDrawableCompat" />
 
@@ -90,7 +88,6 @@
             android:id="@+id/imageView5"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_weight="1"
             app:srcCompat="@drawable/ic_date_range"
             tools:ignore="VectorDrawableCompat" />
 
@@ -123,7 +120,6 @@
             android:id="@+id/imageView6"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_weight="1"
             app:srcCompat="@drawable/ic_group"
             tools:ignore="VectorDrawableCompat" />
 

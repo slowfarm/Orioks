@@ -1,1 +1,4 @@
 /build
+*.jks
+app.aab
+/release

@@ -1,11 +1,11 @@
 package ru.eva.oriokslive.helpers;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import ru.eva.oriokslive.models.orioks.AccessToken;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 import ru.eva.oriokslive.models.orioks.Events;
@@ -102,10 +102,18 @@ public class StorageHelper {
 
     public List<Data> getSchedulersDataCurrentWeek(int dayNumber) {
         Realm realm = Realm.getDefaultInstance();
-        List<Data> dataList = realm.copyFromRealm(realm.where(Data.class).equalTo("dayNumber", dayNumber).findAll());
+        RealmResults<Data> results = realm.where(Data.class)
+                .equalTo("dayNumber", dayNumber)
+                .findAll()
+                .sort("time.timeFrom");
+        RealmResults<Data> results1 = results.sort("day");
+        List<Data> dataList = realm.copyFromRealm(results1);
         if(dataList == null)
             dataList = new ArrayList<>();
-        Log.d("tagddayNumber", dayNumber+"  "+dataList.size()+"");
+        else {
+            dataList.add(0, new Data());
+            fillDataList(dataList);
+        }
         return dataList;
     }
 
@@ -114,10 +122,32 @@ public class StorageHelper {
         List<Data> dataList = realm.copyFromRealm(
                 realm.where(Data.class)
                         .equalTo("dayNumber", week)
-                        .equalTo("day",value).findAll());
-        if(dataList == null)
+                        .equalTo("day",value)
+                        .sort("time.timeFrom")
+                        .findAll());
+        if(dataList == null) {
             dataList = new ArrayList<>();
-        Log.d("tagddayNumber", value+"  "+dataList.size()+"");
+        }
+        else {
+            dataList.add(0, new Data());
+        }
         return dataList;
+    }
+
+    private void fillDataList(List<Data> dataList) {
+        int listSize = dataList.size();
+        for(int i = 1; i< listSize; i++) {
+            if(!dataList.get(i).getDay().equals(dataList.get(i+1).getDay())) {
+                dataList.add(i+1, new Data());
+                i++;
+            }
+        }
+    }
+
+    public Schedulers getSchedule() {
+        Realm realm = Realm.getDefaultInstance();
+        Schedulers scheduler = realm.where(Schedulers.class).findFirst();
+        if(scheduler != null) return realm.copyFromRealm(scheduler);
+        else return null;
     }
 }
