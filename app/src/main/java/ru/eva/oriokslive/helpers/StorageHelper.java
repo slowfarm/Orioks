@@ -111,7 +111,6 @@ public class StorageHelper {
         if(dataList == null)
             dataList = new ArrayList<>();
         else {
-            dataList.add(0, new Data());
             fillDataList(dataList);
         }
         return dataList;
@@ -135,6 +134,7 @@ public class StorageHelper {
     }
 
     private void fillDataList(List<Data> dataList) {
+        dataList.add(0, new Data());
         int listSize = dataList.size();
         for(int i = 1; i< listSize; i++) {
             if(!dataList.get(i).getDay().equals(dataList.get(i+1).getDay())) {

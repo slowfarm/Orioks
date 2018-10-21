@@ -1,9 +1,7 @@
 package ru.eva.oriokslive.fragmens.Scheduler;
 
-import java.util.List;
-
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
-import ru.eva.oriokslive.models.schedule.Data;
+import ru.eva.oriokslive.interfaces.OnViewPagerChangeListener;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
 class ContractSchedulerFragment {
@@ -12,6 +10,8 @@ class ContractSchedulerFragment {
         void setPagerAdapter(int currentDay);
 
         void showToast(String text);
+
+        void onPageChange(int i);
     }
 
     interface Presenter {
@@ -19,6 +19,8 @@ class ContractSchedulerFragment {
         void getCurrentDay();
 
         void getSchedule();
+
+        void onPageChange(int i,  OnViewPagerChangeListener onViewPagerChangeListener);
     }
 
     interface Repository {

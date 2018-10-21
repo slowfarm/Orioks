@@ -21,7 +21,7 @@ import ru.eva.oriokslive.models.orioks.Student;
 public class RetrofitHelper {
     private static RetrofitHelper instance;
 
-    private OnTokenRecieved onPostsReceived;
+    private OnTokenRecieved onTokenReceived;
     private OnDisciplinesRecieved onDisciplinesRecieved;
     private OnStudentRecieved onStudentRecieved;
     private OnEventsRecieved onEventsRecieved;
@@ -37,12 +37,12 @@ public class RetrofitHelper {
         App.getApi().getToken(encodedString).enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
-                onPostsReceived.onResponse(response.body());
+                onTokenReceived.onResponse(response.body());
             }
 
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
-                onPostsReceived.onFailure(t);
+                onTokenReceived.onFailure(t);
             }
         });
     }
@@ -105,8 +105,22 @@ public class RetrofitHelper {
 
     }
 
-    public void setOnTokenReceived(OnTokenRecieved onPostsReceived) {
-        this.onPostsReceived = onPostsReceived;
+    public void deleteAccessToken(String token) {
+        App.getApi().deleteAccessToken("Bearer "+token, token).enqueue(new Callback<AccessToken>() {
+            @Override
+            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                onTokenReceived.onResponse(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<AccessToken> call, Throwable t) {
+                onTokenReceived.onFailure(t);
+            }
+        });
+    }
+
+    public void setOnTokenReceived(OnTokenRecieved onTokenReceived) {
+        this.onTokenReceived = onTokenReceived;
     }
     public void setOnDisciplinesReceived(OnDisciplinesRecieved onDisciplinesRecieved) {
         this.onDisciplinesRecieved = onDisciplinesRecieved;
@@ -115,10 +129,9 @@ public class RetrofitHelper {
         this.onStudentRecieved = onStudentRecieved;
     }
 
-    public void setOnEventsRecieved(OnEventsRecieved onEventsRecieved) {
+    public void setOnEventsReceived(OnEventsRecieved onEventsRecieved) {
         this.onEventsRecieved = onEventsRecieved;
     }
-
 
     public void setOnSchedulersReceived(OnSchedulersReceived onSchedulersReceived) {
         this.onSchedulersReceived = onSchedulersReceived;

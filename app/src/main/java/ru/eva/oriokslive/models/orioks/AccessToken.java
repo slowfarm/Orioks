@@ -10,6 +10,8 @@ public class AccessToken extends RealmObject {
     private String token;
     @SerializedName("error")
     private String error;
+    @SerializedName("info")
+    private String info;
 
     public String getToken() {
         return token;
@@ -17,6 +19,10 @@ public class AccessToken extends RealmObject {
 
     public String getError() {
         return error;
+    }
+
+    public String getInfo() {
+        return info;
     }
 
 }

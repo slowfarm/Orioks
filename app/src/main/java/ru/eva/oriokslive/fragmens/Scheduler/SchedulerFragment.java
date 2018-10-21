@@ -18,10 +18,12 @@ public class SchedulerFragment extends Fragment implements ContractSchedulerFrag
     private ViewPager viewPager;
     private View view;
 
+    ContractSchedulerFragment.Presenter mPresenter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_scheduler, container, false);
-        ContractSchedulerFragment.Presenter mPresenter = new PresenterSchedulerFragment(this);
+        mPresenter = new PresenterSchedulerFragment(this);
         mPresenter.getCurrentDay();
 
         mPresenter.getSchedule();
@@ -47,7 +49,7 @@ public class SchedulerFragment extends Fragment implements ContractSchedulerFrag
             public void onPageScrolled(int i, float v, int i1) {}
             @Override
             public void onPageSelected(int i) {
-                onViewPagerChangeListener.onChange(i);
+                mPresenter.onPageChange(i, onViewPagerChangeListener);
             }
             @Override
             public void onPageScrollStateChanged(int i) { }
@@ -57,5 +59,10 @@ public class SchedulerFragment extends Fragment implements ContractSchedulerFrag
     @Override
     public void showToast(String text) {
         Toast.makeText(view.getContext(), text, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onPageChange(int i) {
+        onViewPagerChangeListener.onChange(i);
     }
 }

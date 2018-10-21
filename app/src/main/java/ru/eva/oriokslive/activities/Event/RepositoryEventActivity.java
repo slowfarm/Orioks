@@ -21,7 +21,7 @@ class RepositoryEventActivity implements ContractEventActivity.Repository {
 
     @Override
     public void getEventList(int id, OnEventsRecieved onEventsRecieved) {
-        RetrofitHelper.getInstance().setOnEventsRecieved(onEventsRecieved);
+        RetrofitHelper.getInstance().setOnEventsReceived(onEventsRecieved);
         RetrofitHelper.getInstance().getEvents(StorageHelper.getInstance().getAccessToken(), id);
     }
 

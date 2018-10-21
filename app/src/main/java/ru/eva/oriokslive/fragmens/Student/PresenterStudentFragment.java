@@ -1,13 +1,15 @@
 package ru.eva.oriokslive.fragmens.Student;
 
+import ru.eva.oriokslive.interfaces.OnTokenRecieved;
+import ru.eva.oriokslive.models.orioks.AccessToken;
 import ru.eva.oriokslive.models.orioks.Student;
 
-class PresenterStudentFragment implements ContractStudentFragment.Presenter {
+class PresenterStudentFragment implements ContractStudentFragment.Presenter, OnTokenRecieved {
     private ContractStudentFragment.View mView;
     private ContractStudentFragment.Repository mRepository;
 
 
-    public PresenterStudentFragment(ContractStudentFragment.View mView) {
+    PresenterStudentFragment(ContractStudentFragment.View mView) {
         this.mView = mView;
         mRepository = new RepositoryStudentFragment();
     }
@@ -22,6 +24,20 @@ class PresenterStudentFragment implements ContractStudentFragment.Presenter {
 
     @Override
     public void onButtonWasClicked() {
+        mRepository.deleteToken(this);
+    }
+
+    @Override
+    public void onResponse(AccessToken accessToken) {
+        finishApp();
+    }
+
+    @Override
+    public void onFailure(Throwable t) {
+        finishApp();
+    }
+
+    private void finishApp(){
         mRepository.clearAllTables();
         mView.finishActivity();
     }

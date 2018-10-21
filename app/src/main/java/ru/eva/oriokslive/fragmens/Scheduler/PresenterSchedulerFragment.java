@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
+import ru.eva.oriokslive.interfaces.OnViewPagerChangeListener;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
 class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter, OnSchedulersReceived {
@@ -28,6 +29,13 @@ class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter,
     public void getSchedule() {
         mRepository.getSchedule(this);
     }
+
+    @Override
+    public void onPageChange(int i, OnViewPagerChangeListener onViewPagerChangeListener) {
+        if(onViewPagerChangeListener != null)
+            mView.onPageChange(i);
+    }
+
     @Override
     public void onResponse(Schedulers schedulers) {
         if(schedulers != null && !scheduleEvaluator(schedulers)) {

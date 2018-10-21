@@ -29,4 +29,8 @@ public interface OrioksAPI {
     @Headers({"Accept: application/json", "User-Agent: orioks_live/0.1 android"})
     @GET("/api/v1/student/disciplines/{id}/events")
     Call<List<Events>> getEvents(@Header("Authorization") String token, @Path("id") int id);
+
+    @Headers({"Accept: application/json", "User-Agent: orioks_live/0.1 android"})
+    @GET("/api/v1/student/tokens/{token}")
+    Call<AccessToken> deleteAccessToken(@Header("Authorization") String token, @Path("token") String token1);
 }
