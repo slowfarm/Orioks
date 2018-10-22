@@ -69,12 +69,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_school_black"
+                app:srcCompat="@drawable/ic_access_time"
                 tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
                 android:text="@string/time"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -106,14 +107,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_school_black"
+                app:srcCompat="@drawable/ic_directions"
                 tools:ignore="VectorDrawableCompat" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/audience"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="@string/audience"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
@@ -145,14 +147,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_school_black"
+                app:srcCompat="@drawable/ic_group"
                 tools:ignore="VectorDrawableCompat" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/teacher"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="@string/teacher"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
