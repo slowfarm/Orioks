@@ -1,6 +1,6 @@
 package ru.eva.oriokslive.activities.Main;
 
-import android.content.Context;
+import android.view.Menu;
 
 import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.models.orioks.Student;
@@ -16,6 +16,8 @@ class ContractMainActivity {
         void showToast(String text);
 
         void setToolbarTitle(String title);
+
+        void hideMenu();
     }
 
     interface Presenter {
@@ -28,6 +30,8 @@ class ContractMainActivity {
         void setStudent();
 
         void getToolbarTitle(int position);
+
+        void onResume(Menu menu);
     }
 
     interface Repository {

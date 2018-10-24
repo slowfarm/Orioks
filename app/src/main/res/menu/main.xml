@@ -5,6 +5,6 @@
         android:id="@+id/action_date"
         android:icon="@drawable/ic_insert_invitation"
         android:orderInCategory="100"
-        android:title="@string/refresh"
+        android:title="@string/this_week"
         app:showAsAction="ifRoom" />
 </menu>

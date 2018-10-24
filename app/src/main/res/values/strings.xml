@@ -40,4 +40,5 @@
     <string name="logout">Выйти</string>
     <string name="refresh">Обновить</string>
     <string name="studying">Обучение</string>
+    <string name="this_week">На этой неделе</string>
 </resources>

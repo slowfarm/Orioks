@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity
     private CircularProgressBar progressBar;
 
     private ContractMainActivity.Presenter mPresenter;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         usernameText =  navigationView.getHeaderView(0).findViewById(R.id.username_text);
@@ -68,13 +69,20 @@ public class MainActivity extends AppCompatActivity
         progressBar = navigationView.getHeaderView(0).findViewById(R.id.progress_bar);
         week = navigationView.getHeaderView(0).findViewById(R.id.week);
         value = navigationView.getHeaderView(0).findViewById(R.id.value);
-        fTrans = getFragmentManager().beginTransaction();
-        fTrans.replace(R.id.frame_layout, mainFragment).commit();
 
         mPresenter = new PresenterMainActivity(this);
         mPresenter.setCurrentWeek();
         mPresenter.getStudent();
         mPresenter.setStudent();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fTrans = getFragmentManager().beginTransaction();
+        fTrans.replace(R.id.frame_layout, mainFragment).commit();
+        navigationView.setCheckedItem(R.id.nav_main);
+        mPresenter.onResume(menu);
     }
 
     @Override
@@ -131,8 +139,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
-
     @Override
     public void onChange(int position) {
        mPresenter.getToolbarTitle(position);
@@ -164,5 +170,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void setToolbarTitle(String title) {
         toolbar.setTitle(title);
+    }
+
+    @Override
+    public void hideMenu() {
+        menu.getItem(0).setVisible(false);
     }
 }

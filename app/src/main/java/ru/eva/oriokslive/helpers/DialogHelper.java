@@ -24,14 +24,19 @@ public class DialogHelper {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = activity.getLayoutInflater().inflate(R.layout.dialog_scheduler, null);
         builder.setView(view).setPositiveButton("ОК", (dialog, id) -> dialog.dismiss());
+
         TextView name = view.findViewById(R.id.name);
         name.setText(data.getClazz().getName());
+
         TextView teacher = view.findViewById(R.id.teacher);
         teacher.setText(data.getClazz().getTeacher());
+
         TextView time = view.findViewById(R.id.time);
         time.setText(data.getTime().getTimeFrom() + "-" +data.getTime().getTimeTo());
+
         TextView audience = view.findViewById(R.id.audience);
         audience.setText(data.getRoom().getName());
+
         return builder.create();
     }
 
@@ -55,7 +60,7 @@ public class DialogHelper {
         TextView teacher = view.findViewById(R.id.teacher);
         StringBuilder teacherList = new StringBuilder();
         for(String teachers : disciplines.getTeachers()) {
-            teacherList.append(teachers).append(",");
+            teacherList.append(teachers).append(", ");
         }
         if(teacherList.length()>0) {
             teacherList = new StringBuilder(teacherList.substring(0, teacherList.length() - 1));

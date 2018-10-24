@@ -1,5 +1,7 @@
 package ru.eva.oriokslive.activities.Main;
 
+import android.view.Menu;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,6 +49,12 @@ class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudent
     @Override
     public void getToolbarTitle(int position) {
         mView.setToolbarTitle(getToolbarTitleByPosition(position));
+    }
+
+    @Override
+    public void onResume(Menu menu) {
+        if(menu != null)
+            mView.hideMenu();
     }
 
     @Override
