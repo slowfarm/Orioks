@@ -1,6 +1,8 @@
 package ru.eva.oriokslive.fragmens.Main;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import ru.eva.oriokslive.R;
+import ru.eva.oriokslive.activities.Registration.RegistrationActivity;
 import ru.eva.oriokslive.adapters.DisciplineAdapter;
 import ru.eva.oriokslive.helpers.RetrofitHelper;
 import ru.eva.oriokslive.helpers.StorageHelper;
@@ -64,5 +67,11 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void unsetRefreshing() {
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void finishActivity() {
+        ((Activity)view.getContext()).finishAffinity();
+        view.getContext().startActivity(new Intent(view.getContext(), RegistrationActivity.class));
     }
 }

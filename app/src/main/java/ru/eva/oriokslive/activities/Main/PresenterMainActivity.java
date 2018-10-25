@@ -28,11 +28,6 @@ class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudent
     }
 
     @Override
-    public void setViewPagerToPosition() {
-        mView.setViewPagerToPosition((getCurrentWeek()-1)%4);
-    }
-
-    @Override
     public void getStudent() {
         Student student = mRepository.getStudent();
         if(student != null) {
@@ -49,12 +44,6 @@ class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudent
     @Override
     public void getToolbarTitle(int position) {
         mView.setToolbarTitle(getToolbarTitleByPosition(position));
-    }
-
-    @Override
-    public void onResume(Menu menu) {
-        if(menu != null)
-            mView.hideMenu();
     }
 
     @Override

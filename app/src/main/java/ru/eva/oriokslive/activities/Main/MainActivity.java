@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity
     private TextView usernameText;
     private TextView groupText;
     private Toolbar toolbar;
-    private Menu menu;
     private TextView week;
     private TextView value;
     private CircularProgressBar progressBar;
@@ -82,7 +81,6 @@ public class MainActivity extends AppCompatActivity
         fTrans = getFragmentManager().beginTransaction();
         fTrans.replace(R.id.frame_layout, mainFragment).commit();
         navigationView.setCheckedItem(R.id.nav_main);
-        mPresenter.onResume(menu);
     }
 
     @Override
@@ -96,28 +94,20 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        this.menu = menu;
-        getMenuInflater().inflate(R.menu.main, menu);
-        menu.getItem(0).setVisible(false);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_date:
-                mPresenter.setViewPagerToPosition();
-                break;
+                return false;
+            case R.id.action_refresh:
+                return false;
         }
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         fTrans = getFragmentManager().beginTransaction();
-        menu.getItem(0).setVisible(false);
         switch (item.getItemId()) {
             case R.id.nav_main:
                 toolbar.setTitle("Обучение");
@@ -126,7 +116,6 @@ public class MainActivity extends AppCompatActivity
             case  R.id.nav_scheduler:
                 toolbar.setTitle("Сегодня");
                 fTrans.replace(R.id.frame_layout, schedulerFragment);
-                menu.getItem(0).setVisible(true);
                 break;
             case R.id.nav_student:
                 toolbar.setTitle("О студенте");
@@ -152,11 +141,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void setViewPagerToPosition(int position) {
-        schedulerFragment.setViewPagerToPosition(position);
-    }
-
-    @Override
     public void setStudent(String name, String group) {
         usernameText.setText(name);
         groupText.setText(group);
@@ -170,10 +154,5 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void setToolbarTitle(String title) {
         toolbar.setTitle(title);
-    }
-
-    @Override
-    public void hideMenu() {
-        menu.getItem(0).setVisible(false);
     }
 }

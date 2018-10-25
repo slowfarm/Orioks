@@ -4,6 +4,9 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -23,6 +26,8 @@ public class SchedulerFragment extends Fragment implements ContractSchedulerFrag
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_scheduler, container, false);
+        setHasOptionsMenu(true);
+
         mPresenter = new PresenterSchedulerFragment(this);
         mPresenter.getCurrentDay();
 
@@ -32,11 +37,6 @@ public class SchedulerFragment extends Fragment implements ContractSchedulerFrag
 
     public void setOnViewPagerChangeListener(OnViewPagerChangeListener onViewPagerChangeListener) {
         this.onViewPagerChangeListener = onViewPagerChangeListener;
-    }
-
-    public void setViewPagerToPosition(int position) {
-        position+=2;
-        viewPager.setCurrentItem(position);
     }
 
     @Override
@@ -64,5 +64,29 @@ public class SchedulerFragment extends Fragment implements ContractSchedulerFrag
     @Override
     public void onPageChange(int i) {
         onViewPagerChangeListener.onChange(i);
+    }
+
+    @Override
+    public void setViewPagerToPosition(int position) {
+        viewPager.setCurrentItem(position);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_date:
+                mPresenter.setViewPagerToPosition();
+                return true;
+            case R.id.action_refresh:
+                mPresenter.refreshSchedule();
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

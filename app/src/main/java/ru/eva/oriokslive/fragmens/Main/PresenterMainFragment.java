@@ -3,13 +3,15 @@ package ru.eva.oriokslive.fragmens.Main;
 import java.util.List;
 
 import ru.eva.oriokslive.interfaces.OnDisciplinesRecieved;
+import ru.eva.oriokslive.interfaces.OnTokenRecieved;
+import ru.eva.oriokslive.models.orioks.AccessToken;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 
-class PresenterMainFragment implements ContractMainFragment.Presenter, OnDisciplinesRecieved {
+class PresenterMainFragment implements ContractMainFragment.Presenter, OnDisciplinesRecieved, OnTokenRecieved {
     private ContractMainFragment.View mView;
     private ContractMainFragment.Repository mRepository;
 
-    public PresenterMainFragment(ContractMainFragment.View mView) {
+    PresenterMainFragment(ContractMainFragment.View mView) {
         this.mView = mView;
         mRepository = new RepositoryMainFragment();
     }
@@ -22,7 +24,6 @@ class PresenterMainFragment implements ContractMainFragment.Presenter, OnDiscipl
     @Override
     public void setDisciplineList() {
         mRepository.setDisciplineList(this);
-
     }
 
     @Override
@@ -31,14 +32,25 @@ class PresenterMainFragment implements ContractMainFragment.Presenter, OnDiscipl
             mRepository.setDisciplineList(disciplinesList);
             mView.addRecyclerVIewItems(disciplinesList);
         } else {
-            mView.showToast("Ошибка обновления");
+            mView.showToast("Токен аннулирован");
+            mRepository.deleteToken(this);
         }
         mView.unsetRefreshing();
+    }
+
+    @Override
+    public void onResponse(AccessToken accessToken) {
+        finishApp();
     }
 
     @Override
     public void onFailure(Throwable t) {
         mView.showToast(t.getMessage());
         mView.unsetRefreshing();
+    }
+
+    private void finishApp(){
+        mRepository.clearAllTables();
+        mView.finishActivity();
     }
 }

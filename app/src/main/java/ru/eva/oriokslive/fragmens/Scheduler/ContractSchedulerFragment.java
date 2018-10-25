@@ -12,6 +12,8 @@ class ContractSchedulerFragment {
         void showToast(String text);
 
         void onPageChange(int i);
+
+        void setViewPagerToPosition(int position);
     }
 
     interface Presenter {
@@ -21,6 +23,10 @@ class ContractSchedulerFragment {
         void getSchedule();
 
         void onPageChange(int i,  OnViewPagerChangeListener onViewPagerChangeListener);
+
+        void setViewPagerToPosition();
+
+        void refreshSchedule();
     }
 
     interface Repository {

@@ -63,7 +63,7 @@ public class DialogHelper {
             teacherList.append(teachers).append(", ");
         }
         if(teacherList.length()>0) {
-            teacherList = new StringBuilder(teacherList.substring(0, teacherList.length() - 1));
+            teacherList = new StringBuilder(teacherList.substring(0, teacherList.length() - 2));
             teacher.setText(teacherList.toString());
         } else
             teacher.setText("Не назначен");

@@ -15,7 +15,7 @@ class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter,
     private ContractSchedulerFragment.Repository mRepository;
 
 
-    public PresenterSchedulerFragment(ContractSchedulerFragment.View mView) {
+    PresenterSchedulerFragment(ContractSchedulerFragment.View mView) {
         this.mView = mView;
         mRepository = new RepositorySchedulerFragment();
     }
@@ -27,7 +27,11 @@ class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter,
 
     @Override
     public void getSchedule() {
-        mRepository.getSchedule(this);
+        if(mRepository.getLocalSchedule() == null) {
+            mRepository.getSchedule(this);
+        } else {
+            mView.setPagerAdapter(calculateCurrentDay());
+        }
     }
 
     @Override
@@ -37,10 +41,22 @@ class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter,
     }
 
     @Override
+    public void setViewPagerToPosition() {
+        int position = (getCurrentWeek()-1)%4 + 2;
+        mView.setViewPagerToPosition(position);
+    }
+
+    @Override
+    public void refreshSchedule() {
+        mRepository.getSchedule(this);
+    }
+
+    @Override
     public void onResponse(Schedulers schedulers) {
-        if(schedulers != null && !scheduleEvaluator(schedulers)) {
+        if(schedulers != null) {
             mRepository.setSchedule(schedulers);
             mView.setPagerAdapter(calculateCurrentDay());
+            mView.onPageChange(0);
         }
     }
 
@@ -71,25 +87,5 @@ class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter,
     private int calculateCurrentDay() {
         int currentWeek = getCurrentWeek();
         return (currentWeek-1)%4;
-    }
-
-    private boolean scheduleEvaluator(Schedulers scheduler) {
-        Schedulers scheduler1 = mRepository.getLocalSchedule();
-        if(scheduler1 != null && scheduler.getData().size() == scheduler1.getData().size()) {
-            for (int i = 0; i < scheduler.getData().size(); i++) {
-                if (!scheduler.getData().get(i).getClazz().getName().equals(scheduler1.getData().get(i).getClazz().getName()))
-                    return  false;
-                if(!scheduler.getData().get(i).getRoom().getName().equals(scheduler1.getData().get(i).getRoom().getName()))
-                    return  false;
-                if(!scheduler.getData().get(i).getClazz().getTeacher().equals(scheduler1.getData().get(i).getClazz().getTeacher()))
-                    return  false;
-                if(!scheduler.getData().get(i).getTime().getTimeFrom().equals(scheduler1.getData().get(i).getTime().getTimeFrom()))
-                    return  false;
-                if(!scheduler.getData().get(i).getTime().getTimeTo().equals(scheduler1.getData().get(i).getTime().getTimeTo()))
-                    return  false;
-            }
-            return true;
-        }
-        else return false;
     }
 }

@@ -9,29 +9,21 @@ class ContractMainActivity {
     interface View {
         void showCurrentWeek(String currentWeek, float progress, String value);
 
-        void setViewPagerToPosition(int position);
-
         void setStudent(String name, String group);
 
         void showToast(String text);
 
         void setToolbarTitle(String title);
-
-        void hideMenu();
     }
 
     interface Presenter {
         void setCurrentWeek();
-
-        void setViewPagerToPosition();
 
         void getStudent();
 
         void setStudent();
 
         void getToolbarTitle(int position);
-
-        void onResume(Menu menu);
     }
 
     interface Repository {
