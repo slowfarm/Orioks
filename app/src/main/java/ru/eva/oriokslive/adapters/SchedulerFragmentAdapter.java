@@ -13,11 +13,11 @@ import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.helpers.DialogHelper;
 import ru.eva.oriokslive.models.schedule.Data;
 
-class SchedulerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SchedulerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Data> dataList;
 
-    SchedulerFragmentAdapter(List<Data> dataList) {
+    public SchedulerFragmentAdapter(List<Data> dataList) {
         this.dataList = dataList;
     }
 

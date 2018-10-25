@@ -23,8 +23,7 @@ import ru.eva.oriokslive.fragmens.Student.StudentFragment;
 import ru.eva.oriokslive.interfaces.OnViewPagerChangeListener;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        OnViewPagerChangeListener, ContractMainActivity.View {
+        implements NavigationView.OnNavigationItemSelectedListener, ContractMainActivity.View {
 
     private MainFragment mainFragment;
     private StudentFragment studentFragment;
@@ -52,8 +51,7 @@ public class MainActivity extends AppCompatActivity
 
         mainFragment = new MainFragment();
         studentFragment = new StudentFragment();
-        schedulerFragment = new SchedulerFragment();
-        schedulerFragment.setOnViewPagerChangeListener(this);
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -114,7 +112,9 @@ public class MainActivity extends AppCompatActivity
                 fTrans.replace(R.id.frame_layout, mainFragment);
                 break;
             case  R.id.nav_scheduler:
-                toolbar.setTitle("Сегодня");
+                toolbar.setTitle("Расписание");
+                schedulerFragment = new SchedulerFragment();
+                schedulerFragment.setFragmentManager(getSupportFragmentManager());
                 fTrans.replace(R.id.frame_layout, schedulerFragment);
                 break;
             case R.id.nav_student:
@@ -126,11 +126,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public void onChange(int position) {
-       mPresenter.getToolbarTitle(position);
     }
 
     @Override

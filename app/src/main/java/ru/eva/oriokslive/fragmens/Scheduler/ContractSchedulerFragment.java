@@ -7,24 +7,18 @@ import ru.eva.oriokslive.models.schedule.Schedulers;
 class ContractSchedulerFragment {
     interface View {
 
-        void setPagerAdapter(int currentDay);
+        void setPagerAdapter();
 
         void showToast(String text);
-
-        void onPageChange(int i);
 
         void setViewPagerToPosition(int position);
     }
 
     interface Presenter {
 
-        void getCurrentDay();
+        void setPagerAdapter();
 
-        void getSchedule();
-
-        void onPageChange(int i,  OnViewPagerChangeListener onViewPagerChangeListener);
-
-        void setViewPagerToPosition();
+        void setViewPagerToCurrentWeek();
 
         void refreshSchedule();
     }

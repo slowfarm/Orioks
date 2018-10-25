@@ -21,27 +21,16 @@ class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter,
     }
 
     @Override
-    public void getCurrentDay() {
-        mView.setPagerAdapter(calculateCurrentDay());
-    }
-
-    @Override
-    public void getSchedule() {
+    public void setPagerAdapter() {
         if(mRepository.getLocalSchedule() == null) {
             mRepository.getSchedule(this);
         } else {
-            mView.setPagerAdapter(calculateCurrentDay());
+            mView.setPagerAdapter();
         }
     }
 
     @Override
-    public void onPageChange(int i, OnViewPagerChangeListener onViewPagerChangeListener) {
-        if(onViewPagerChangeListener != null)
-            mView.onPageChange(i);
-    }
-
-    @Override
-    public void setViewPagerToPosition() {
+    public void setViewPagerToCurrentWeek() {
         int position = (getCurrentWeek()-1)%4 + 2;
         mView.setViewPagerToPosition(position);
     }
@@ -55,8 +44,7 @@ class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter,
     public void onResponse(Schedulers schedulers) {
         if(schedulers != null) {
             mRepository.setSchedule(schedulers);
-            mView.setPagerAdapter(calculateCurrentDay());
-            mView.onPageChange(0);
+            mView.setPagerAdapter();
         }
     }
 
@@ -84,8 +72,4 @@ class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter,
         return currentWeek - startWeek + 1;
     }
 
-    private int calculateCurrentDay() {
-        int currentWeek = getCurrentWeek();
-        return (currentWeek-1)%4;
-    }
 }

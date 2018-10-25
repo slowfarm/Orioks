@@ -1,84 +1,73 @@
 package ru.eva.oriokslive.adapters;
 
-import android.app.Activity;
-import android.content.Context;
-import android.support.v4.view.PagerAdapter;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
+import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentFirstDenominator;
+import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentFirstNumerator;
+import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentSecondDenominator;
+import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentSecondNumerator;
+import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentToday;
+import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentTomorrow;
 
-import ru.eva.oriokslive.R;
-import ru.eva.oriokslive.helpers.StorageHelper;
-import ru.eva.oriokslive.models.schedule.Data;
+public class SchedulerFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
-public class SchedulerFragmentPagerAdapter extends PagerAdapter {
-
-    private Context context;
-    private int currentWeek;
-
-    public SchedulerFragmentPagerAdapter(Context context, int currentWeek) {
-        this.context = context;
-        this.currentWeek = currentWeek;
-    }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-
-        View viewItem = inflater.inflate(R.layout.scheduler_pager_item, container, false);
-        List<Data> dataList;
-        switch (position) {
-            case 0:
-                dataList = StorageHelper.getInstance().getSchedulersDataCurrentDay(currentWeek, getDayOfWeek());
-                break;
-            case 1:
-                dataList = StorageHelper.getInstance().getSchedulersDataCurrentDay(currentWeek, getNextDayOfWeek());
-                break;
-                default:
-                    dataList = StorageHelper.getInstance().getSchedulersDataCurrentWeek(position-2);
-                    break;
+    public SchedulerFragmentPagerAdapter(FragmentManager fm) {
+            super(fm);
         }
-        SchedulerFragmentAdapter adapter = new SchedulerFragmentAdapter(dataList);
-        RecyclerView recyclerView = viewItem.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(adapter);
 
-        container.addView(viewItem);
-        return viewItem;
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
     }
 
     @Override
-    public int getCount() {
-        return 6;
-    }
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new FragmentToday();
+                case 1:
+                    return new FragmentTomorrow();
+                case 2:
+                    return new FragmentFirstNumerator();
+                case 3:
+                    return new FragmentFirstDenominator();
+                case 4:
+                    return new FragmentSecondNumerator();
+                case 5:
+                    return new FragmentSecondDenominator();
+                    default:
+                        return new FragmentToday();
+            }
+        }
 
-    @Override
-    public boolean isViewFromObject(View view, Object object) {
-        return view == object;
-    }
+        @Override
+        public int getCount() {
+            return 6;
+        }
 
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
-    }
+        @Override
+        public CharSequence getPageTitle(int position) {
+            // Generate title based on item position
+            switch (position) {
+                case 0:
+                    return "Сегодня";
+                case 1:
+                    return "Завтра";
+                case 2:
+                    return "1 Числитель";
+                case 3:
+                    return "1 Знаменатель";
+                case 4:
+                    return "2 Числитель";
+                case 5:
+                    return "2 Знаменатель";
+                default:
+                    return null;
+            }
+        }
 
-    private int getDayOfWeek() {
-        Calendar c = Calendar.getInstance(Locale.getDefault());
-        return c.get(Calendar.DAY_OF_WEEK) - 1;
     }
-
-    private int getNextDayOfWeek() {
-        if(getDayOfWeek() == 6)
-            return 1;
-        else
-            return getDayOfWeek()+1;
-    }
-}
