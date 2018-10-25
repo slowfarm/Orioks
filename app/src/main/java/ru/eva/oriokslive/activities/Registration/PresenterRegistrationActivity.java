@@ -46,6 +46,6 @@ public class PresenterRegistrationActivity implements ContractRegistrationActivi
 
     @Override
     public void onFailure(Throwable t) {
-        mView.showToast(t.getMessage());
+        mView.showToast("Нет соединения с интернетом");
     }
 }

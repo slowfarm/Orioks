@@ -61,7 +61,7 @@ class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudent
 
     @Override
     public void onFailure(Throwable t) {
-        mView.showToast(t.getMessage());
+        mView.showToast("Нет соединения с интернетом");
     }
 
     private float getProgress() {

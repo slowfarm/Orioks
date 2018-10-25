@@ -49,7 +49,7 @@ class PresenterEventActivity implements ContractEventActivity.Presenter, OnEvent
 
     @Override
     public void onFailure(Throwable t) {
-        mView.showToast(t.getMessage());
+        mView.showToast("Нет соединения с интернетом");
     }
 
     private boolean isListsNotEqual(List<Events> retrofitList) {
