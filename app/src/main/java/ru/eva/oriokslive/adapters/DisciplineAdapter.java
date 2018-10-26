@@ -13,7 +13,7 @@ import com.budiyev.android.circularprogressbar.CircularProgressBar;
 import java.util.List;
 
 import ru.eva.oriokslive.R;
-import ru.eva.oriokslive.activities.Event.EventActivity;
+import ru.eva.oriokslive.activities.event.EventActivity;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 
 public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineAdapter.ViewHolder> {

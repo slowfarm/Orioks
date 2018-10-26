@@ -3,15 +3,14 @@ package ru.eva.oriokslive.adapters;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentFirstDenominator;
-import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentFirstNumerator;
-import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentSecondDenominator;
-import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentSecondNumerator;
-import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentToday;
-import ru.eva.oriokslive.fragmens.Scheduler.ViewPagerFragments.FragmentTomorrow;
+import ru.eva.oriokslive.fragmens.scheduler.pager.firstdenomination.FirstDenominatorFragment;
+import ru.eva.oriokslive.fragmens.scheduler.pager.firstnumerator.FirstNumeratorFragment;
+import ru.eva.oriokslive.fragmens.scheduler.pager.seconddenominator.SecondDenominatorFragment;
+import ru.eva.oriokslive.fragmens.scheduler.pager.secondnumerator.SecondNumeratorFragment;
+import ru.eva.oriokslive.fragmens.scheduler.pager.today.TodayFragment;
+import ru.eva.oriokslive.fragmens.scheduler.pager.tomorrow.TomorrowFragment;
 
 public class SchedulerFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -28,19 +27,19 @@ public class SchedulerFragmentPagerAdapter extends FragmentStatePagerAdapter {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new FragmentToday();
+                    return new TodayFragment();
                 case 1:
-                    return new FragmentTomorrow();
+                    return new TomorrowFragment();
                 case 2:
-                    return new FragmentFirstNumerator();
+                    return new FirstNumeratorFragment();
                 case 3:
-                    return new FragmentFirstDenominator();
+                    return new FirstDenominatorFragment();
                 case 4:
-                    return new FragmentSecondNumerator();
+                    return new SecondNumeratorFragment();
                 case 5:
-                    return new FragmentSecondDenominator();
+                    return new SecondDenominatorFragment();
                     default:
-                        return new FragmentToday();
+                        return new TodayFragment();
             }
         }
 
