@@ -134,14 +134,14 @@ public class StorageHelper {
     }
 
     private void fillDataList(List<Data> dataList) {
-        dataList.add(0, new Data());
         int listSize = dataList.size();
         for(int i = 1; i< listSize; i++) {
-            if(!dataList.get(i).getDay().equals(dataList.get(i+1).getDay())) {
-                dataList.add(i+1, new Data());
+            if(!dataList.get(i).getDay().equals(dataList.get(i-1).getDay())) {
+                dataList.add(i, new Data());
                 i++;
             }
         }
+        dataList.add(0, new Data());
     }
 
     public Schedulers getSchedule() {
