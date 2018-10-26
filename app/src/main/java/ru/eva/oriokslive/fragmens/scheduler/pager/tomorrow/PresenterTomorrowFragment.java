@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class PresenterTomorrowFragment implements ContractTomorrowFragment.Presenter{
+class PresenterTomorrowFragment implements ContractTomorrowFragment.Presenter{
     private ContractTomorrowFragment.View mView;
     private ContractTomorrowFragment.Repository mRepository;
 
@@ -18,7 +18,7 @@ public class PresenterTomorrowFragment implements ContractTomorrowFragment.Prese
 
     @Override
     public void getSchedule() {
-        mView.setAdapter(mRepository.getSchedule(getCurrentWeek(), getNextDayOfWeek()));
+        mView.setAdapter(mRepository.getSchedule(calculateCurrentDay(), getNextDayOfWeek()));
     }
 
     private int getCurrentWeek() {
@@ -40,13 +40,18 @@ public class PresenterTomorrowFragment implements ContractTomorrowFragment.Prese
         return currentWeek - startWeek + 1;
     }
 
+    private int calculateCurrentDay() {
+        int currentWeek = getCurrentWeek();
+        return (currentWeek-1)%4;
+    }
+
     private int getDayOfWeek() {
         Calendar c = Calendar.getInstance(Locale.getDefault());
         return c.get(Calendar.DAY_OF_WEEK) - 1;
     }
 
     private int getNextDayOfWeek() {
-        if(getDayOfWeek() == 6)
+        if(getDayOfWeek() == 7)
             return 1;
         else
             return getDayOfWeek()+1;
