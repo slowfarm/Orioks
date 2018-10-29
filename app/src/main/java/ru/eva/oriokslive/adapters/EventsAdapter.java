@@ -35,13 +35,18 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        double progress = disciplinesList.get(position).getCurrentGrade() / disciplinesList.get(position).getMaxGrade() * 100;
-        holder.name.setText(disciplinesList.get(position).getType());
-        if(disciplinesList.get(position).getCurrentGrade() != -1.0)
-            holder.value.setText(String.valueOf(disciplinesList.get(position).getCurrentGrade()));
-        else
+        double progress = 0;
+        if(disciplinesList.get(position).getCurrentGrade() != null) {
+            progress = disciplinesList.get(position).getCurrentGrade() / disciplinesList.get(position).getMaxGrade() * 100;
+            if (disciplinesList.get(position).getCurrentGrade() != -1.0)
+                holder.value.setText(String.valueOf(disciplinesList.get(position).getCurrentGrade()));
+            else
+                holder.value.setText("Н");
+        } else {
             holder.value.setText("-");
+        }
 
+        holder.name.setText(disciplinesList.get(position).getType());
         holder.valueFrom.setText(String.valueOf(disciplinesList.get(position).getMaxGrade()));
 
         if(progress >= 0)
@@ -77,7 +82,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
         ViewHolder(View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.text_view);
+            name = itemView.findViewById(R.id.name);
             progressBar = itemView.findViewById(R.id.progress_bar);
             value = itemView.findViewById(R.id.value);
             week = itemView.findViewById(R.id.week);
