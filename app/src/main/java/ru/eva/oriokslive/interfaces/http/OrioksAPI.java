@@ -3,6 +3,7 @@ package ru.eva.oriokslive.interfaces.http;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -31,6 +32,6 @@ public interface OrioksAPI {
     Call<List<Events>> getEvents(@Header("Authorization") String token, @Path("id") int id);
 
     @Headers({"Accept: application/json", "User-Agent: orioks_live/0.1 android"})
-    @GET("/api/v1/student/tokens/{token}")
+    @DELETE("/api/v1/student/tokens/{token}")
     Call<AccessToken> deleteAccessToken(@Header("Authorization") String token, @Path("token") String token1);
 }
