@@ -35,11 +35,6 @@ class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter,
     }
 
     @Override
-    public void refreshSchedule() {
-        mRepository.getSchedule(this);
-    }
-
-    @Override
     public void onResponse(Schedulers schedulers) {
         if(schedulers != null) {
             mRepository.setSchedule(schedulers);

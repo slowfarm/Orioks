@@ -18,8 +18,6 @@ class ContractSchedulerFragment {
         void setPagerAdapter();
 
         void setViewPagerToCurrentWeek();
-
-        void refreshSchedule();
     }
 
     interface Repository {

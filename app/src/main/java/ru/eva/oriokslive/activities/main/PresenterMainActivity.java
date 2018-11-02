@@ -6,10 +6,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
 import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.models.orioks.Student;
+import ru.eva.oriokslive.models.schedule.Schedulers;
 
-class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudentRecieved {
+class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudentRecieved, OnSchedulersReceived {
 
     private ContractMainActivity.View mView;
     private ContractMainActivity.Repository mRepository;
@@ -45,6 +47,14 @@ class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudent
     }
 
     @Override
+    public void getSchedule() {
+        Student student = mRepository.getStudent();
+        if(student != null) {
+            mRepository.getSchedule(student.getGroup(), this);
+        }
+    }
+
+    @Override
     public void onResponse(Student student) {
         if(student != null) {
             if(student.getError() != null) {
@@ -55,6 +65,11 @@ class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudent
                 mRepository.setStudent(student);
             }
         }
+    }
+
+    @Override
+    public void onResponse(Schedulers schedulers) {
+        mRepository.setSchedule(schedulers);
     }
 
     @Override
@@ -82,7 +97,9 @@ class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudent
         int startWeek = cal.get(Calendar.WEEK_OF_YEAR);
         cal.setTime(new Date());
         int currentWeek = cal.get(Calendar.WEEK_OF_YEAR);
-        return currentWeek - startWeek + 1;
+        int week = currentWeek - startWeek + 1;
+        if(week > 18) return 18;
+        return week;
     }
 
     private String getToolbarTitleByPosition(int position) {

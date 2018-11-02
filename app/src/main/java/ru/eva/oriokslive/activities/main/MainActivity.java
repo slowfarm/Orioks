@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity
     private TextView value;
     private CircularProgressBar progressBar;
 
-    private ContractMainActivity.Presenter mPresenter;
     private NavigationView navigationView;
 
     @Override
@@ -65,15 +64,17 @@ public class MainActivity extends AppCompatActivity
         week = navigationView.getHeaderView(0).findViewById(R.id.week);
         value = navigationView.getHeaderView(0).findViewById(R.id.value);
 
-        mPresenter = new PresenterMainActivity(this);
+        ContractMainActivity.Presenter mPresenter = new PresenterMainActivity(this);
         mPresenter.setCurrentWeek();
         mPresenter.getStudent();
         mPresenter.setStudent();
+        mPresenter.getSchedule();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        toolbar.setTitle("Обучение");
         fTrans = getFragmentManager().beginTransaction();
         fTrans.replace(R.id.frame_layout, mainFragment).commit();
         navigationView.setCheckedItem(R.id.nav_main);
@@ -93,8 +94,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_date:
-                return false;
-            case R.id.action_refresh:
                 return false;
         }
         return false;

@@ -59,9 +59,6 @@ public class SchedulerFragment extends Fragment implements ContractSchedulerFrag
             case R.id.action_date:
                 mPresenter.setViewPagerToCurrentWeek();
                 return true;
-            case R.id.action_refresh:
-                mPresenter.refreshSchedule();
-                return true;
         }
         return false;
     }

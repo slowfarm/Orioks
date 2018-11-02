@@ -39,7 +39,7 @@ class PresenterEventActivity implements ContractEventActivity.Presenter, OnEvent
 
     @Override
     public void onResponse(List<Events> eventsList) {
-        if(isListsNotEqual(eventsList)) {
+        if(eventsList != null) {
             mView.addRecyclerViewItems(eventsList);
             for (Events event : eventsList)
                 event.setId(id);
@@ -50,18 +50,5 @@ class PresenterEventActivity implements ContractEventActivity.Presenter, OnEvent
     @Override
     public void onFailure(Throwable t) {
         mView.showToast("Нет соединения с интернетом");
-    }
-
-    private boolean isListsNotEqual(List<Events> retrofitList) {
-        List<Events> repositoryList = mRepository.getEventList(id);
-        if(repositoryList.size() != retrofitList.size()) {
-            return true;
-        } else {
-            for(int i=0; i < repositoryList.size(); i++) {
-                if(!repositoryList.get(i).getCurrentGrade().equals(retrofitList.get(i).getCurrentGrade()))
-                    return true;
-            }
-            return false;
-        }
     }
 }

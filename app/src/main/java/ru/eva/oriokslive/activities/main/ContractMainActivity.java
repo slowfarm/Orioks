@@ -1,7 +1,9 @@
 package ru.eva.oriokslive.activities.main;
 
+import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
 import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.models.orioks.Student;
+import ru.eva.oriokslive.models.schedule.Schedulers;
 
 class ContractMainActivity {
     interface View {
@@ -22,6 +24,8 @@ class ContractMainActivity {
         void setStudent();
 
         void getToolbarTitle(int position);
+
+        void getSchedule();
     }
 
     interface Repository {
@@ -31,5 +35,9 @@ class ContractMainActivity {
         void updateStudent(OnStudentRecieved onStudentRecieved);
 
         void setStudent(Student student);
+
+        void getSchedule(String group, OnSchedulersReceived onSchedulersReceived);
+
+        void setSchedule(Schedulers schedulers);
     }
 }
