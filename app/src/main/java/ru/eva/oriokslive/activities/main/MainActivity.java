@@ -67,8 +67,6 @@ public class MainActivity extends AppCompatActivity
         ContractMainActivity.Presenter mPresenter = new PresenterMainActivity(this);
         mPresenter.setCurrentWeek();
         mPresenter.getStudent();
-        mPresenter.setStudent();
-        mPresenter.getSchedule();
     }
 
     @Override
@@ -141,10 +139,5 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void setToolbarTitle(String title) {
-        toolbar.setTitle(title);
     }
 }

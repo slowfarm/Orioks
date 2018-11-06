@@ -34,7 +34,8 @@ public class RetrofitHelper {
     }
 
     public void getAccessToken(String encodedString) {
-        App.getApi().getToken(encodedString).enqueue(new Callback<AccessToken>() {
+        String userAgent = "User-Agent: orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
+        App.getApi().getToken(encodedString, userAgent).enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 onTokenReceived.onResponse(response.body());
@@ -48,7 +49,8 @@ public class RetrofitHelper {
     }
 
     public void getDisciplines(String token, String year, String semester) {
-        App.getApi().getDisciplines("Bearer "+token).enqueue(new Callback<List<Disciplines>>() {
+        String userAgent = "User-Agent: orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
+        App.getApi().getDisciplines("Bearer "+token, userAgent).enqueue(new Callback<List<Disciplines>>() {
             @Override
             public void onResponse(Call<List<Disciplines>> call, Response<List<Disciplines>> response) {
                 onDisciplinesRecieved.onResponse(response.body());
@@ -63,7 +65,8 @@ public class RetrofitHelper {
 
 
     public void getStudent(String token) {
-        App.getApi().getStudent("Bearer "+token).enqueue(new Callback<Student>() {
+        String userAgent = "User-Agent: orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
+        App.getApi().getStudent("Bearer "+token, userAgent).enqueue(new Callback<Student>() {
             @Override
             public void onResponse(Call<Student> call, Response<Student> response) {
                 onStudentRecieved.onResponse(response.body());
@@ -77,7 +80,8 @@ public class RetrofitHelper {
     }
 
     public void getEvents(String token, int id) {
-        App.getApi().getEvents("Bearer "+token, id).enqueue(new Callback<List<Events>>() {
+        String userAgent = "User-Agent: orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
+        App.getApi().getEvents("Bearer "+token, userAgent, id).enqueue(new Callback<List<Events>>() {
             @Override
             public void onResponse(Call<List<Events>> call, Response<List<Events>> response) {
                 onEventsRecieved.onResponse(response.body());
@@ -106,7 +110,8 @@ public class RetrofitHelper {
     }
 
     public void deleteAccessToken(String token) {
-        App.getApi().deleteAccessToken("Bearer "+token, token).enqueue(new Callback<AccessToken>() {
+        String userAgent = "User-Agent: orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
+        App.getApi().deleteAccessToken("Bearer "+token,userAgent, token).enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 onTokenReceived.onResponse(response.body());

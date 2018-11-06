@@ -2,23 +2,21 @@ package ru.eva.oriokslive.activities.registration;
 
 import android.util.Base64;
 
+import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
+import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.interfaces.OnTokenRecieved;
 import ru.eva.oriokslive.models.orioks.AccessToken;
+import ru.eva.oriokslive.models.orioks.Student;
+import ru.eva.oriokslive.models.schedule.Schedulers;
 
-public class PresenterRegistrationActivity implements ContractRegistrationActivity.Presenter, OnTokenRecieved {
+public class PresenterRegistrationActivity implements ContractRegistrationActivity.Presenter,
+        OnTokenRecieved,OnStudentRecieved, OnSchedulersReceived {
     private ContractRegistrationActivity.View mView;
     private ContractRegistrationActivity.Repository mRepository;
 
     PresenterRegistrationActivity(ContractRegistrationActivity.View mView) {
         this.mView = mView;
         mRepository = new RepositoryRegistrationActivity();
-    }
-
-    @Override
-    public void checkAccessToken() {
-        if(mRepository.getAccessToken() != null) {
-           mView.startActivity();
-        }
     }
 
     @Override
@@ -38,10 +36,30 @@ public class PresenterRegistrationActivity implements ContractRegistrationActivi
     public void onResponse(AccessToken accessToken) {
         if(accessToken != null) {
             mRepository.setAccessToken(accessToken);
+            mRepository.getStudent(this);
             mView.startActivity();
         } else {
             mView.showToast("Неверный логин либо пароль");
         }
+    }
+
+    @Override
+    public void onResponse(Student student) {
+        if(student != null) {
+            if(student.getError() != null) {
+                mView.showToast(student.getError());
+            }
+            else {
+                mRepository.setStudent(student);
+                mRepository.getSchedule(student.getGroup(), this);
+            }
+        }
+    }
+
+    @Override
+    public void onResponse(Schedulers schedulers) {
+        mRepository.setSchedule(schedulers);
+        mView.startActivity();
     }
 
     @Override

@@ -25,6 +25,7 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private DisciplineAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ContractMainFragment.Presenter mPresenter;
 
     View view;
 
@@ -34,7 +35,7 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         swipeRefreshLayout = view.findViewById(R.id.container);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        ContractMainFragment.Presenter mPresenter = new PresenterMainFragment(this);
+        mPresenter = new PresenterMainFragment(this);
         mPresenter.getDisciplineList();
         mPresenter.setDisciplineList();
 
@@ -43,7 +44,7 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onRefresh() {
-        RetrofitHelper.getInstance().getDisciplines(StorageHelper.getInstance().getAccessToken(), "", "");
+        mPresenter.setDisciplineList();
     }
 
     @Override

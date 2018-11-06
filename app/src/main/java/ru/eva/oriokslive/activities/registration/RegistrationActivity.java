@@ -24,7 +24,6 @@ public class RegistrationActivity extends AppCompatActivity implements ContractR
         Button button = findViewById(R.id.button);
 
         mPresenter = new PresenterRegistrationActivity(this);
-        mPresenter.checkAccessToken();
 
         button.setOnClickListener(view-> mPresenter.onButtonWasClicked(
                 login.getText().toString(),

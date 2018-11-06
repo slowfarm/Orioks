@@ -6,12 +6,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
-import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.models.orioks.Student;
-import ru.eva.oriokslive.models.schedule.Schedulers;
 
-class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudentRecieved, OnSchedulersReceived {
+class PresenterMainActivity implements ContractMainActivity.Presenter {
 
     private ContractMainActivity.View mView;
     private ContractMainActivity.Repository mRepository;
@@ -33,48 +30,6 @@ class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudent
         if(student != null) {
             mView.setStudent(student.getFullName(), student.getGroup());
         }
-    }
-
-    @Override
-    public void setStudent() {
-        mRepository.updateStudent(this);
-
-    }
-
-    @Override
-    public void getToolbarTitle(int position) {
-        mView.setToolbarTitle(getToolbarTitleByPosition(position));
-    }
-
-    @Override
-    public void getSchedule() {
-        Student student = mRepository.getStudent();
-        if(student != null) {
-            mRepository.getSchedule(student.getGroup(), this);
-        }
-    }
-
-    @Override
-    public void onResponse(Student student) {
-        if(student != null) {
-            if(student.getError() != null) {
-                mView.showToast(student.getError());
-            }
-            else {
-                mView.setStudent(student.getFullName(), student.getGroup());
-                mRepository.setStudent(student);
-            }
-        }
-    }
-
-    @Override
-    public void onResponse(Schedulers schedulers) {
-        mRepository.setSchedule(schedulers);
-    }
-
-    @Override
-    public void onFailure(Throwable t) {
-        mView.showToast("Нет соединения с интернетом");
     }
 
     private float getProgress() {
@@ -100,25 +55,6 @@ class PresenterMainActivity implements ContractMainActivity.Presenter, OnStudent
         int week = currentWeek - startWeek + 1;
         if(week > 18) return 18;
         return week;
-    }
-
-    private String getToolbarTitleByPosition(int position) {
-        switch (position) {
-            case 0:
-                return "Сегодня";
-            case 1:
-                return "Завтра";
-            case 2:
-                return "1 Числитель";
-            case 3:
-                return "1 Знаменатель";
-            case 4:
-                return "2 Числитель";
-            case 5:
-                return "2 Знаменатель";
-                default:
-                    return "";
-        }
     }
 
     private String getCurrentValue(int week) {

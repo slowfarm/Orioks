@@ -15,23 +15,23 @@ import ru.eva.oriokslive.models.orioks.Student;
 
 public interface OrioksAPI {
 
-    @Headers({"Accept: application/json", "User-Agent: orioks_live/0.1 android"})
+    @Headers({"Accept: application/json"})
     @GET("/api/v1/auth")
-    Call<AccessToken> getToken(@Header("Authorization") String loginPass);
+    Call<AccessToken> getToken(@Header("Authorization") String loginPass, @Header("User-Agent") String userAgent);
 
-    @Headers({"Accept: application/json", "User-Agent: orioks_live/0.1 android"})
+    @Headers({"Accept: application/json"})
     @GET("/api/v1/student/disciplines")
-    Call<List<Disciplines>> getDisciplines(@Header("Authorization") String token);
+    Call<List<Disciplines>> getDisciplines(@Header("Authorization") String token, @Header("User-Agent") String userAgent);
 
-    @Headers({"Accept: application/json", "User-Agent: orioks_live/0.1 android"})
+    @Headers({"Accept: application/json"})
     @GET("/api/v1/student")
-    Call<Student> getStudent(@Header("Authorization") String token);
+    Call<Student> getStudent(@Header("Authorization") String token, @Header("User-Agent") String userAgent);
 
-    @Headers({"Accept: application/json", "User-Agent: orioks_live/0.1 android"})
+    @Headers({"Accept: application/json"})
     @GET("/api/v1/student/disciplines/{id}/events")
-    Call<List<Events>> getEvents(@Header("Authorization") String token, @Path("id") int id);
+    Call<List<Events>> getEvents(@Header("Authorization") String token, @Header("User-Agent") String userAgent, @Path("id") int id);
 
-    @Headers({"Accept: application/json", "User-Agent: orioks_live/0.1 android"})
+    @Headers({"Accept: application/json"})
     @DELETE("/api/v1/student/tokens/{token}")
-    Call<AccessToken> deleteAccessToken(@Header("Authorization") String token, @Path("token") String token1);
+    Call<AccessToken> deleteAccessToken(@Header("Authorization") String token, @Header("User-Agent") String userAgent, @Path("token") String token1);
 }
