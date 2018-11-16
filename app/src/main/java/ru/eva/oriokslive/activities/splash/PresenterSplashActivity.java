@@ -1,13 +1,17 @@
 package ru.eva.oriokslive.activities.splash;
 
+import java.util.List;
+
+import ru.eva.oriokslive.interfaces.OnAllAccessTokensReceived;
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
 import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.interfaces.OnTokenRecieved;
 import ru.eva.oriokslive.models.orioks.AccessToken;
+import ru.eva.oriokslive.models.orioks.Security;
 import ru.eva.oriokslive.models.orioks.Student;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
-public class PresenterSplashActivity implements ContractSplashActivity.Presenter, OnStudentRecieved, OnSchedulersReceived, OnTokenRecieved {
+public class PresenterSplashActivity implements ContractSplashActivity.Presenter, OnStudentRecieved, OnSchedulersReceived, OnTokenRecieved, OnAllAccessTokensReceived {
     private ContractSplashActivity.View mView;
     private ContractSplashActivity.Repository mRepository;
 
@@ -45,12 +49,18 @@ public class PresenterSplashActivity implements ContractSplashActivity.Presenter
     @Override
     public void onResponse(Schedulers schedulers) {
         mRepository.setSchedule(schedulers);
-        mView.startMainActivity();
+        mRepository.getAllActiveTokens(mRepository.getAccessToken(), this);
     }
 
     @Override
     public void onResponse(AccessToken accessToken) {
         finishApp();
+    }
+
+    @Override
+    public void onResponse(List<Security> tokens) {
+        mRepository.setAllActiveTokens(tokens);
+        mView.startMainActivity();
     }
 
     @Override

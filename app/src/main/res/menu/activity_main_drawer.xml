@@ -18,5 +18,11 @@
             android:icon="@drawable/ic_person_white"
             android:title="@string/about_student" />
     </group>
+    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_security"
+        android:icon="@drawable/ic_security"
+        android:title="@string/security" />
+    </group>
 
 </menu>

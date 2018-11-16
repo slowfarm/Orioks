@@ -41,4 +41,8 @@
     <string name="refresh">Обновить</string>
     <string name="studying">Обучение</string>
     <string name="this_week">На этой неделе</string>
+    <string name="device">Устройство</string>
+    <string name="last_activity">Последняя активность</string>
+    <string name="security">Безопасность</string>
+    <string name="delete">Удалить</string>
 </resources>

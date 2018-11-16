@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import ru.eva.oriokslive.App;
+import ru.eva.oriokslive.interfaces.OnAllAccessTokensReceived;
 import ru.eva.oriokslive.interfaces.OnDisciplinesRecieved;
 import ru.eva.oriokslive.interfaces.OnEventsRecieved;
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
@@ -15,6 +16,7 @@ import ru.eva.oriokslive.interfaces.OnTokenRecieved;
 import ru.eva.oriokslive.models.orioks.AccessToken;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 import ru.eva.oriokslive.models.orioks.Events;
+import ru.eva.oriokslive.models.orioks.Security;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 import ru.eva.oriokslive.models.orioks.Student;
 
@@ -26,6 +28,7 @@ public class RetrofitHelper {
     private OnStudentRecieved onStudentRecieved;
     private OnEventsRecieved onEventsRecieved;
     private OnSchedulersReceived onSchedulersReceived;
+    private OnAllAccessTokensReceived onAllAccessTokensReceived;
 
     public static RetrofitHelper getInstance() {
         if (instance == null)
@@ -34,7 +37,7 @@ public class RetrofitHelper {
     }
 
     public void getAccessToken(String encodedString) {
-        String userAgent = "User-Agent: orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
+        String userAgent = "orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
         App.getApi().getToken(encodedString, userAgent).enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
@@ -49,7 +52,7 @@ public class RetrofitHelper {
     }
 
     public void getDisciplines(String token, String year, String semester) {
-        String userAgent = "User-Agent: orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
+        String userAgent = "orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
         App.getApi().getDisciplines("Bearer "+token, userAgent).enqueue(new Callback<List<Disciplines>>() {
             @Override
             public void onResponse(Call<List<Disciplines>> call, Response<List<Disciplines>> response) {
@@ -65,7 +68,7 @@ public class RetrofitHelper {
 
 
     public void getStudent(String token) {
-        String userAgent = "User-Agent: orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
+        String userAgent = "orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
         App.getApi().getStudent("Bearer "+token, userAgent).enqueue(new Callback<Student>() {
             @Override
             public void onResponse(Call<Student> call, Response<Student> response) {
@@ -80,7 +83,7 @@ public class RetrofitHelper {
     }
 
     public void getEvents(String token, int id) {
-        String userAgent = "User-Agent: orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
+        String userAgent = "orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
         App.getApi().getEvents("Bearer "+token, userAgent, id).enqueue(new Callback<List<Events>>() {
             @Override
             public void onResponse(Call<List<Events>> call, Response<List<Events>> response) {
@@ -110,8 +113,8 @@ public class RetrofitHelper {
     }
 
     public void deleteAccessToken(String token) {
-        String userAgent = "User-Agent: orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
-        App.getApi().deleteAccessToken("Bearer "+token,userAgent, token).enqueue(new Callback<AccessToken>() {
+        String userAgent = "orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
+        App.getApi().deleteAccessToken("Bearer "+token, userAgent, token).enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 onTokenReceived.onResponse(response.body());
@@ -120,6 +123,22 @@ public class RetrofitHelper {
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
                 onTokenReceived.onFailure(t);
+            }
+        });
+    }
+
+
+    public void getAllActiveTokens(String token) {
+        String userAgent = "orioks_live/2.0 Android "+android.os.Build.VERSION.RELEASE;
+        App.getApi().getAllActiveTokens("Bearer "+token, userAgent).enqueue(new Callback<List<Security>>() {
+            @Override
+            public void onResponse(Call<List<Security>> call, Response<List<Security>> response) {
+                onAllAccessTokensReceived.onResponse(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Security>> call, Throwable t) {
+                onAllAccessTokensReceived.onFailure(t);
             }
         });
     }
@@ -140,5 +159,9 @@ public class RetrofitHelper {
 
     public void setOnSchedulersReceived(OnSchedulersReceived onSchedulersReceived) {
         this.onSchedulersReceived = onSchedulersReceived;
+    }
+
+    public void setOnAllActiveTokensReceived(OnAllAccessTokensReceived onAllAccessTokensReceived) {
+        this.onAllAccessTokensReceived = onAllAccessTokensReceived;
     }
 }

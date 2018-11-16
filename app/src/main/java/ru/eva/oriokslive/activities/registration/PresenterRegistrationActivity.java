@@ -2,15 +2,19 @@ package ru.eva.oriokslive.activities.registration;
 
 import android.util.Base64;
 
+import java.util.List;
+
+import ru.eva.oriokslive.interfaces.OnAllAccessTokensReceived;
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
 import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.interfaces.OnTokenRecieved;
 import ru.eva.oriokslive.models.orioks.AccessToken;
+import ru.eva.oriokslive.models.orioks.Security;
 import ru.eva.oriokslive.models.orioks.Student;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
 public class PresenterRegistrationActivity implements ContractRegistrationActivity.Presenter,
-        OnTokenRecieved,OnStudentRecieved, OnSchedulersReceived {
+        OnTokenRecieved,OnStudentRecieved, OnSchedulersReceived, OnAllAccessTokensReceived {
     private ContractRegistrationActivity.View mView;
     private ContractRegistrationActivity.Repository mRepository;
 
@@ -37,7 +41,6 @@ public class PresenterRegistrationActivity implements ContractRegistrationActivi
         if(accessToken != null) {
             mRepository.setAccessToken(accessToken);
             mRepository.getStudent(this);
-            mView.startActivity();
         } else {
             mView.showToast("Неверный логин либо пароль");
         }
@@ -59,6 +62,13 @@ public class PresenterRegistrationActivity implements ContractRegistrationActivi
     @Override
     public void onResponse(Schedulers schedulers) {
         mRepository.setSchedule(schedulers);
+        mRepository.getAllActiveTokens(this);
+
+    }
+
+    @Override
+    public void onResponse(List<Security> tokens) {
+        mRepository.setAllActiveTokens(tokens);
         mView.startActivity();
     }
 

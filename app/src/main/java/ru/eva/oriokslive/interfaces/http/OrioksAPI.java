@@ -11,6 +11,7 @@ import retrofit2.http.Path;
 import ru.eva.oriokslive.models.orioks.AccessToken;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 import ru.eva.oriokslive.models.orioks.Events;
+import ru.eva.oriokslive.models.orioks.Security;
 import ru.eva.oriokslive.models.orioks.Student;
 
 public interface OrioksAPI {
@@ -34,4 +35,8 @@ public interface OrioksAPI {
     @Headers({"Accept: application/json"})
     @DELETE("/api/v1/student/tokens/{token}")
     Call<AccessToken> deleteAccessToken(@Header("Authorization") String token, @Header("User-Agent") String userAgent, @Path("token") String token1);
+
+    @Headers({"Accept: application/json"})
+    @GET("/api/v1/student/tokens")
+    Call<List<Security>> getAllActiveTokens(@Header("Authorization") String token, @Header("User-Agent") String userAgent);
 }

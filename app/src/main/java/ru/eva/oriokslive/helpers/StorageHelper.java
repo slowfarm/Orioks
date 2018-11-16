@@ -9,6 +9,7 @@ import io.realm.RealmResults;
 import ru.eva.oriokslive.models.orioks.AccessToken;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 import ru.eva.oriokslive.models.orioks.Events;
+import ru.eva.oriokslive.models.orioks.Security;
 import ru.eva.oriokslive.models.orioks.Student;
 import ru.eva.oriokslive.models.schedule.Data;
 import ru.eva.oriokslive.models.schedule.Schedulers;
@@ -150,4 +151,18 @@ public class StorageHelper {
         if(scheduler != null) return realm.copyFromRealm(scheduler);
         else return null;
     }
+
+    public List<Security> getAllActiveTokens() {
+        Realm realm = Realm.getDefaultInstance();
+        return realm.copyFromRealm(realm.where(Security.class).findAll());
+    }
+
+    public void setAllActiveTokens(List<Security> tokens) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(realm1 -> {
+            realm.delete(Security.class);
+            realm.insert(tokens);
+        });
+    }
+
 }

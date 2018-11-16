@@ -1,10 +1,14 @@
 package ru.eva.oriokslive.activities.splash;
 
+import java.util.List;
+
 import ru.eva.oriokslive.helpers.RetrofitHelper;
 import ru.eva.oriokslive.helpers.StorageHelper;
+import ru.eva.oriokslive.interfaces.OnAllAccessTokensReceived;
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
 import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.interfaces.OnTokenRecieved;
+import ru.eva.oriokslive.models.orioks.Security;
 import ru.eva.oriokslive.models.orioks.Student;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
@@ -46,5 +50,16 @@ public class RepositorySplashActivity implements ContractSplashActivity.Reposito
     @Override
     public void clearAllTables() {
         StorageHelper.getInstance().clearTables();
+    }
+
+    @Override
+    public void getAllActiveTokens(String token, OnAllAccessTokensReceived onAllAccessTokensReceived) {
+        RetrofitHelper.getInstance().setOnAllActiveTokensReceived(onAllAccessTokensReceived);
+        RetrofitHelper.getInstance().getAllActiveTokens(token);
+    }
+
+    @Override
+    public void setAllActiveTokens(List<Security> tokens) {
+        StorageHelper.getInstance().setAllActiveTokens(tokens);
     }
 }

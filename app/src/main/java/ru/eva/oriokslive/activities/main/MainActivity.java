@@ -18,6 +18,7 @@ import com.budiyev.android.circularprogressbar.CircularProgressBar;
 import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.fragmens.main.MainFragment;
 import ru.eva.oriokslive.fragmens.scheduler.SchedulerFragment;
+import ru.eva.oriokslive.fragmens.security.SecurityFragment;
 import ru.eva.oriokslive.fragmens.student.StudentFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity
 
     private MainFragment mainFragment;
     private StudentFragment studentFragment;
+    private SecurityFragment securityFragment;
     private SchedulerFragment schedulerFragment;
     private FragmentTransaction fTrans;
 
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity
 
         mainFragment = new MainFragment();
         studentFragment = new StudentFragment();
-
+        securityFragment = new SecurityFragment();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -115,6 +117,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_student:
                 toolbar.setTitle("О студенте");
                 fTrans.replace(R.id.frame_layout, studentFragment);
+                break;
+            case R.id.nav_security:
+                toolbar.setTitle("Безопасность");
+                fTrans.replace(R.id.frame_layout, securityFragment);
                 break;
         }
         fTrans.commit();

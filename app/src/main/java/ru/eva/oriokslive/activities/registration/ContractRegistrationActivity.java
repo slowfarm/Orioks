@@ -1,9 +1,13 @@
 package ru.eva.oriokslive.activities.registration;
 
+import java.util.List;
+
+import ru.eva.oriokslive.interfaces.OnAllAccessTokensReceived;
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
 import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.interfaces.OnTokenRecieved;
 import ru.eva.oriokslive.models.orioks.AccessToken;
+import ru.eva.oriokslive.models.orioks.Security;
 import ru.eva.oriokslive.models.orioks.Student;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
@@ -31,5 +35,9 @@ class ContractRegistrationActivity {
         void setStudent(Student student);
 
         void getSchedule(String group, OnSchedulersReceived onSchedulersReceived);
+
+        void getAllActiveTokens(OnAllAccessTokensReceived onAllAccessTokensReceived);
+
+        void setAllActiveTokens(List<Security> tokens);
     }
 }
