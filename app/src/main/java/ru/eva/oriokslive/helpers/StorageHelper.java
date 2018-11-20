@@ -154,7 +154,7 @@ public class StorageHelper {
 
     public List<Security> getAllActiveTokens() {
         Realm realm = Realm.getDefaultInstance();
-        return realm.copyFromRealm(realm.where(Security.class).findAll());
+        return realm.where(Security.class).findAll();
     }
 
     public void setAllActiveTokens(List<Security> tokens) {
@@ -165,4 +165,8 @@ public class StorageHelper {
         });
     }
 
+    public void deleteActiveToken(Security token) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(realm1 -> token.deleteFromRealm());
+    }
 }

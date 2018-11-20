@@ -13,9 +13,10 @@ import ru.eva.oriokslive.models.orioks.Security;
 class RepositorySecurityFragment implements ContractSecurityFragment.Repository {
 
     @Override
-    public void deleteActiveToken(String token, OnTokenRecieved onTokenRecieved) {
+    public void deleteActiveToken(Security token, OnTokenRecieved onTokenRecieved) {
         RetrofitHelper.getInstance().setOnTokenReceived(onTokenRecieved);
-        RetrofitHelper.getInstance().deleteAccessToken(token);
+        RetrofitHelper.getInstance().deleteAccessToken(token.getToken());
+        StorageHelper.getInstance().deleteActiveToken(token);
     }
 
     @Override
@@ -32,5 +33,10 @@ class RepositorySecurityFragment implements ContractSecurityFragment.Repository 
     @Override
     public void clearAllTables() {
         StorageHelper.getInstance().clearTables();
+    }
+
+    @Override
+    public List<Security> getAllActiveLocalTokens() {
+        return StorageHelper.getInstance().getAllActiveTokens();
     }
 }

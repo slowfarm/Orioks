@@ -21,13 +21,13 @@ import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.interfaces.OnDeleteButtonClickListener;
 import ru.eva.oriokslive.models.orioks.Security;
 
-public class SecurityAdapter extends RecyclerView.Adapter<SecurityAdapter.ViewHolder> {
+public class SecurityFragmentAdapter extends RecyclerView.Adapter<SecurityFragmentAdapter.ViewHolder> {
     private List<Security> tokenList;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
     private OnDeleteButtonClickListener onDeleteButtonClickListener;
 
 
-    public SecurityAdapter(List<Security> tokenList) {
+    public SecurityFragmentAdapter(List<Security> tokenList) {
         this.tokenList = tokenList;
     }
 
@@ -38,7 +38,7 @@ public class SecurityAdapter extends RecyclerView.Adapter<SecurityAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(SecurityAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(SecurityFragmentAdapter.ViewHolder holder, int position) {
         binderHelper.bind(holder.swipeLayout, tokenList.get(position).getToken());
         String inputDate = tokenList.get(position).getLastUsed();
         String pattern = "yyyy-MM-dd'T'HH:mm";
@@ -70,7 +70,7 @@ public class SecurityAdapter extends RecyclerView.Adapter<SecurityAdapter.ViewHo
             date = itemView.findViewById(R.id.date);
             device = itemView.findViewById(R.id.device);
             deleteLayout.setOnClickListener(v -> {
-                onDeleteButtonClickListener.onClick(tokenList.get(getAdapterPosition()).getToken());
+                onDeleteButtonClickListener.onClick(tokenList.get(getAdapterPosition()));
                 notifyItemRemoved(getAdapterPosition());
             });
         }

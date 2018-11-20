@@ -18,13 +18,13 @@ class PresenterSecurityFragment implements ContractSecurityFragment.Presenter, O
     }
 
     @Override
-    public void deleteActiveToken(String token) {
+    public void deleteActiveToken(Security token) {
         mRepository.deleteActiveToken(token, this);
     }
 
     @Override
     public void getAllActiveTokens() {
-        mView.setAdapter(StorageHelper.getInstance().getAllActiveTokens());
+        mView.setAdapter(mRepository.getAllActiveLocalTokens());
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.List;
 
 import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.activities.registration.RegistrationActivity;
-import ru.eva.oriokslive.adapters.SecurityAdapter;
+import ru.eva.oriokslive.adapters.SecurityFragmentAdapter;
 import ru.eva.oriokslive.interfaces.OnDeleteButtonClickListener;
 import ru.eva.oriokslive.models.orioks.Security;
 
@@ -38,21 +38,21 @@ public class SecurityFragment extends Fragment implements ContractSecurityFragme
     }
 
     @Override
-    public void onClick(String token) {
-        mPresenter.deleteActiveToken(token);
-    }
-
-    @Override
     public void showToast(String text) {
         Toast.makeText(view.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void setAdapter(List<Security> allActiveTokens) {
-        SecurityAdapter adapter = new SecurityAdapter(allActiveTokens);
+        SecurityFragmentAdapter adapter = new SecurityFragmentAdapter(allActiveTokens);
         adapter.setOnDeleteButtonClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(Security token) {
+        mPresenter.deleteActiveToken(token);
     }
 
     @Override

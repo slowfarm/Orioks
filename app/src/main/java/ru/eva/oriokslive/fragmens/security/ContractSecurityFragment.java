@@ -18,18 +18,20 @@ class ContractSecurityFragment {
 
     interface Presenter {
 
-        void deleteActiveToken(String token);
+        void deleteActiveToken(Security token);
         void getAllActiveTokens();
     }
 
     interface Repository {
 
-        void deleteActiveToken(String token, OnTokenRecieved onTokenRecieved);
+        void deleteActiveToken(Security token, OnTokenRecieved onTokenRecieved);
 
         void getAllActiveTokens(OnAllAccessTokensReceived onAllAccessTokensReceived);
 
         void setAllActiveTokens(List<Security> tokens);
 
         void clearAllTables();
+
+        List<Security> getAllActiveLocalTokens();
     }
 }

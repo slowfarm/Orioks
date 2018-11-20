@@ -1,5 +1,7 @@
 package ru.eva.oriokslive.interfaces;
 
+import ru.eva.oriokslive.models.orioks.Security;
+
 public interface OnDeleteButtonClickListener {
-    void onClick(String token);
+    void onClick(Security token);
 }

@@ -45,4 +45,5 @@
     <string name="last_activity">Последняя активность</string>
     <string name="security">Безопасность</string>
     <string name="delete">Удалить</string>
+    <string name="additionally">Дополнительно</string>
 </resources>
