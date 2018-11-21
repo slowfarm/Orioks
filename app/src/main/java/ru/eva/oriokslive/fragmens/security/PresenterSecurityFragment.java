@@ -39,7 +39,6 @@ class PresenterSecurityFragment implements ContractSecurityFragment.Presenter, O
     public void onResponse(AccessToken accessToken) {
         mRepository.deleteActiveLocalToken(token);
         mView.notifyItemRemoved(position);
-        mView.showToast("Токен успешно удален");
         mRepository.getAllActiveTokens(this);
     }
 

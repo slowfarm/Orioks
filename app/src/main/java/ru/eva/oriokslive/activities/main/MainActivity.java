@@ -69,11 +69,7 @@ public class MainActivity extends AppCompatActivity
         ContractMainActivity.Presenter mPresenter = new PresenterMainActivity(this);
         mPresenter.setCurrentWeek();
         mPresenter.getStudent();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
         toolbar.setTitle("Обучение");
         fTrans = getFragmentManager().beginTransaction();
         fTrans.replace(R.id.frame_layout, mainFragment).commit();

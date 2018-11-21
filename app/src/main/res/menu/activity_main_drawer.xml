@@ -20,11 +20,13 @@
     </group>
     <item android:title="@string/additionally">
         <menu>
-        <item
-            android:id="@+id/nav_security"
-            android:icon="@drawable/ic_security"
-            android:title="@string/security" />
-            </menu>
-        </item>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_security"
+                    android:icon="@drawable/ic_security"
+                    android:title="@string/security" />
+            </group>
+        </menu>
+    </item>
 
 </menu>
