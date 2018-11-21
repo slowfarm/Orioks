@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import ru.eva.oriokslive.models.orioks.AccessToken;
 import ru.eva.oriokslive.models.orioks.Disciplines;
 import ru.eva.oriokslive.models.orioks.Events;
@@ -154,7 +155,7 @@ public class StorageHelper {
 
     public List<Security> getAllActiveTokens() {
         Realm realm = Realm.getDefaultInstance();
-        return realm.where(Security.class).findAll();
+        return realm.where(Security.class).sort("lastUsed", Sort.DESCENDING).findAll();
     }
 
     public void setAllActiveTokens(List<Security> tokens) {
