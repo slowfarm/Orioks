@@ -16,6 +16,8 @@ class ContractRegistrationActivity {
         void startActivity();
 
         void showToast(String text);
+
+        void setButtonEnabled();
     }
 
     interface Presenter {

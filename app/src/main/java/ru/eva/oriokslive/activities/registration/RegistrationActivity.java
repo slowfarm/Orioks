@@ -14,6 +14,7 @@ import ru.eva.oriokslive.activities.main.MainActivity;
 public class RegistrationActivity extends AppCompatActivity implements ContractRegistrationActivity.View {
 
     private ContractRegistrationActivity.Presenter mPresenter;
+    private Button button;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,13 +22,14 @@ public class RegistrationActivity extends AppCompatActivity implements ContractR
         setContentView(R.layout.activity_registration);
         EditText login = findViewById(R.id.login);
         EditText password = findViewById(R.id.password);
-        Button button = findViewById(R.id.button);
+        button = findViewById(R.id.button);
 
         mPresenter = new PresenterRegistrationActivity(this);
 
-        button.setOnClickListener(view-> mPresenter.onButtonWasClicked(
-                login.getText().toString(),
-                password.getText().toString()));
+        button.setOnClickListener(view-> {
+            mPresenter.onButtonWasClicked(login.getText().toString(), password.getText().toString());
+            button.setEnabled(false);
+        });
     }
 
 
@@ -40,5 +42,10 @@ public class RegistrationActivity extends AppCompatActivity implements ContractR
     @Override
     public void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setButtonEnabled() {
+        button.setEnabled(true);
     }
 }

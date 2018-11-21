@@ -38,12 +38,12 @@ public class SecurityFragmentAdapter extends RecyclerView.Adapter<SecurityFragme
     }
 
     @Override
-    public void onBindViewHolder(SecurityFragmentAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SecurityFragmentAdapter.ViewHolder holder, int position) {
         binderHelper.bind(holder.swipeLayout, tokenList.get(position).getToken());
         String inputDate = tokenList.get(position).getLastUsed();
         String pattern = "yyyy-MM-dd'T'HH:mm";
         SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
-        Date date = null;
+        Date date = new Date();
         try {
             date = sdf.parse(inputDate);
         } catch (ParseException e) {
@@ -69,9 +69,9 @@ public class SecurityFragmentAdapter extends RecyclerView.Adapter<SecurityFragme
             deleteLayout = itemView.findViewById(R.id.delete_layout);
             date = itemView.findViewById(R.id.date);
             device = itemView.findViewById(R.id.device);
-            deleteLayout.setOnClickListener(v -> {
-                onDeleteButtonClickListener.onClick(tokenList.get(getAdapterPosition()));
-                notifyItemRemoved(getAdapterPosition());
+            deleteLayout.setOnClickListener(v ->  {
+                onDeleteButtonClickListener.onClick(tokenList.get(getAdapterPosition()), getAdapterPosition());
+                swipeLayout.close(true);
             });
         }
     }

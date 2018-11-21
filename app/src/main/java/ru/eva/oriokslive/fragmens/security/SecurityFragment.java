@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,11 +20,16 @@ import ru.eva.oriokslive.adapters.SecurityFragmentAdapter;
 import ru.eva.oriokslive.interfaces.OnDeleteButtonClickListener;
 import ru.eva.oriokslive.models.orioks.Security;
 
-public class SecurityFragment extends Fragment implements ContractSecurityFragment.View, OnDeleteButtonClickListener {
+public class SecurityFragment extends Fragment implements
+        ContractSecurityFragment.View,
+        OnDeleteButtonClickListener,
+        SwipeRefreshLayout.OnRefreshListener {
 
 
     private ContractSecurityFragment.Presenter mPresenter;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private SecurityFragmentAdapter adapter;
     private View view;
 
     @Override
@@ -32,6 +38,9 @@ public class SecurityFragment extends Fragment implements ContractSecurityFragme
 
         mPresenter = new PresenterSecurityFragment(this);
         recyclerView = view.findViewById(R.id.recycler_view);
+
+        swipeRefreshLayout = view.findViewById(R.id.container);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         mPresenter.getAllActiveTokens();
         return view;
@@ -44,20 +53,39 @@ public class SecurityFragment extends Fragment implements ContractSecurityFragme
 
     @Override
     public void setAdapter(List<Security> allActiveTokens) {
-        SecurityFragmentAdapter adapter = new SecurityFragmentAdapter(allActiveTokens);
+        adapter = new SecurityFragmentAdapter(allActiveTokens);
         adapter.setOnDeleteButtonClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
     }
 
     @Override
-    public void onClick(Security token) {
-        mPresenter.deleteActiveToken(token);
+    public void onClick(Security token, int position) {
+        mPresenter.deleteActiveToken(token, position);
     }
 
     @Override
     public void finishActivity() {
         ((Activity)view.getContext()).finishAffinity();
         view.getContext().startActivity(new Intent(view.getContext(), RegistrationActivity.class));
+    }
+
+    @Override
+    public void unsetRefreshing() {
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void notifyItemRemoved(int position) {
+        adapter.notifyItemRemoved(position);
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        adapter.notifyDataSetChanged();
+    }
+    @Override
+    public void onRefresh() {
+        mPresenter.refreshActiveTokens();
     }
 }

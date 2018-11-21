@@ -14,12 +14,21 @@ class ContractSecurityFragment {
         void setAdapter(List<Security> allActiveTokens);
 
         void finishActivity();
+
+        void unsetRefreshing();
+
+        void notifyItemRemoved(int position);
+
+        void notifyDataSetChanged();
     }
 
     interface Presenter {
 
-        void deleteActiveToken(Security token);
+        void deleteActiveToken(Security token, int position);
+
         void getAllActiveTokens();
+
+        void refreshActiveTokens();
     }
 
     interface Repository {
@@ -33,5 +42,7 @@ class ContractSecurityFragment {
         void clearAllTables();
 
         List<Security> getAllActiveLocalTokens();
+
+        void deleteActiveLocalToken(Security token);
     }
 }

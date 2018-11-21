@@ -43,6 +43,7 @@ public class PresenterRegistrationActivity implements ContractRegistrationActivi
             mRepository.getStudent(this);
         } else {
             mView.showToast("Неверный логин либо пароль");
+            mView.setButtonEnabled();
         }
     }
 
@@ -75,5 +76,6 @@ public class PresenterRegistrationActivity implements ContractRegistrationActivi
     @Override
     public void onFailure(Throwable t) {
         mView.showToast("Нет соединения с интернетом");
+        mView.setButtonEnabled();
     }
 }

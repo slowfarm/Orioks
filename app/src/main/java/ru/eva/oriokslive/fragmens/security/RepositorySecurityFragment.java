@@ -16,7 +16,6 @@ class RepositorySecurityFragment implements ContractSecurityFragment.Repository 
     public void deleteActiveToken(Security token, OnTokenRecieved onTokenRecieved) {
         RetrofitHelper.getInstance().setOnTokenReceived(onTokenRecieved);
         RetrofitHelper.getInstance().deleteAccessToken(token.getToken());
-        StorageHelper.getInstance().deleteActiveToken(token);
     }
 
     @Override
@@ -38,5 +37,10 @@ class RepositorySecurityFragment implements ContractSecurityFragment.Repository 
     @Override
     public List<Security> getAllActiveLocalTokens() {
         return StorageHelper.getInstance().getAllActiveTokens();
+    }
+
+    @Override
+    public void deleteActiveLocalToken(Security token) {
+        StorageHelper.getInstance().deleteActiveToken(token);
     }
 }
