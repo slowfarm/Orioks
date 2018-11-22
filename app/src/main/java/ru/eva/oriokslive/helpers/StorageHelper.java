@@ -136,8 +136,7 @@ public class StorageHelper {
     }
 
     private void fillDataList(List<Data> dataList) {
-        int listSize = dataList.size();
-        for(int i = 1; i< listSize; i++) {
+        for(int i = 1; i< dataList.size(); i++) {
             if(!dataList.get(i).getDay().equals(dataList.get(i-1).getDay())) {
                 dataList.add(i, new Data());
                 i++;
