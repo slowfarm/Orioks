@@ -55,13 +55,13 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             holder.progressBar.setProgress(0);
 
         if(progress < 50) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FF7535"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FF6D00"));
         } else if(progress < 70) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#F1C40F"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FFD600"));
         } else if(progress < 85) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#9ACB31"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#64DD17"));
         } else {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#28D002"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#00C853"));
         }
 
         holder.week.setText(disciplinesList.get(position).getWeek());

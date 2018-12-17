@@ -7,8 +7,8 @@ android {
         applicationId "ru.eva.oriokslive"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 10025
-        versionName "1.0.25"
+        versionCode 10026
+        versionName "1.0.26"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -43,7 +43,7 @@ public class SecurityFragmentAdapter extends RecyclerView.Adapter<SecurityFragme
     @Override
     public void onBindViewHolder(@NonNull SecurityFragmentAdapter.ViewHolder holder, int position) {
         binderHelper.bind(holder.swipeLayout, tokenList.get(position).getToken());
-        if(tokenList.get(position).getUserAgent().split("\\s").length == 3) {
+        if(tokenList.get(position).getUserAgent().split("\\s").length > 1) {
             holder.application.setText(getApplicationName(tokenList.get(position).getUserAgent()));
             holder.device.setText(getDeviceName(tokenList.get(position).getUserAgent()));
         }
@@ -117,6 +117,10 @@ public class SecurityFragmentAdapter extends RecyclerView.Adapter<SecurityFragme
 
     private String getDeviceName(String text) {
         String[] agent = text.split("\\s");
-        return agent[1] + " " + agent[2];
+        StringBuilder deviceName = new StringBuilder();
+        for (int i = 1; i < agent.length; i++) {
+            deviceName.append(agent[i]).append(" ");
+        }
+        return deviceName.toString();
     }
 }

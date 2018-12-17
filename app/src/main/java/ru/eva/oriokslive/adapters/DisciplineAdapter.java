@@ -37,28 +37,31 @@ public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        double progress = disciplinesList.get(position).getCurrentGrade() / disciplinesList.get(position).getMaxGrade() * 100;
-        holder.name.setText(disciplinesList.get(position).getName());
-        if(disciplinesList.get(position).getCurrentGrade() != -1.0)
-            holder.value.setText(String.valueOf(disciplinesList.get(position).getCurrentGrade()));
+        Disciplines discipline =disciplinesList.get(position);
+        double progress = discipline.getCurrentGrade() / discipline.getMaxGrade() * 100;
+
+        holder.name.setText(discipline.getName());
+        if(discipline.getCurrentGrade() != -1.0)
+            holder.value.setText(String.valueOf(discipline.getCurrentGrade()));
         else
             holder.value.setText("-");
 
-        holder.valueFrom.setText(String.valueOf(disciplinesList.get(position).getMaxGrade()));
+        holder.valueFrom.setText(String.valueOf(discipline.getMaxGrade()));
+
+        holder.formControl.setText(discipline.getControlForm());
 
         if(progress >= 0)
             holder.progressBar.setProgress((int) progress);
         else
             holder.progressBar.setProgress(0);
-
         if(progress < 50) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FF7535"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FF6D00"));
         } else if(progress < 70) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#F1C40F"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FFD600"));
         } else if(progress < 85) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#9ACB31"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#64DD17"));
         } else {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#28D002"));
+            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#00C853"));
         }
     }
 
@@ -69,17 +72,17 @@ public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineAdapter.Vi
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView name;
+        private final TextView name,valueFrom, value, formControl;
         private final CircularProgressBar progressBar;
-        private final TextView value;
-        private final TextView valueFrom;
+
 
         ViewHolder(View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.text_view);
+            name = itemView.findViewById(R.id.discipline);
             progressBar = itemView.findViewById(R.id.progress_bar);
             value = itemView.findViewById(R.id.value);
             valueFrom = itemView.findViewById(R.id.value_from);
+            formControl = itemView.findViewById(R.id.form_control);
             itemView.setOnClickListener(view-> view.getContext()
                     .startActivity(
                             new Intent(view.getContext(), EventActivity.class)
