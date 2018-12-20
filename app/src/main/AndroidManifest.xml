@@ -39,6 +39,7 @@
         <activity
             android:name=".activities.main.MainActivity"
             android:label="@string/main"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 

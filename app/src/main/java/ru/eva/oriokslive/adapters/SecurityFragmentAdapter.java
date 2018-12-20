@@ -104,9 +104,9 @@ public class SecurityFragmentAdapter extends RecyclerView.Adapter<SecurityFragme
         if(diff < hour)
             return  "Недавно";
         if(diff < day)
-            return TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS) + " часов назад";
+            return TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS) + " часа(ов) назад";
         if(diff < week)
-            return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + " дней назад";
+            return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + " дня(ей) назад";
         return sdf.format(date);
     }
 
