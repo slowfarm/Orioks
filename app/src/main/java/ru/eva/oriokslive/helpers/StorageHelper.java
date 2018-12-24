@@ -130,7 +130,7 @@ public class StorageHelper {
             dataList = new ArrayList<>();
         }
         else if(dataList.size() > 0) {
-            setDataToPosition(dataList, 1);
+            setDataToPosition(dataList, 0);
         } else {
             dataList.add(0, new Data());
         }
