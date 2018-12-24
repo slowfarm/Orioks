@@ -129,7 +129,9 @@ public class StorageHelper {
         if(dataList == null) {
             dataList = new ArrayList<>();
         }
-        else {
+        else if(dataList.size() > 0) {
+            setDataToPosition(dataList, 1);
+        } else {
             dataList.add(0, new Data());
         }
         return dataList;
@@ -138,11 +140,11 @@ public class StorageHelper {
     private void fillDataList(List<Data> dataList) {
         for(int i = 1; i< dataList.size(); i++) {
             if(!dataList.get(i).getDay().equals(dataList.get(i-1).getDay())) {
-                dataList.add(i, new Data());
+                setDataToPosition(dataList, i);
                 i++;
             }
         }
-        dataList.add(0, new Data());
+        setDataToPosition(dataList, 0);
     }
 
     public Schedulers getSchedule() {
@@ -168,5 +170,32 @@ public class StorageHelper {
     public void deleteActiveToken(Security token) {
         Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(realm1 -> token.deleteFromRealm());
+    }
+
+    private String getDayOfWeek(int day) {
+        switch (day) {
+            case 1:
+                return "Понедельник";
+            case 2:
+                return "Вторник";
+            case 3:
+                return "Среда";
+            case 4:
+                return "Четверг";
+            case 5:
+                return "Пятница";
+            case 6:
+                return "Суббота";
+            case 7:
+                return "Воскресенье";
+            default:
+                return "Понедельник";
+        }
+    }
+
+    private void setDataToPosition(List<Data> dataList, int position) {
+        Data data = new Data();
+        data.setDayOfWeek(getDayOfWeek(dataList.get(position).getDay()));
+        dataList.add(position, data);
     }
 }

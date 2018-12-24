@@ -1,7 +1,10 @@
 package ru.eva.oriokslive.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,37 +28,41 @@ public class SchedulerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         switch (i) {
-            case 0:
-                return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.scheduler_list_item, parent, false));
             case 1:
                 return new ViewHolder1(LayoutInflater.from(parent.getContext()).inflate(R.layout.schedulers_list_separator, parent, false));
-                default:
-                    return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.scheduler_list_item, parent, false));
+            default:
+                return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.scheduler_list_item, parent, false));
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+        Data item = dataList.get(position);
         switch (viewHolder.getItemViewType()) {
             case 0:
                 ViewHolder holder = (ViewHolder)viewHolder;
-                holder.name.setText(dataList.get(position).getClazz().getName());
-                holder.audience.setText(dataList.get(position).getRoom().getName());
-                holder.teacher.setText(dataList.get(position).getClazz().getTeacher());
-                holder.timeStart.setText(dataList.get(position).getTime().getTimeFrom());
-                holder.timeEnd.setText(dataList.get(position).getTime().getTimeTo());
+                holder.name.setText(item.getClazz().getName());
+                holder.audience.setText(item.getRoom().getName());
+                holder.teacher.setText(item.getClazz().getTeacher());
+                holder.timeStart.setText(item.getTime().getTimeFrom());
+                holder.timeEnd.setText(item.getTime().getTimeTo());
+
+                if(position == getItemCount()-1) {
+                    setLayoutMarginBottom(holder.itemView, 16);
+                } else {
+                    setLayoutMarginBottom(holder.itemView, 0);
+                }
                 break;
-            case 1:
+            default:
                 ViewHolder1 holder1 = (ViewHolder1)viewHolder;
-                if(dataList.size() != 1) {
-                    holder1.dayOfWeek.setText(getDayOfWeek(position));
+                if(dataList.size() != 1 && item.getDayOfWeek() != null) {
+                    holder1.dayOfWeek.setText(item.getDayOfWeek());
                 }
                 else {
                     holder1.dayOfWeek.setText("Нет занятий");
                 }
                 break;
         }
-
     }
 
     @Override
@@ -73,11 +80,7 @@ public class SchedulerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView name;
-        private final TextView audience;
-        private final TextView teacher;
-        private final TextView timeStart;
-        private final TextView timeEnd;
+        private final TextView name, audience, teacher, timeStart, timeEnd;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,6 +97,7 @@ public class SchedulerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.
                             .show());
         }
     }
+
     class ViewHolder1 extends RecyclerView.ViewHolder {
         private final TextView dayOfWeek;
         ViewHolder1(@NonNull View itemView) {
@@ -102,26 +106,14 @@ public class SchedulerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    private String getDayOfWeek(int position) {
-        switch (dataList.get(position+1).getDay()) {
-            case 1:
-                return "Понедельник";
-            case 2:
-                return "Вторник";
-            case 3:
-                return "Среда";
-            case 4:
-                return "Четверг";
-            case 5:
-                return "Пятница";
-            case 6:
-                return "Суббота";
-            case 7:
-                return "Воскресенье";
-            default:
-                return "Понедельник";
-        }
+    private void setLayoutMarginBottom(View view, int margin) {
+        ViewGroup.MarginLayoutParams params= new  ViewGroup.MarginLayoutParams(view.getLayoutParams());
+        float dp = convertDpToPixel(view.getContext());
+        params.setMargins(Math.round(dp), 0, Math.round(dp), margin);
+        view.setLayoutParams(params);
     }
 
-
+    private static float convertDpToPixel(Context context){
+        return 4 * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
 }

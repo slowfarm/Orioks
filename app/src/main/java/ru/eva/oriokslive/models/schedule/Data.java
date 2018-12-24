@@ -25,6 +25,8 @@ public class Data extends RealmObject {
     @Expose
     private Room room;
 
+    private String dayOfWeek;
+
     public Integer getDay() {
         return day;
     }
@@ -72,4 +74,13 @@ public class Data extends RealmObject {
     public void setRoom(Room room) {
         this.room = room;
     }
+
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
 }
