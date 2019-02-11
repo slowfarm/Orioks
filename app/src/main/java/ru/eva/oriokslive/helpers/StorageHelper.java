@@ -26,11 +26,13 @@ public class StorageHelper {
     }
 
     public void setAccessToken(AccessToken accessToken) {
-        Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(realm1 -> {
-            realm.delete(AccessToken.class);
-            realm.insert(accessToken);
-        });
+        if(accessToken != null) {
+            Realm realm = Realm.getDefaultInstance();
+            realm.executeTransaction(realm1 -> {
+                realm.delete(AccessToken.class);
+                realm.insert(accessToken);
+            });
+        }
     }
 
     public String getAccessToken() {
@@ -45,6 +47,8 @@ public class StorageHelper {
     }
 
     public void setStudent(Student student) {
+        if(student.getGroup().split("&nbsp;").length > 0)
+            student.setGroup(student.getGroup().split("&nbsp;")[0]);
         Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(realm1 -> {
             realm.delete(Student.class);

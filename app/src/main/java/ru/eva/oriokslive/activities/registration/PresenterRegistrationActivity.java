@@ -64,7 +64,6 @@ public class PresenterRegistrationActivity implements ContractRegistrationActivi
     public void onResponse(Schedulers schedulers) {
         mRepository.setSchedule(schedulers);
         mRepository.getAllActiveTokens(this);
-
     }
 
     @Override

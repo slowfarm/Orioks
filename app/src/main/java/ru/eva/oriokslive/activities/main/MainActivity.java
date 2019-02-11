@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity
     private TextView value;
     private CircularProgressBar progressBar;
 
-    private NavigationView navigationView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +55,7 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         usernameText =  navigationView.getHeaderView(0).findViewById(R.id.username_text);
