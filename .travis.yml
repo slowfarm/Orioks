@@ -23,3 +23,8 @@ notifications:
   email:
     on_success: change
     on_failure: always
+ before_install:
+  - pwd
+  - ls -la
+  - chmod +x /.gradlew
+  sudo: false
