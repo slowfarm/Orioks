@@ -27,3 +27,4 @@ notifications:
   - pwd
   - ls -la
   - chmod +x /.gradlew
+  sudo: false
