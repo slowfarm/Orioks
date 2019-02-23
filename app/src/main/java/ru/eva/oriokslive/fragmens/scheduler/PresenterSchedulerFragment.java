@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import ru.eva.oriokslive.helpers.ConvertHelper;
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
 import ru.eva.oriokslive.models.schedule.Schedulers;
 
@@ -30,7 +31,8 @@ class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter,
 
     @Override
     public void setViewPagerToCurrentWeek() {
-        int position = (getCurrentWeek()-1)%4 + 2;
+        int currentWeek = ConvertHelper.getInstance().getCurrentWeek();
+        int position = (currentWeek-1)%4 + 2;
         mView.setViewPagerToPosition(position);
     }
 
@@ -45,50 +47,6 @@ class PresenterSchedulerFragment implements ContractSchedulerFragment.Presenter,
     @Override
     public void onFailure(Throwable t) {
         mView.showToast("Нет соединения с интернетом");
-    }
-
-    private int getCurrentWeek() {
-        String format = "yyyyMMdd";
-
-        SimpleDateFormat df = new SimpleDateFormat(format, Locale.getDefault());
-        Calendar cal = Calendar.getInstance();
-        String input = cal.get(Calendar.YEAR)+"0901";
-        Date date = null;
-        try {
-            date = df.parse(input);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        cal.setTime(date);
-        int startWeek = cal.get(Calendar.WEEK_OF_YEAR);
-        cal.setTime(new Date());
-        int currentWeek = cal.get(Calendar.WEEK_OF_YEAR);
-        int week = currentWeek - startWeek + 1;
-        if(week > 18) return 18;
-        if(week < 0)
-            return getCurrentWeek2Sem();
-        return week;
-    }
-
-    private int getCurrentWeek2Sem() {
-        String format = "yyyyMMdd";
-
-        SimpleDateFormat df = new SimpleDateFormat(format, Locale.getDefault());
-        Calendar cal = Calendar.getInstance();
-        String input = cal.get(Calendar.YEAR)+"0211";
-        Date date = null;
-        try {
-            date = df.parse(input);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        cal.setTime(date);
-        int startWeek = cal.get(Calendar.WEEK_OF_YEAR);
-        cal.setTime(new Date());
-        int currentWeek = cal.get(Calendar.WEEK_OF_YEAR);
-        int week = currentWeek - startWeek + 1;
-        if(week > 18) return 18;
-        return week;
     }
 
 }
