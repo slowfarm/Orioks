@@ -9,8 +9,8 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import ru.eva.oriokslive.models.orioks.AccessToken;
-import ru.eva.oriokslive.models.orioks.Disciplines;
-import ru.eva.oriokslive.models.orioks.Events;
+import ru.eva.oriokslive.models.orioks.Discipline;
+import ru.eva.oriokslive.models.orioks.Event;
 import ru.eva.oriokslive.models.orioks.Security;
 import ru.eva.oriokslive.models.orioks.Student;
 
@@ -22,7 +22,7 @@ public interface OrioksAPI {
 
     @Headers({"Accept: application/json"})
     @GET("/api/v1/student/disciplines")
-    Call<List<Disciplines>> getDisciplines(@Header("Authorization") String token, @Header("User-Agent") String userAgent);
+    Call<List<Discipline>> getDisciplines(@Header("Authorization") String token, @Header("User-Agent") String userAgent);
 
     @Headers({"Accept: application/json"})
     @GET("/api/v1/student")
@@ -30,7 +30,7 @@ public interface OrioksAPI {
 
     @Headers({"Accept: application/json"})
     @GET("/api/v1/student/disciplines/{id}/events")
-    Call<List<Events>> getEvents(@Header("Authorization") String token, @Header("User-Agent") String userAgent, @Path("id") int id);
+    Call<List<Event>> getEvents(@Header("Authorization") String token, @Header("User-Agent") String userAgent, @Path("id") int id);
 
     @Headers({"Accept: application/json"})
     @DELETE("/api/v1/student/tokens/{token}")
@@ -39,4 +39,8 @@ public interface OrioksAPI {
     @Headers({"Accept: application/json"})
     @GET("/api/v1/student/tokens")
     Call<List<Security>> getAllActiveTokens(@Header("Authorization") String token, @Header("User-Agent") String userAgent);
+
+    @Headers({"Accept: application/json"})
+    @GET("/api/v1/schedule/groups")
+    Call<String[]> getGroup(@Header("Authorization") String token, @Header("User-Agent") String userAgent);
 }

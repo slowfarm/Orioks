@@ -11,7 +11,7 @@ import ru.eva.oriokslive.interfaces.OnTokenRecieved;
 import ru.eva.oriokslive.models.orioks.AccessToken;
 import ru.eva.oriokslive.models.orioks.Security;
 import ru.eva.oriokslive.models.orioks.Student;
-import ru.eva.oriokslive.models.schedule.Schedulers;
+import ru.eva.oriokslive.models.miet.schedule.Schedulers;
 
 public class PresenterRegistrationActivity implements ContractRegistrationActivity.Presenter,
         OnTokenRecieved,OnStudentRecieved, OnSchedulersReceived, OnAllAccessTokensReceived {

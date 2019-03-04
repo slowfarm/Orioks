@@ -2,9 +2,10 @@ package ru.eva.oriokslive.activities.event;
 
 import java.util.List;
 
+import ru.eva.oriokslive.helpers.ConvertHelper;
 import ru.eva.oriokslive.helpers.DialogHelper;
 import ru.eva.oriokslive.interfaces.OnEventsRecieved;
-import ru.eva.oriokslive.models.orioks.Events;
+import ru.eva.oriokslive.models.orioks.Event;
 
 class PresenterEventActivity implements ContractEventActivity.Presenter, OnEventsRecieved {
     private ContractEventActivity.View mView;
@@ -19,7 +20,7 @@ class PresenterEventActivity implements ContractEventActivity.Presenter, OnEvent
 
     @Override
     public void getRecyclerView() {
-        mView.setRecyclerView(mRepository.getEventList(id));
+        mView.setRecyclerView(ConvertHelper.getInstance().events(mRepository.getEventList(id)));
     }
 
     @Override
@@ -38,12 +39,12 @@ class PresenterEventActivity implements ContractEventActivity.Presenter, OnEvent
     }
 
     @Override
-    public void onResponse(List<Events> eventsList) {
-        if(eventsList != null) {
-            mView.addRecyclerViewItems(eventsList);
-            for (Events event : eventsList)
+    public void onResponse(List<Event> eventList) {
+        if(eventList != null) {
+            mView.addRecyclerViewItems(ConvertHelper.getInstance().events(eventList));
+            for (Event event : eventList)
                 event.setId(id);
-            mRepository.setEventList(eventsList);
+            mRepository.setEventList(eventList);
         }
     }
 

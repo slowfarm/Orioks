@@ -2,16 +2,24 @@ package ru.eva.oriokslive.activities.splash;
 
 import java.util.List;
 
+import ru.eva.oriokslive.helpers.ConvertHelper;
 import ru.eva.oriokslive.interfaces.OnAllAccessTokensReceived;
+import ru.eva.oriokslive.interfaces.OnNewsReceived;
 import ru.eva.oriokslive.interfaces.OnSchedulersReceived;
 import ru.eva.oriokslive.interfaces.OnStudentRecieved;
 import ru.eva.oriokslive.interfaces.OnTokenRecieved;
+import ru.eva.oriokslive.models.miet.news.News;
+import ru.eva.oriokslive.models.miet.news.NewsResponse;
 import ru.eva.oriokslive.models.orioks.AccessToken;
 import ru.eva.oriokslive.models.orioks.Security;
 import ru.eva.oriokslive.models.orioks.Student;
-import ru.eva.oriokslive.models.schedule.Schedulers;
+import ru.eva.oriokslive.models.miet.schedule.Schedulers;
 
-public class PresenterSplashActivity implements ContractSplashActivity.Presenter, OnStudentRecieved, OnSchedulersReceived, OnTokenRecieved, OnAllAccessTokensReceived {
+public class PresenterSplashActivity implements ContractSplashActivity.Presenter,
+        OnStudentRecieved,
+        OnTokenRecieved,
+        OnAllAccessTokensReceived,
+        OnNewsReceived {
     private ContractSplashActivity.View mView;
     private ContractSplashActivity.Repository mRepository;
 
@@ -38,7 +46,7 @@ public class PresenterSplashActivity implements ContractSplashActivity.Presenter
             }
             else {
                 mRepository.setStudent(student);
-                mRepository.getSchedule(student.getGroup(), this);
+                mRepository.getAllActiveTokens(mRepository.getAccessToken(), this);
             }
         } else {
             mView.showToast("Токен аннулирован");
@@ -47,9 +55,17 @@ public class PresenterSplashActivity implements ContractSplashActivity.Presenter
     }
 
     @Override
-    public void onResponse(Schedulers schedulers) {
-        mRepository.setSchedule(schedulers);
-        mRepository.getAllActiveTokens(mRepository.getAccessToken(), this);
+    public void onResponse(List<Security> tokens) {
+        mRepository.setAllActiveTokens(tokens);
+        mRepository.getNews(this);
+
+    }
+
+    @Override
+    public void onResponse(NewsResponse newsResponse) {
+        List<News> newsList = ConvertHelper.getInstance().news(newsResponse);
+        mRepository.setNews(newsList);
+        mView.startMainActivity();
     }
 
     @Override
@@ -58,14 +74,8 @@ public class PresenterSplashActivity implements ContractSplashActivity.Presenter
     }
 
     @Override
-    public void onResponse(List<Security> tokens) {
-        mRepository.setAllActiveTokens(tokens);
-        mView.startMainActivity();
-    }
-
-    @Override
     public void onFailure(Throwable t) {
-        mView.showToast("Нет соединения с интернетом");
+        mView.showToast(t.getMessage());
         mView.startMainActivity();
     }
 

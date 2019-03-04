@@ -1,119 +1,88 @@
 package ru.eva.oriokslive.adapters;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.chauthai.swipereveallayout.SwipeRevealLayout;
+import com.chauthai.swipereveallayout.ViewBinderHelper;
 
 import java.util.List;
 
 import ru.eva.oriokslive.R;
-import ru.eva.oriokslive.helpers.DialogHelper;
-import ru.eva.oriokslive.models.schedule.Data;
+import ru.eva.oriokslive.interfaces.OnGroupDeleteButtonClickListener;
+import ru.eva.oriokslive.interfaces.OnGroupItemClickListener;
 
-public class SchedulerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SchedulerFragmentAdapter extends RecyclerView.Adapter<SchedulerFragmentAdapter.ViewHolder> {
 
-    private List<Data> dataList;
+    private List<String> groupList;
+    private OnGroupItemClickListener onGroupItemClickListener;
+    private OnGroupDeleteButtonClickListener onGroupDeleteButtonClickListener;
+    private final ViewBinderHelper binderHelper = new ViewBinderHelper();
 
-    public SchedulerFragmentAdapter(List<Data> dataList) {
-        this.dataList = dataList;
+
+    public SchedulerFragmentAdapter(List<String> groupList) {
+        this.groupList = groupList;
     }
+
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        switch (i) {
-            case 1:
-                return new ViewHolder1(LayoutInflater.from(parent.getContext()).inflate(R.layout.schedulers_list_separator, parent, false));
-            default:
-                return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.scheduler_list_item, parent, false));
-        }
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.group_list_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        Data item = dataList.get(position);
-        switch (viewHolder.getItemViewType()) {
-            case 0:
-                ViewHolder holder = (ViewHolder)viewHolder;
-                holder.name.setText(item.getClazz().getName());
-                holder.audience.setText(item.getRoom().getName());
-                holder.teacher.setText(item.getClazz().getTeacher());
-                holder.timeStart.setText(item.getTime().getTimeFrom());
-                holder.timeEnd.setText(item.getTime().getTimeTo());
-
-                if(position == getItemCount()-1) {
-                    setLayoutMarginBottom(holder.itemView, 16);
-                } else {
-                    setLayoutMarginBottom(holder.itemView, 0);
-                }
-                break;
-            default:
-                ViewHolder1 holder1 = (ViewHolder1)viewHolder;
-                if(dataList.size() != 1 && item.getDayOfWeek() != null) {
-                    holder1.dayOfWeek.setText(item.getDayOfWeek());
-                }
-                else {
-                    holder1.dayOfWeek.setText("Нет занятий");
-                }
-                break;
-        }
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        String group = groupList.get(position);
+        holder.group.setText(group);
+        binderHelper.bind(holder.swipeLayout, group);
     }
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        return groupList.size();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if(dataList.get(position).getDay() != null)
-            return 0;
-        else
-            return 1;
+    public void addItems(List<String> groupList) {
+        this.groupList = groupList;
+        notifyDataSetChanged();
+    }
+
+    public void removeItem(int position) {
+        groupList.remove(position);
+        notifyItemRemoved(position);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView group;
+        private final SwipeRevealLayout swipeLayout;
+        private final LinearLayout frontLayout;
+        private final View deleteLayout;
 
-        private final TextView name, audience, teacher, timeStart, timeEnd;
-
-        ViewHolder(@NonNull View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.name);
-            audience = itemView.findViewById(R.id.audience);
-            teacher = itemView.findViewById(R.id.teacher);
-            timeStart = itemView.findViewById(R.id.time_start);
-            timeEnd = itemView.findViewById(R.id.time_end);
-
-            itemView.setOnClickListener(view->
-                    DialogHelper
-                            .getInstance()
-                            .createDialog(dataList.get(getAdapterPosition()), view)
-                            .show());
+            swipeLayout = itemView.findViewById(R.id.swipe_layout);
+            deleteLayout = itemView.findViewById(R.id.delete_layout);
+            group = itemView.findViewById(R.id.group);
+            frontLayout = itemView.findViewById(R.id.front_layout);
+            frontLayout.setOnClickListener(v -> onGroupItemClickListener.onClick(groupList.get(getAdapterPosition())));
+            deleteLayout.setOnClickListener(v ->  {
+                onGroupDeleteButtonClickListener.onClick(groupList.get(getAdapterPosition()), getAdapterPosition());
+                swipeLayout.close(true);
+            });
         }
     }
 
-    class ViewHolder1 extends RecyclerView.ViewHolder {
-        private final TextView dayOfWeek;
-        ViewHolder1(@NonNull View itemView) {
-            super(itemView);
-            dayOfWeek = itemView.findViewById(R.id.day_of_week);
-        }
+    public void setOnGroupItemClickListener(OnGroupItemClickListener onGroupItemClickListener) {
+        this.onGroupItemClickListener = onGroupItemClickListener;
     }
 
-    private void setLayoutMarginBottom(View view, int margin) {
-        ViewGroup.MarginLayoutParams params= new  ViewGroup.MarginLayoutParams(view.getLayoutParams());
-        float dp = convertDpToPixel(view.getContext());
-        params.setMargins(Math.round(dp), 0, Math.round(dp), margin);
-        view.setLayoutParams(params);
-    }
-
-    private static float convertDpToPixel(Context context){
-        return 4 * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    public void setOnGroupDeleteButtonClickListener(OnGroupDeleteButtonClickListener onGroupDeleteButtonClickListener) {
+        this.onGroupDeleteButtonClickListener = onGroupDeleteButtonClickListener;
     }
 }

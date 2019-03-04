@@ -1,6 +1,6 @@
 package ru.eva.oriokslive.interfaces;
 
-import ru.eva.oriokslive.models.schedule.Schedulers;
+import ru.eva.oriokslive.models.miet.schedule.Schedulers;
 
 public interface OnSchedulersReceived {
 

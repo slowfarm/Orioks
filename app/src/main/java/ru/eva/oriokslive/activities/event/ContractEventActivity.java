@@ -4,18 +4,18 @@ import java.util.List;
 
 import ru.eva.oriokslive.helpers.DialogHelper;
 import ru.eva.oriokslive.interfaces.OnEventsRecieved;
-import ru.eva.oriokslive.models.orioks.Disciplines;
-import ru.eva.oriokslive.models.orioks.Events;
+import ru.eva.oriokslive.models.orioks.Discipline;
+import ru.eva.oriokslive.models.orioks.Event;
 
 class ContractEventActivity {
     interface View {
-        void setRecyclerView(List<Events> data);
+        void setRecyclerView(List<Event> data);
 
-        void showDialog(Disciplines discipline, DialogHelper dialog);
+        void showDialog(Discipline discipline, DialogHelper dialog);
 
         void setToolbarTitle(String title);
 
-        void addRecyclerViewItems(List<Events> data);
+        void addRecyclerViewItems(List<Event> data);
 
         void showToast(String text);
     }
@@ -32,12 +32,12 @@ class ContractEventActivity {
     }
 
     interface Repository {
-        List<Events> getEventList(int id);
+        List<Event> getEventList(int id);
 
-        Disciplines getDiscipline(int id);
+        Discipline getDiscipline(int id);
 
         void getEventList(int id, OnEventsRecieved onEventsRecieved);
 
-        void setEventList(List<Events> eventsList);
+        void setEventList(List<Event> eventList);
     }
 }

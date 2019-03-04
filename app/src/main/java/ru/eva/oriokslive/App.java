@@ -1,17 +1,23 @@
 package ru.eva.oriokslive;
 
+import org.simpleframework.xml.convert.AnnotationStrategy;
+import org.simpleframework.xml.core.Persister;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.eva.oriokslive.interfaces.http.MietAPI;
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
+import ru.eva.oriokslive.interfaces.http.NewsAPI;
 import ru.eva.oriokslive.interfaces.http.OrioksAPI;
+import ru.eva.oriokslive.interfaces.http.ScheduleAPI;
 
 public class App extends android.app.Application {
     private static OrioksAPI orioksApi;
-    private static MietAPI mietAPI;
+    private static ScheduleAPI scheduleAPI;
+    private static NewsAPI newsAPI;
 
     @Override
     public void onCreate() {
@@ -44,12 +50,23 @@ public class App extends android.app.Application {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        mietAPI = retrofit.create(MietAPI.class);
+        scheduleAPI = retrofit.create(ScheduleAPI.class);
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl("https:/miet.ru/")
+                .client(httpClient)
+                .addConverterFactory(SimpleXmlConverterFactory.createNonStrict(
+                        new Persister(new AnnotationStrategy())))
+                .build();
+
+        newsAPI = retrofit.create(NewsAPI.class);
     }
 
     public static OrioksAPI getApi() {
         return orioksApi;
     }
 
-    public static MietAPI getMietAPI() {return  mietAPI;}
+    public static ScheduleAPI getScheduleAPI() {return scheduleAPI;}
+
+    public static NewsAPI getNewsAPI() {return newsAPI;}
 }

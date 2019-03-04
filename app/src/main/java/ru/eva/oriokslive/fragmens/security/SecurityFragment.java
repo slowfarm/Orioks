@@ -85,13 +85,14 @@ public class SecurityFragment extends Fragment implements
 
     @Override
     public void notifyItemRemoved(int position) {
-        adapter.notifyItemRemoved(position);
+        adapter.removeItem(position);
     }
 
     @Override
-    public void notifyDataSetChanged() {
-        adapter.notifyDataSetChanged();
+    public void addRecyclerViewItems(List<Security> convertTokens) {
+        adapter.addItems(convertTokens);
     }
+
     @Override
     public void onRefresh() {
         mPresenter.refreshActiveTokens();

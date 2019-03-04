@@ -2,12 +2,11 @@ package ru.eva.oriokslive.fragmens.main;
 
 import java.util.List;
 
-import ru.eva.oriokslive.helpers.RetrofitHelper;
-import ru.eva.oriokslive.helpers.StorageHelper;
+import ru.eva.oriokslive.helpers.ConvertHelper;
 import ru.eva.oriokslive.interfaces.OnDisciplinesRecieved;
 import ru.eva.oriokslive.interfaces.OnTokenRecieved;
 import ru.eva.oriokslive.models.orioks.AccessToken;
-import ru.eva.oriokslive.models.orioks.Disciplines;
+import ru.eva.oriokslive.models.orioks.Discipline;
 
 class PresenterMainFragment implements ContractMainFragment.Presenter, OnDisciplinesRecieved, OnTokenRecieved {
     private ContractMainFragment.View mView;
@@ -20,7 +19,7 @@ class PresenterMainFragment implements ContractMainFragment.Presenter, OnDiscipl
 
     @Override
     public void getDisciplineList() {
-        mView.setRecyclerView(mRepository.getDisciplineList());
+        mView.setRecyclerView(ConvertHelper.getInstance().disciplines(mRepository.getDisciplineList()));
     }
 
     @Override
@@ -29,10 +28,10 @@ class PresenterMainFragment implements ContractMainFragment.Presenter, OnDiscipl
     }
 
     @Override
-    public void onResponse(List<Disciplines> disciplinesList) {
-        if(disciplinesList != null) {
-            mRepository.setDisciplineList(disciplinesList);
-            mView.addRecyclerVIewItems(disciplinesList);
+    public void onResponse(List<Discipline> disciplineList) {
+        if(disciplineList != null) {
+            mRepository.setDisciplineList(disciplineList);
+            mView.addRecyclerVIewItems(ConvertHelper.getInstance().disciplines(disciplineList));
         } else {
             mView.showToast("Токен аннулирован");
             mRepository.deleteToken(this);

@@ -15,8 +15,8 @@ import java.util.List;
 import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.adapters.EventsAdapter;
 import ru.eva.oriokslive.helpers.DialogHelper;
-import ru.eva.oriokslive.models.orioks.Disciplines;
-import ru.eva.oriokslive.models.orioks.Events;
+import ru.eva.oriokslive.models.orioks.Discipline;
+import ru.eva.oriokslive.models.orioks.Event;
 
 
 public class EventActivity extends AppCompatActivity implements ContractEventActivity.View {
@@ -60,7 +60,7 @@ public class EventActivity extends AppCompatActivity implements ContractEventAct
     }
 
     @Override
-    public void setRecyclerView(List<Events> data) {
+    public void setRecyclerView(List<Event> data) {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         adapter = new EventsAdapter(data);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,7 +68,7 @@ public class EventActivity extends AppCompatActivity implements ContractEventAct
     }
 
     @Override
-    public void showDialog(Disciplines discipline, DialogHelper dialog) {
+    public void showDialog(Discipline discipline, DialogHelper dialog) {
         dialog.createDialog(discipline, this).show();
     }
 
@@ -81,7 +81,7 @@ public class EventActivity extends AppCompatActivity implements ContractEventAct
     }
 
     @Override
-    public void addRecyclerViewItems(List<Events> data) {
+    public void addRecyclerViewItems(List<Event> data) {
         adapter.addItems(data);
     }
 

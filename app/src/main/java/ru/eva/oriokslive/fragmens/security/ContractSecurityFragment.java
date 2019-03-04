@@ -19,7 +19,7 @@ class ContractSecurityFragment {
 
         void notifyItemRemoved(int position);
 
-        void notifyDataSetChanged();
+        void addRecyclerViewItems(List<Security> convertTokens);
     }
 
     interface Presenter {

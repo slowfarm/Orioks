@@ -2,6 +2,7 @@ package ru.eva.oriokslive.fragmens.security;
 
 import java.util.List;
 
+import ru.eva.oriokslive.helpers.ConvertHelper;
 import ru.eva.oriokslive.interfaces.OnAllAccessTokensReceived;
 import ru.eva.oriokslive.interfaces.OnTokenRecieved;
 import ru.eva.oriokslive.models.orioks.AccessToken;
@@ -27,7 +28,7 @@ class PresenterSecurityFragment implements ContractSecurityFragment.Presenter, O
 
     @Override
     public void getAllActiveTokens() {
-        mView.setAdapter(mRepository.getAllActiveLocalTokens());
+        mView.setAdapter(ConvertHelper.getInstance().tokens(mRepository.getAllActiveLocalTokens()));
     }
 
     @Override
@@ -39,7 +40,7 @@ class PresenterSecurityFragment implements ContractSecurityFragment.Presenter, O
     public void onResponse(AccessToken accessToken) {
         mRepository.deleteActiveLocalToken(token);
         mView.notifyItemRemoved(position);
-        mRepository.getAllActiveTokens(this);
+        //mRepository.getAllActiveTokens(this);
     }
 
     @Override
@@ -47,7 +48,7 @@ class PresenterSecurityFragment implements ContractSecurityFragment.Presenter, O
         mView.unsetRefreshing();
         if(tokens != null) {
             mRepository.setAllActiveTokens(tokens);
-            mView.notifyDataSetChanged();
+            mView.addRecyclerViewItems(ConvertHelper.getInstance().tokens(mRepository.getAllActiveLocalTokens()));
         }
         else {
             mView.showToast("Токен анулирован");

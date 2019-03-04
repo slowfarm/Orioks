@@ -1,6 +1,6 @@
 package ru.eva.oriokslive.adapters;
 
-import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,73 +12,48 @@ import com.budiyev.android.circularprogressbar.CircularProgressBar;
 import java.util.List;
 
 import ru.eva.oriokslive.R;
-import ru.eva.oriokslive.models.orioks.Events;
+import ru.eva.oriokslive.models.orioks.Event;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
-    private List<Events> disciplinesList;
+    private List<Event> eventList;
 
 
-    public EventsAdapter(List<Events> disciplinesList) {
-        this.disciplinesList = disciplinesList;
+    public EventsAdapter(List<Event> eventList) {
+        this.eventList = eventList;
     }
 
-    public void addItems(List<Events> disciplinesList) {
-        this.disciplinesList = disciplinesList;
+    public void addItems(List<Event> eventList) {
+        this.eventList = eventList;
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.events_list_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        double progress = 0;
-        if(disciplinesList.get(position).getCurrentGrade() != null) {
-            progress = disciplinesList.get(position).getCurrentGrade() / disciplinesList.get(position).getMaxGrade() * 100;
-            if (disciplinesList.get(position).getCurrentGrade() != -1.0)
-                holder.value.setText(String.valueOf(disciplinesList.get(position).getCurrentGrade()));
-            else
-                holder.value.setText("Н");
-        } else {
-            holder.value.setText("-");
-        }
-
-        holder.name.setText(disciplinesList.get(position).getType());
-        holder.valueFrom.setText(String.valueOf(disciplinesList.get(position).getMaxGrade()));
-
-        if(progress >= 0)
-            holder.progressBar.setProgress((int) progress);
-        else
-            holder.progressBar.setProgress(0);
-
-        if(progress < 50) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FF6D00"));
-        } else if(progress < 70) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FFD600"));
-        } else if(progress < 85) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#64DD17"));
-        } else {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#00C853"));
-        }
-
-        holder.week.setText(disciplinesList.get(position).getWeek());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Event event = eventList.get(position);
+        holder.value.setText(event.getCurrentGradeValue());
+        holder.name.setText(event.getType());
+        holder.valueFrom.setText(event.getMaxGradeValue());
+        holder.progressBar.setProgress(event.getProgress());
+        holder.progressBar.setForegroundStrokeColor(event.getColor());
+        holder.week.setText(eventList.get(position).getWeek());
     }
 
     @Override
     public int getItemCount() {
-        return disciplinesList.size();
+        return eventList.size();
     }
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView name;
+        private final TextView name, value, week, valueFrom;
         private final CircularProgressBar progressBar;
-        private final TextView value;
-        private final TextView week;
-        private final TextView valueFrom;
 
         ViewHolder(View itemView) {
             super(itemView);

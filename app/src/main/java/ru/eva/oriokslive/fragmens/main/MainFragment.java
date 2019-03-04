@@ -18,9 +18,7 @@ import java.util.List;
 import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.activities.registration.RegistrationActivity;
 import ru.eva.oriokslive.adapters.DisciplineAdapter;
-import ru.eva.oriokslive.helpers.RetrofitHelper;
-import ru.eva.oriokslive.helpers.StorageHelper;
-import ru.eva.oriokslive.models.orioks.Disciplines;
+import ru.eva.oriokslive.models.orioks.Discipline;
 
 public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, ContractMainFragment.View {
 
@@ -57,7 +55,7 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     @Override
-    public void setRecyclerView(List<Disciplines> disciplineList) {
+    public void setRecyclerView(List<Discipline> disciplineList) {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         adapter = new DisciplineAdapter(disciplineList);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -65,8 +63,8 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     @Override
-    public void addRecyclerVIewItems(List<Disciplines> disciplinesList) {
-        adapter.addItems(disciplinesList);
+    public void addRecyclerVIewItems(List<Discipline> disciplineList) {
+        adapter.addItems(disciplineList);
     }
 
     @Override

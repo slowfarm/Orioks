@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import ru.eva.oriokslive.R;
-import ru.eva.oriokslive.models.orioks.Disciplines;
-import ru.eva.oriokslive.models.schedule.Data;
+import ru.eva.oriokslive.models.orioks.Discipline;
+import ru.eva.oriokslive.models.miet.schedule.Data;
 
 public class DialogHelper {
 
@@ -40,26 +40,26 @@ public class DialogHelper {
         return builder.create();
     }
 
-    public AlertDialog createDialog(Disciplines disciplines, Activity activity) {
+    public AlertDialog createDialog(Discipline discipline, Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = activity.getLayoutInflater().inflate(R.layout.dialog_events, null);
         builder.setView(view).setPositiveButton("ОК", (dialog, id) -> dialog.dismiss());
 
         TextView form = view.findViewById(R.id.form);
-        form.setText(disciplines.getControlForm());
+        form.setText(discipline.getControlForm());
 
         TextView department = view.findViewById(R.id.department);
-        department.setText(disciplines.getDepartment());
+        department.setText(discipline.getDepartment());
 
         TextView time = view.findViewById(R.id.time);
-        if(!disciplines.getExamDate().equals(""))
-            time.setText(disciplines.getExamDate());
+        if(!discipline.getExamDate().equals(""))
+            time.setText(discipline.getExamDate());
         else
             time.setText("Не назначена");
 
         TextView teacher = view.findViewById(R.id.teacher);
         StringBuilder teacherList = new StringBuilder();
-        for(String teachers : disciplines.getTeachers()) {
+        for(String teachers : discipline.getTeachers()) {
             teacherList.append(teachers).append(", ");
         }
         if(teacherList.length()>0) {

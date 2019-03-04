@@ -1,19 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.design.widget.TabLayout
-        android:id="@+id/sliding_tabs"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/group_list_item" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_btn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:tabTextColor="#FFFFFF"
-        android:background="@color/colorPrimary"
-        app:tabIndicatorColor="@color/colorPrimaryDark"
-        app:tabMode="scrollable" />
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:useCompatPadding="true"
+        app:elevation="8dp"
+        app:fabSize="normal"
+        tools:src="@drawable/ic_add" />
+</RelativeLayout>

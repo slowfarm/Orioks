@@ -2,31 +2,31 @@ package ru.eva.oriokslive.activities.event;
 
 import java.util.List;
 
-import ru.eva.oriokslive.helpers.RetrofitHelper;
-import ru.eva.oriokslive.helpers.StorageHelper;
+import ru.eva.oriokslive.domain.NetworkStorage;
+import ru.eva.oriokslive.domain.LocalStorage;
 import ru.eva.oriokslive.interfaces.OnEventsRecieved;
-import ru.eva.oriokslive.models.orioks.Disciplines;
-import ru.eva.oriokslive.models.orioks.Events;
+import ru.eva.oriokslive.models.orioks.Discipline;
+import ru.eva.oriokslive.models.orioks.Event;
 
 class RepositoryEventActivity implements ContractEventActivity.Repository {
     @Override
-    public List<Events> getEventList(int id) {
-        return StorageHelper.getInstance().getEventsList(id);
+    public List<Event> getEventList(int id) {
+        return LocalStorage.getInstance().getEventsList(id);
     }
 
     @Override
-    public Disciplines getDiscipline(int id) {
-        return StorageHelper.getInstance().getDiscipline(id);
+    public Discipline getDiscipline(int id) {
+        return LocalStorage.getInstance().getDiscipline(id);
     }
 
     @Override
     public void getEventList(int id, OnEventsRecieved onEventsRecieved) {
-        RetrofitHelper.getInstance().setOnEventsReceived(onEventsRecieved);
-        RetrofitHelper.getInstance().getEvents(StorageHelper.getInstance().getAccessToken(), id);
+        NetworkStorage.getInstance().setOnEventsReceived(onEventsRecieved);
+        NetworkStorage.getInstance().getEvents(LocalStorage.getInstance().getAccessToken(), id);
     }
 
     @Override
-    public void setEventList(List<Events> eventsList) {
-        StorageHelper.getInstance().setEvents(eventsList);
+    public void setEventList(List<Event> eventList) {
+        LocalStorage.getInstance().setEvents(eventList);
     }
 }

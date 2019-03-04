@@ -1,7 +1,7 @@
 package ru.eva.oriokslive.adapters;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,60 +14,43 @@ import java.util.List;
 
 import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.activities.event.EventActivity;
-import ru.eva.oriokslive.models.orioks.Disciplines;
+import ru.eva.oriokslive.models.orioks.Discipline;
 
 public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineAdapter.ViewHolder> {
 
-    private List<Disciplines> disciplinesList;
+    private List<Discipline> disciplineList;
 
 
-    public DisciplineAdapter(List<Disciplines> disciplinesList) {
-        this.disciplinesList = disciplinesList;
+    public DisciplineAdapter(List<Discipline> disciplineList) {
+        this.disciplineList = disciplineList;
     }
 
-    public void addItems(List<Disciplines> disciplinesList) {
-        this.disciplinesList = disciplinesList;
+    public void addItems(List<Discipline> disciplineList) {
+        this.disciplineList = disciplineList;
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.discipline_list_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Disciplines discipline =disciplinesList.get(position);
-        double progress = discipline.getCurrentGrade() / discipline.getMaxGrade() * 100;
-
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Discipline discipline = disciplineList.get(position);
         holder.name.setText(discipline.getName());
-        if(discipline.getCurrentGrade() != -1.0)
-            holder.value.setText(String.valueOf(discipline.getCurrentGrade()));
-        else
-            holder.value.setText("-");
-
-        holder.valueFrom.setText(String.valueOf(discipline.getMaxGrade()));
-
+        holder.value.setText(discipline.getCurrentGradeValue());
+        holder.valueFrom.setText(discipline.getMaxGradeValue());
         holder.formControl.setText(discipline.getControlForm());
+        holder.progressBar.setProgress(discipline.getProgress());
+        holder.progressBar.setForegroundStrokeColor(discipline.getColor());
 
-        if(progress >= 0)
-            holder.progressBar.setProgress((int) progress);
-        else
-            holder.progressBar.setProgress(0);
-        if(progress < 50) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FF6D00"));
-        } else if(progress < 70) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#FFD600"));
-        } else if(progress < 85) {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#64DD17"));
-        } else {
-            holder.progressBar.setForegroundStrokeColor(Color.parseColor("#00C853"));
-        }
     }
 
     @Override
     public int getItemCount() {
-        return disciplinesList.size();
+        return disciplineList.size();
     }
 
 
@@ -86,7 +69,7 @@ public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineAdapter.Vi
             itemView.setOnClickListener(view-> view.getContext()
                     .startActivity(
                             new Intent(view.getContext(), EventActivity.class)
-                                    .putExtra("id", disciplinesList.get(getAdapterPosition()).getId())));
+                                    .putExtra("id", disciplineList.get(getAdapterPosition()).getId())));
         }
     }
 }

@@ -12,12 +12,7 @@ import android.widget.TextView;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.interfaces.OnDeleteButtonClickListener;
@@ -33,6 +28,11 @@ public class SecurityFragmentAdapter extends RecyclerView.Adapter<SecurityFragme
         this.tokenList = tokenList;
     }
 
+    public void addItems(List<Security> tokenList) {
+            this.tokenList = tokenList;
+            notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,22 +42,22 @@ public class SecurityFragmentAdapter extends RecyclerView.Adapter<SecurityFragme
 
     @Override
     public void onBindViewHolder(@NonNull SecurityFragmentAdapter.ViewHolder holder, int position) {
-        binderHelper.bind(holder.swipeLayout, tokenList.get(position).getToken());
-        if(tokenList.get(position).getUserAgent().split("\\s").length > 1) {
-            holder.application.setText(getApplicationName(tokenList.get(position).getUserAgent()));
-            holder.device.setText(getDeviceName(tokenList.get(position).getUserAgent()));
-        }
-        else {
-            holder.application.setText(tokenList.get(position).getUserAgent());
-            holder.deviceLayout.setVisibility(View.GONE);
-        }
-        holder.date.setText(dataParser(tokenList.get(position).getLastUsed()));
-
+        Security security = tokenList.get(position);
+        binderHelper.bind(holder.swipeLayout, security.getToken());
+        holder.application.setText(security.getApplication());
+        holder.device.setText(security.getDevice());
+        holder.deviceLayout.setVisibility(security.isContainDevice() ? View.VISIBLE : View.GONE);
+        holder.date.setText(security.getLastUsedValue());
     }
 
     @Override
     public int getItemCount() {
         return tokenList.size();
+    }
+
+    public void removeItem(int position) {
+        tokenList.remove(position);
+        notifyItemRemoved(position);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -83,44 +83,5 @@ public class SecurityFragmentAdapter extends RecyclerView.Adapter<SecurityFragme
 
     public void setOnDeleteButtonClickListener(OnDeleteButtonClickListener onDeleteButtonClickListener) {
         this.onDeleteButtonClickListener = onDeleteButtonClickListener;
-    }
-
-    private String dataParser(String inputDate) {
-        String oldPattern = "yyyy-MM-dd'T'HH:mm";
-        String newPattern = "HH:mm dd.MM.yyy";
-        SimpleDateFormat sdf = new SimpleDateFormat(oldPattern, Locale.getDefault());
-        Date date = new Date();
-        Date dateNow = new Date();
-        try {
-            date = sdf.parse(inputDate);
-            sdf.applyPattern(newPattern);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        int hour = 1000 * 60 * 60;
-        int day = hour * 24;
-        int week = day* 7;
-        long diff = dateNow.getTime() - date.getTime();
-        if(diff < hour)
-            return  "Недавно";
-        if(diff < day)
-            return TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS) + " часа(ов) назад";
-        if(diff < week)
-            return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + " дня(ей) назад";
-        return sdf.format(date);
-    }
-
-    private String getApplicationName(String text) {
-        String[] agent = text.split("\\s");
-        return agent[0];
-    }
-
-    private String getDeviceName(String text) {
-        String[] agent = text.split("\\s");
-        StringBuilder deviceName = new StringBuilder();
-        for (int i = 1; i < agent.length; i++) {
-            deviceName.append(agent[i]).append(" ");
-        }
-        return deviceName.toString();
     }
 }

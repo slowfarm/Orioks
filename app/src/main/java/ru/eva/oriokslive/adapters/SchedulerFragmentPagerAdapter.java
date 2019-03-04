@@ -1,22 +1,25 @@
 package ru.eva.oriokslive.adapters;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import ru.eva.oriokslive.fragmens.scheduler.pager.firstdenomination.FirstDenominatorFragment;
-import ru.eva.oriokslive.fragmens.scheduler.pager.firstnumerator.FirstNumeratorFragment;
-import ru.eva.oriokslive.fragmens.scheduler.pager.seconddenominator.SecondDenominatorFragment;
-import ru.eva.oriokslive.fragmens.scheduler.pager.secondnumerator.SecondNumeratorFragment;
-import ru.eva.oriokslive.fragmens.scheduler.pager.today.TodayFragment;
-import ru.eva.oriokslive.fragmens.scheduler.pager.tomorrow.TomorrowFragment;
+import ru.eva.oriokslive.activities.schedule.pager.firstdenomination.FirstDenominatorFragment;
+import ru.eva.oriokslive.activities.schedule.pager.firstnumerator.FirstNumeratorFragment;
+import ru.eva.oriokslive.activities.schedule.pager.seconddenominator.SecondDenominatorFragment;
+import ru.eva.oriokslive.activities.schedule.pager.secondnumerator.SecondNumeratorFragment;
+import ru.eva.oriokslive.activities.schedule.pager.today.TodayFragment;
+import ru.eva.oriokslive.activities.schedule.pager.tomorrow.TomorrowFragment;
+
 
 public class SchedulerFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     public SchedulerFragmentPagerAdapter(FragmentManager fm) {
             super(fm);
         }
+        private String group;
 
     @Override
     public int getItemPosition(@NonNull Object object) {
@@ -25,22 +28,34 @@ public class SchedulerFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
         public Fragment getItem(int position) {
+        Bundle args = new Bundle();
+        args.putString("group", group);
+        Fragment fragment;
             switch (position) {
                 case 0:
-                    return new TodayFragment();
+                    fragment =  new TodayFragment();
+                    break;
                 case 1:
-                    return new TomorrowFragment();
+                    fragment = new TomorrowFragment();
+                    break;
                 case 2:
-                    return new FirstNumeratorFragment();
+                    fragment = new FirstNumeratorFragment();
+                    break;
                 case 3:
-                    return new FirstDenominatorFragment();
+                    fragment = new FirstDenominatorFragment();
+                    break;
                 case 4:
-                    return new SecondNumeratorFragment();
+                    fragment = new SecondNumeratorFragment();
+                    break;
                 case 5:
-                    return new SecondDenominatorFragment();
+                    fragment = new SecondDenominatorFragment();
+                    break;
                     default:
-                        return new TodayFragment();
+                        fragment = new TodayFragment();
+                        break;
             }
+            fragment.setArguments(args);
+            return fragment;
         }
 
         @Override
@@ -50,7 +65,6 @@ public class SchedulerFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            // Generate title based on item position
             switch (position) {
                 case 0:
                     return "Сегодня";
@@ -69,4 +83,7 @@ public class SchedulerFragmentPagerAdapter extends FragmentStatePagerAdapter {
             }
         }
 
+        public void setGroup(String group){
+        this.group = group;
+        }
     }
