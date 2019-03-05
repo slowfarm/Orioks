@@ -1,5 +1,6 @@
 package ru.eva.oriokslive.adapters;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -59,19 +60,26 @@ public class SchedulerFragmentAdapter extends RecyclerView.Adapter<SchedulerFrag
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView group;
+        private final TextView group, delete, add;
         private final SwipeRevealLayout swipeLayout;
         private final LinearLayout frontLayout;
-        private final View deleteLayout;
 
         ViewHolder(View itemView) {
             super(itemView);
             swipeLayout = itemView.findViewById(R.id.swipe_layout);
-            deleteLayout = itemView.findViewById(R.id.delete_layout);
+            delete = itemView.findViewById(R.id.delete);
             group = itemView.findViewById(R.id.group);
             frontLayout = itemView.findViewById(R.id.front_layout);
-            frontLayout.setOnClickListener(v -> onGroupItemClickListener.onClick(groupList.get(getAdapterPosition())));
-            deleteLayout.setOnClickListener(v ->  {
+            add = itemView.findViewById(R.id.add);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                add.setVisibility(View.GONE);
+            }
+            frontLayout.setOnClickListener(v -> onGroupItemClickListener.onClick(v, groupList.get(getAdapterPosition())));
+            add.setOnClickListener(v -> {
+                onGroupItemClickListener.onClick(v, groupList.get(getAdapterPosition()));
+                swipeLayout.close(true);
+            });
+            delete.setOnClickListener(v ->  {
                 onGroupDeleteButtonClickListener.onClick(groupList.get(getAdapterPosition()), getAdapterPosition());
                 swipeLayout.close(true);
             });

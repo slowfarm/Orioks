@@ -1,7 +1,17 @@
 package ru.eva.oriokslive.fragmens.schedule;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,11 +19,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
 import ru.eva.oriokslive.R;
 import ru.eva.oriokslive.activities.group.GroupActivity;
+import ru.eva.oriokslive.activities.main.MainActivity;
 import ru.eva.oriokslive.activities.schedule.SchedulerActivity;
 import ru.eva.oriokslive.adapters.SchedulerFragmentAdapter;
 import ru.eva.oriokslive.interfaces.OnGroupDeleteButtonClickListener;
@@ -55,8 +67,16 @@ public class SchedulerFragment extends Fragment implements ContractSchedulerFrag
     }
 
     @Override
-    public void onClick(String group) {
-        startActivity(new Intent(view.getContext(), SchedulerActivity.class).putExtra("group", group));
+    public void onClick(View v, String group) {
+        switch (v.getId()) {
+            case R.id.front_layout:
+                startSchedulerActivity(group);
+                break;
+            case R.id.add:
+                mPresenter.addPinnedShortcuts(v.getContext(), group);
+                break;
+        }
+
     }
 
     @Override
@@ -70,5 +90,9 @@ public class SchedulerFragment extends Fragment implements ContractSchedulerFrag
     public void onClick(String group, int position) {
         mPresenter.removeGroup(group);
         adapter.removeItem(position);
+    }
+
+    private void startSchedulerActivity(String group) {
+        startActivity(new Intent(view.getContext(), SchedulerActivity.class).putExtra("group", group));
     }
 }

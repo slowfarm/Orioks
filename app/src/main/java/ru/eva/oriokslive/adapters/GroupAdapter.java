@@ -79,7 +79,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         ViewHolder(View itemView) {
             super(itemView);
             group = itemView.findViewById(R.id.group);
-            itemView.setOnClickListener(v->onGroupItemClickListener.onClick(filteredData.get(getAdapterPosition())));
+            itemView.setOnClickListener(v -> onGroupItemClickListener.onClick(v, filteredData.get(getAdapterPosition())));
         }
     }
 

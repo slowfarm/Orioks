@@ -7,8 +7,8 @@ android {
         applicationId "ru.eva.oriokslive"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 10100
-        versionName "1.1.0"
+        versionCode 10101
+        versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -47,5 +47,5 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.5'
 
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 }

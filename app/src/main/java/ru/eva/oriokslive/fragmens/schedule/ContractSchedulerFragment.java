@@ -1,5 +1,7 @@
 package ru.eva.oriokslive.fragmens.schedule;
 
+import android.content.Context;
+
 import java.util.List;
 
 class ContractSchedulerFragment {
@@ -17,6 +19,8 @@ class ContractSchedulerFragment {
         void addLocalGroup(String group);
 
         void removeGroup(String group);
+
+        void addPinnedShortcuts(Context context, String group);
     }
 
     interface Repository {
