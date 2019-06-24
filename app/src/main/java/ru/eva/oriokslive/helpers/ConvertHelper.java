@@ -187,7 +187,7 @@ public class ConvertHelper {
     private String dataParser(String inputDate) {
         String oldPattern = "yyyy-MM-dd'T'HH:mm";
         String newPattern = "HH:mm dd.MM.yyy";
-        SimpleDateFormat sdf = new SimpleDateFormat(oldPattern,  Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat(oldPattern, Locale.getDefault());
         Date date = new Date();
         Date dateNow = new Date();
         try {
@@ -199,13 +199,19 @@ public class ConvertHelper {
         int hour = 1000 * 60 * 60;
         int day = hour * 24;
         int week = day* 7;
-        long diff = dateNow.getTime() - date.getTime();
+        long diff = dateNow.getTime() - date.getTime() - 3 * hour;
         if(diff < hour)
             return  "Недавно";
-        if(diff < day)
+        if(diff < day) {
+            if(TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS) == 1)
+                return TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS) + " час назад";
             return TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS) + " часа(ов) назад";
-        if(diff < week)
+        }
+        if(diff < week) {
+            if (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) == 1)
+                return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + " день назад";
             return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + " дня(ей) назад";
+        }
         return sdf.format(date);
     }
 
