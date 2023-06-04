@@ -1,12 +1,12 @@
 package ru.eva.oriokslive.ui.activity.main
 
 import android.view.LayoutInflater
-import android.view.Menu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -22,11 +22,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         ActivityMainBinding::inflate
     private val viewModel: MainViewModel by viewModels()
 
+    private val appBarConfiguration by lazy {
+        AppBarConfiguration(
+            setOf(
+                R.id.nav_main,
+                R.id.nav_student,
+                R.id.nav_schedule,
+                R.id.nav_news,
+                R.id.nav_security
+            ), binding.drawerLayout
+        )
+    }
+
     override fun setupUI() {
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.navigationHostFragment)
-        val appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navigationView.setupWithNavController(navController)
 
@@ -44,5 +55,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         viewModel.errorMessage.observe(this) {
             Toast.makeText(this, R.string.no_connection, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.navigationHostFragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

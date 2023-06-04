@@ -38,6 +38,7 @@ class RemoteRepositoryImpl @Inject constructor(
     override suspend fun getGroups(): List<String>? = mietApi.getGroups()
 
     override suspend fun getSchedule(group: String): Schedule? = mietApi.getScheduler(group)
+
     override suspend fun getNews(): NewsResponse? = newsApi.getNews()
 }
 
