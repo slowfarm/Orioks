@@ -1,6 +1,6 @@
-package ru.eva.oriokslive.network.entity.news;
+package ru.eva.oriokslive.ui.entity;
 
-data class News(
+data class NewsItem(
     val title: String,
     val link: String,
     val description: String,

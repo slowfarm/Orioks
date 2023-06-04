@@ -1,6 +1,5 @@
 package ru.eva.oriokslive.network.repository
 
-import ru.eva.oriokslive.network.entity.news.News
 import ru.eva.oriokslive.network.entity.news.NewsResponse
 import ru.eva.oriokslive.network.entity.orioks.Security
 import ru.eva.oriokslive.network.entity.orioks.AccessToken

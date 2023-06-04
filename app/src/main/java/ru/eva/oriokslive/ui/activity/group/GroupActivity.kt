@@ -37,7 +37,7 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>() {
 
         viewModel.getGroups()
         viewModel.groups.observe(this) { adapter.setItems(it) }
-        viewModel.errorMessage.observe(this) {
+        viewModel.onError.observe(this) {
             Toast.makeText(this, R.string.no_connection, Toast.LENGTH_LONG).show()
         }
     }

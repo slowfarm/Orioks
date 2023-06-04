@@ -35,8 +35,9 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
             binding.rvNews.layoutManager = LinearLayoutManager(requireContext())
             binding.rvNews.adapter = adapter
             adapter.addItems(it)
+            binding.swipeRefreshLayout.isRefreshing = false
         }
-        viewModel.errorMessage.observe(viewLifecycleOwner) {
+        viewModel.onError.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), R.string.no_connection, Toast.LENGTH_LONG).show()
         }
     }

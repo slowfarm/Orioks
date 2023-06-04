@@ -2,16 +2,9 @@ package ru.eva.oriokslive.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
-
-import ru.eva.oriokslive.network.entity.news.Item;
-import ru.eva.oriokslive.network.entity.news.News;
-import ru.eva.oriokslive.network.entity.news.NewsResponse;
 
 public class ConvertHelper {
 

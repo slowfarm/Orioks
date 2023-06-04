@@ -25,8 +25,8 @@ interface OrioksApi {
     suspend fun getEvents(@Path("id") id: Int): List<Event>?
 
     @DELETE("/api/v1/student/tokens/{token}")
-    fun deleteAccessToken(@Path("token") token: String): AccessToken?
+    suspend fun deleteAccessToken(@Path("token") token: String): AccessToken?
 
     @GET("/api/v1/student/tokens")
-    fun getAllActiveTokens(): List<Security>?
+    suspend fun getAllActiveTokens(): List<Security>?
 }

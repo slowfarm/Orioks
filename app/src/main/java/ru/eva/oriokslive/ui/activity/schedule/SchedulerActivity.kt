@@ -37,7 +37,7 @@ class SchedulerActivity : BaseActivity<ActivityScheduleBinding>() {
         viewModel.scheduleExist.observe(this) {
             binding.viewPager.adapter = adapter
         }
-        viewModel.errorMessage.observe(this) {
+        viewModel.onError.observe(this) {
             Toast.makeText(this, R.string.no_connection, Toast.LENGTH_LONG).show()
         }
         viewModel.viewPagerPosition.observe(this) {

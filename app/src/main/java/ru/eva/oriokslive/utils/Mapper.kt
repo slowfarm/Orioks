@@ -1,7 +1,7 @@
 package ru.eva.oriokslive.utils
 
 import ru.eva.oriokslive.R
-import ru.eva.oriokslive.network.entity.news.News
+import ru.eva.oriokslive.ui.entity.NewsItem
 import ru.eva.oriokslive.network.entity.news.NewsResponse
 import ru.eva.oriokslive.network.entity.orioks.Discipline
 import ru.eva.oriokslive.network.entity.orioks.Event
@@ -11,6 +11,8 @@ import ru.eva.oriokslive.network.entity.schedule.Data
 import ru.eva.oriokslive.ui.entity.DisciplineItem
 import ru.eva.oriokslive.ui.entity.EventItem
 import ru.eva.oriokslive.ui.entity.Header
+import ru.eva.oriokslive.ui.entity.ScheduleItem
+import ru.eva.oriokslive.ui.entity.SecurityItem
 
 fun mapStudent(student: Student): Header {
     val week = getCurrentWeek()
@@ -51,81 +53,76 @@ fun mapDisciplines(disciplines: List<Discipline>) = disciplines.map {
     )
 }
 
-fun mapDay(schedule: List<Data>?): List<Data> {
-    var result: MutableList<Data>? = schedule?.toMutableList()
+fun mapDay(schedule: List<Data>?): List<ScheduleItem> {
+    var result: MutableList<ScheduleItem>? = mapSchedule(schedule)
     when {
         result == null -> result = mutableListOf()
         result.isNotEmpty() -> setDataToPosition(result, 0)
-        else -> result.add(0, Data())
+        else -> result.add(0, ScheduleItem())
     }
     return result
 }
 
-fun mapWeek(schedule: List<Data>?): List<Data> {
-    var result: MutableList<Data>? = schedule?.toMutableList()
+fun mapWeek(schedule: List<Data>?): List<ScheduleItem> {
+    var result: MutableList<ScheduleItem>? = mapSchedule(schedule)
     if (result == null) result = mutableListOf() else fillDataList(result)
     return result
 }
 
-//    public List<Discipline> disciplines(List<Discipline> disciplineList) {
-//        for(Discipline discipline : disciplineList) {
-//            if (discipline.getCurrentGrade() != -1.0) {
-//                discipline.setCurrentGradeValue(String.valueOf(discipline.getCurrentGrade()));
-//            } else {
-//                discipline.setCurrentGradeValue("-");
-//            }
-//            discipline.setMaxGradeValue(String.valueOf(discipline.getMaxGrade()));
-//
-//            double progress = discipline.getCurrentGrade() / discipline.getMaxGrade() * 100;
-//            discipline.setProgress(progress >= 0 ? (int)progress : 0);
-//
-//            if(progress < 50) {
-//                discipline.setColor(Color.parseColor("#FF6D00"));
-//            } else if(progress < 70) {
-//                discipline.setColor(Color.parseColor("#FFD600"));
-//            } else if(progress < 85) {
-//                discipline.setColor(Color.parseColor("#64DD17"));
-//            } else {
-//                discipline.setColor(Color.parseColor("#00C853"));
-//            }
-//        }
-//        return disciplineList;
-//    }
-fun mapTokens(tokens: List<Security>): MutableList<Security> {
-    val result = mutableListOf<Security>()
+fun mapTokens(tokens: List<Security>): MutableList<SecurityItem> {
+    val result = mutableListOf<SecurityItem>()
     for (security in tokens) {
-        var item = security
-        item = if (security.userAgent.split("\\s").size > 1) {
-            item.copy(
-                application = security.userAgent.split("\\s")[0],
-                device = security.userAgent.replace("\\s", " "),
-                containDevice = true
-            )
-        } else {
-            item.copy(
-                application = security.userAgent,
-                containDevice = false
-            )
+        when {
+            security.userAgent.split("\\s").size > 1 -> {
+                result.add(
+                    SecurityItem(
+                        security.token,
+                        security.userAgent.split("\\s")[0],
+                        security.userAgent.replace("\\s", " "),
+                        true,
+                        dataParser(security.lastUsed)
+                    )
+                )
+            }
+            else -> {
+                result.add(
+                    SecurityItem(
+                        security.token,
+                        security.userAgent,
+                        security.userAgent,
+                        false,
+                        dataParser(security.lastUsed)
+                    )
+                )
+            }
         }
-        item = item.copy(
-            lastUsedValue = dataParser(security.lastUsed)
-        )
-        result.add(item)
     }
     return result
 }
 
-fun mapNews(response: NewsResponse): List<News> = response.channel.items.map {
-    News(
+fun mapNews(response: NewsResponse): List<NewsItem> = response.channel.items.map {
+    NewsItem(
         title = it.title,
         link = it.link,
         description = it.description,
-        imageUrl = it.link,
+        imageUrl = it.enclosure.url,
         date = it.date,
     )
 }
 
-private fun fillDataList(dataList: MutableList<Data>) {
+private fun mapSchedule(items: List<Data>?) = items?.map {
+    ScheduleItem(
+        day = it.day,
+        dayNumber = it.dayNumber,
+        time = it.time,
+        clazz = it.clazz,
+        group = it.group,
+        room = it.room,
+        dayOfWeek = getDayOfWeek(it.day),
+    )
+}?.toMutableList()
+
+private fun fillDataList(dataList: MutableList<ScheduleItem>) {
     var i = 1
     while (i < dataList.size) {
         if (dataList[i].day != dataList[i - 1].day) {
@@ -137,7 +134,7 @@ private fun fillDataList(dataList: MutableList<Data>) {
     setDataToPosition(dataList, 0)
 }
 
-private fun setDataToPosition(dataList: MutableList<Data>, position: Int) {
-    val data = Data(dayOfWeek = getDayOfWeek(dataList[position].day ?: 0))
-    dataList.add(position, data)
+private fun setDataToPosition(items: MutableList<ScheduleItem>, position: Int) {
+    val data = ScheduleItem(dayOfWeek = getDayOfWeek(items[position].day ?: 0))
+    items.add(position, data)
 }

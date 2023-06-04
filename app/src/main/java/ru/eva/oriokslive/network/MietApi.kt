@@ -9,5 +9,5 @@ interface MietApi {
     suspend fun getScheduler(@Query("group") group: String): Schedule?
 
     @POST("/schedule/groups")
-    suspend fun getGroups(): List<String>?
+    suspend fun getGroups(): Array<String>?
 }

@@ -10,6 +10,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.eva.oriokslive.domain.GeneralDatabase
 import ru.eva.oriokslive.domain.dao.DisciplinesDao
+import ru.eva.oriokslive.domain.dao.ScheduleDao
 import ru.eva.oriokslive.domain.dao.StudentDao
 import ru.eva.oriokslive.domain.provider.DatabaseProvider
 import ru.eva.oriokslive.domain.provider.GsonProvider
@@ -25,6 +26,9 @@ object DatabaseModule {
 
     @Provides
     fun provideDisciplineDao(database: GeneralDatabase): DisciplinesDao = database.getDisciplineDao()
+
+    @Provides
+    fun provideScheduleDao(database: GeneralDatabase): ScheduleDao = database.getScheduleDao()
 
     @Provides
     fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences =

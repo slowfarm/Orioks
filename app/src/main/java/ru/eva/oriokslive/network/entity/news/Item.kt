@@ -5,14 +5,19 @@ import org.simpleframework.xml.Root
 
 @Root(name = "item", strict = false)
 data class Item(
-    @Element(name = "title")
+    @field:Element(name = "title")
+    @param:Element(name = "title")
     val title: String,
-    @Element(name = "link")
+    @field:Element(name = "link")
+    @param:Element(name = "link")
     val link: String,
-    @Element(name = "description")
+    @field:Element(name = "description")
+    @param:Element(name = "description")
     val description: String,
-    @Element(name = "enclosure")
+    @field:Element(name = "enclosure")
+    @param:Element(name = "enclosure")
     val enclosure: Enclosure,
-    @Element(name = "pubDate")
+    @field:Element(name = "pubDate")
+    @param:Element(name = "pubDate")
     val date: String,
 )

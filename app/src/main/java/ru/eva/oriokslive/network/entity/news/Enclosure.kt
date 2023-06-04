@@ -5,6 +5,7 @@ import org.simpleframework.xml.Root
 
 @Root(name = "enclosure", strict = false)
 data class Enclosure(
-    @Attribute(name = "url")
+    @field:Attribute(name = "url")
+    @param:Attribute(name = "url")
     val url: String,
 )

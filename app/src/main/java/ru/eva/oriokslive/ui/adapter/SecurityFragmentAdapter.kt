@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.ViewBinderHelper
 import ru.eva.oriokslive.databinding.ListItemSecurityBinding
-import ru.eva.oriokslive.network.entity.orioks.Security
+import ru.eva.oriokslive.ui.entity.SecurityItem
 
 
 class SecurityFragmentAdapter(
-    private val listener: (Security, Int) -> Unit,
+    private val listener: (String, Int) -> Unit,
 ) : RecyclerView.Adapter<SecurityViewHolder>() {
 
-    private var tokens = mutableListOf<Security>()
+    private var tokens = mutableListOf<SecurityItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SecurityViewHolder(
         ListItemSecurityBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,14 +25,9 @@ class SecurityFragmentAdapter(
         holder.bind(tokens[position], listener)
     }
 
-    fun addItems(items: List<Security>) {
+    fun addItems(items: List<SecurityItem>) {
         tokens = items.toMutableList()
-        notifyItemRangeChanged(0, tokens.size)
-    }
-
-    fun removeItem(position: Int) {
-        tokens.removeAt(position)
-        notifyItemRemoved(position)
+        notifyDataSetChanged()
     }
 }
 
@@ -40,15 +35,15 @@ class SecurityViewHolder(private val binding: ListItemSecurityBinding) :
     RecyclerView.ViewHolder(binding.root) {
     private val binderHelper = ViewBinderHelper()
 
-    fun bind(item: Security, listener: (Security, Int) -> Unit) {
+    fun bind(item: SecurityItem, listener: (String, Int) -> Unit) {
         binderHelper.bind(binding.swipeLayout, item.token)
         binding.tvApplication.text = item.application
         binding.tvDevice.text = item.device
         binding.llDevice.visibility = if (item.containDevice) View.VISIBLE else View.GONE
-        binding.tvDate.text = item.lastUsedValue
+        binding.tvDate.text = item.lastUsed
         binding.flDelete.setOnClickListener {
-            listener.invoke(item, adapterPosition)
-            binding.swipeLayout.close(true);
+            listener.invoke(item.token, adapterPosition)
+            binding.swipeLayout.close(true)
         }
     }
 }

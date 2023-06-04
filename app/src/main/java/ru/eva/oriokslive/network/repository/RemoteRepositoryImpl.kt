@@ -4,7 +4,6 @@ import okhttp3.Credentials
 import ru.eva.oriokslive.network.MietApi
 import ru.eva.oriokslive.network.NewsApi
 import ru.eva.oriokslive.network.OrioksApi
-import ru.eva.oriokslive.network.entity.news.News
 import ru.eva.oriokslive.network.entity.news.NewsResponse
 import ru.eva.oriokslive.network.entity.orioks.Security
 import ru.eva.oriokslive.network.entity.orioks.AccessToken
@@ -35,7 +34,7 @@ class RemoteRepositoryImpl @Inject constructor(
 
     override suspend fun getAllActiveTokens(): List<Security>? = orioksApi.getAllActiveTokens()
 
-    override suspend fun getGroups(): List<String>? = mietApi.getGroups()
+    override suspend fun getGroups(): List<String>? = mietApi.getGroups()?.toList()
 
     override suspend fun getSchedule(group: String): Schedule? = mietApi.getScheduler(group)
 

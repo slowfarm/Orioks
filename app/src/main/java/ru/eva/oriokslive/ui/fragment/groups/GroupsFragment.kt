@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.FragmentGroupsBinding
-import ru.eva.oriokslive.databinding.FragmentScheduleBinding
 import ru.eva.oriokslive.ui.activity.schedule.SchedulerActivity
 import ru.eva.oriokslive.ui.activity.group.GroupActivity
 import ru.eva.oriokslive.ui.adapter.SchedulerFragmentAdapter
@@ -70,7 +69,7 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
-            data?.getStringExtra(EXTRA_GROUP)?.let { viewModel.addGroup(it) }
+            data?.getStringExtra(EXTRA_GROUP)?.let { viewModel.addSchedule(it) }
         }
     }
 

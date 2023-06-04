@@ -19,7 +19,7 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     val disciplines = MutableLiveData<List<DisciplineItem>>()
-    val errorMessage = MutableLiveData<Unit>()
+    val onError = MutableLiveData<Unit>()
 
     fun getDisciplineList() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -27,7 +27,7 @@ class MainViewModel @Inject constructor(
                 domainRepository.setDisciplines(it)
                 disciplines.postValue(mapDisciplines(it))
             } ?: run {
-                errorMessage.postValue(Unit)
+                onError.postValue(Unit)
                 domainRepository.getDisciplines()?.let { disciplines.postValue(mapDisciplines(it)) }
             }
         }

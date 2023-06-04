@@ -14,34 +14,28 @@ import ru.eva.oriokslive.ui.adapter.DisciplineAdapter
 import ru.eva.oriokslive.ui.base.BaseFragment
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<FragmentMainBinding>(), SwipeRefreshLayout.OnRefreshListener {
+class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentMainBinding =
         FragmentMainBinding::inflate
     private val viewModel: MainViewModel by viewModels()
 
     private val adapter: DisciplineAdapter by lazy { DisciplineAdapter() }
-    private val swipeRefreshLayout: SwipeRefreshLayout by lazy { requireView().findViewById(R.id.container) }
-    private val recyclerView: RecyclerView by lazy { requireView().findViewById(R.id.rvGroups) }
 
     override fun setupUI() {
-        swipeRefreshLayout.setOnRefreshListener(this)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = adapter
+        binding.swipeRefreshLayout.setOnRefreshListener { viewModel.getDisciplineList() }
+        binding.rvGroups.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvGroups.adapter = adapter
 
         viewModel.getDisciplineList()
 
         viewModel.disciplines.observe(viewLifecycleOwner) {
             adapter.addItems(it)
-            swipeRefreshLayout.isRefreshing = false
+            binding.swipeRefreshLayout.isRefreshing = false
         }
 
-        viewModel.errorMessage.observe(viewLifecycleOwner) {
+        viewModel.onError.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), R.string.no_connection, Toast.LENGTH_LONG).show()
         }
-    }
-
-    override fun onRefresh() {
-        viewModel.getDisciplineList()
     }
 }

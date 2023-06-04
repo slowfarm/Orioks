@@ -12,7 +12,7 @@ class DisciplineAdapter : RecyclerView.Adapter<DisciplineViewHolder?>() {
 
     fun addItems(items: List<DisciplineItem>) {
         disciplines = items
-        notifyItemRangeChanged(0, disciplines.size)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DisciplineViewHolder(

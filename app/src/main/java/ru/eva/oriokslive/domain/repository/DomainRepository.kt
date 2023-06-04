@@ -19,8 +19,7 @@ interface DomainRepository {
     suspend fun clearAll()
     suspend fun getGroups(): List<String>?
     suspend fun removeGroup(group: String)
-    suspend fun addGroup(group: String)
-    suspend fun setSchedule(schedule: Schedule)
+    suspend fun setSchedule(schedule: List<Data>)
     suspend fun getSchedule(group: String): List<Data>?
     suspend fun getSchedule(dayNumber: Int, day: Int, group: String): List<Data>?
     suspend fun getSchedule(dayNumber: Int, group: String): List<Data>?

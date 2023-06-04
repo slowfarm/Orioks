@@ -6,5 +6,5 @@ import ru.eva.oriokslive.network.entity.news.NewsResponse
 
 interface NewsApi {
     @POST("/rss/news")
-    fun getNews(): NewsResponse?
+    suspend fun getNews(): NewsResponse?
 }

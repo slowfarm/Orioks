@@ -7,6 +7,7 @@ object Common {
     const val VERSION_DATABASE = 1
     const val TABLE_STUDENT = "student_table"
     const val TABLE_DISCIPLINE = "discipline_table"
+    const val TABLE_SCHEDULE = "schedule_table"
 
     fun getMigrations(): Array<Migration> = arrayOf()
 }

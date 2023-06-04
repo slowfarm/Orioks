@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.eva.oriokslive.domain.repository.DomainRepository
-import ru.eva.oriokslive.network.entity.schedule.Data
+import ru.eva.oriokslive.ui.entity.ScheduleItem
 import ru.eva.oriokslive.utils.calculateCurrentDay
 import ru.eva.oriokslive.utils.getDayOfWeek
 import ru.eva.oriokslive.utils.getNextDayOfWeek
@@ -20,7 +20,7 @@ class ScheduleViewModel @Inject constructor(
     private val domainRepository: DomainRepository,
 ) : ViewModel() {
 
-    val schedule = MutableLiveData<List<Data>>()
+    val schedule = MutableLiveData<List<ScheduleItem>>()
 
     fun getSchedule(group: String, position: Int) {
         viewModelScope.launch(Dispatchers.IO) {

@@ -3,12 +3,12 @@ package ru.eva.oriokslive.domain.repository
 import android.content.SharedPreferences
 import androidx.annotation.WorkerThread
 import ru.eva.oriokslive.domain.dao.DisciplinesDao
+import ru.eva.oriokslive.domain.dao.ScheduleDao
 import ru.eva.oriokslive.domain.dao.StudentDao
 import ru.eva.oriokslive.network.entity.orioks.Discipline
 import ru.eva.oriokslive.network.entity.orioks.Event
 import ru.eva.oriokslive.network.entity.orioks.Student
 import ru.eva.oriokslive.network.entity.schedule.Data
-import ru.eva.oriokslive.network.entity.schedule.Schedule
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,6 +17,7 @@ class DomainRepositoryImpl @Inject constructor(
     private val preferences: SharedPreferences,
     private val studentDao: StudentDao,
     private val disciplinesDao: DisciplinesDao,
+    private val scheduleDao: ScheduleDao,
 ) : DomainRepository {
     override fun setAccessToken(value: String) {
         preferences.edit().putString(ACCESS_TOKEN, value).commit()
@@ -37,7 +38,8 @@ class DomainRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getDisciplineById(id: Int): Discipline = disciplinesDao.getDisciplineById(id)
+    override suspend fun getDisciplineById(id: Int): Discipline =
+        disciplinesDao.getDisciplineById(id)
 
     @WorkerThread
     override suspend fun setDisciplines(disciplines: List<Discipline>) {
@@ -52,33 +54,21 @@ class DomainRepositoryImpl @Inject constructor(
         preferences.edit().clear().apply()
     }
 
-    override suspend fun getGroups(): List<String>? {
-        TODO("Not yet implemented")
+    override suspend fun getGroups(): List<String>? = scheduleDao.getGroups()
+
+    override suspend fun removeGroup(group: String) = scheduleDao.removeGroup(group)
+
+    override suspend fun setSchedule(schedule: List<Data>) {
+        scheduleDao.insert(schedule)
     }
 
-    override suspend fun removeGroup(group: String) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getSchedule(group: String): List<Data>? = scheduleDao.getSchedule(group)
 
-    override suspend fun addGroup(group: String) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getSchedule(dayNumber: Int, day: Int, group: String): List<Data>? =
+        scheduleDao.getSchedule(dayNumber, day, group)
 
-    override suspend fun setSchedule(schedule: Schedule) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getSchedule(group: String): List<Data>? {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getSchedule(dayNumber: Int, day: Int, group: String): List<Data>? {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getSchedule(dayNumber: Int, group: String): List<Data>? {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getSchedule(dayNumber: Int, group: String): List<Data>? =
+        scheduleDao.getSchedule(dayNumber, group)
 
     companion object {
         private const val ACCESS_TOKEN = "ACCESS_TOKEN"

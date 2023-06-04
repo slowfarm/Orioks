@@ -9,8 +9,4 @@ data class Security(
     val token: String,
     @SerializedName("user_agent")
     val userAgent: String,
-    val application: String,
-    val device: String,
-    val containDevice: Boolean,
-    val lastUsedValue: String,
 )

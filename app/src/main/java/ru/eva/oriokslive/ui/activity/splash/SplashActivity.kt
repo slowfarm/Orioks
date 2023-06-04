@@ -25,7 +25,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-        viewModel.errorMessage.observe(this) {
+        viewModel.onError.observe(this) {
             Toast.makeText(this, R.string.token_deleted, Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, RegistrationActivity::class.java))
             finish()

@@ -7,11 +7,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.eva.oriokslive.domain.repository.DomainRepository
+import ru.eva.oriokslive.network.repository.RemoteRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class GroupsViewModel @Inject constructor(
     private val domainRepository: DomainRepository,
+    private val remoteRepository: RemoteRepository,
 ) : ViewModel() {
 
     val groups = MutableLiveData<List<String>>()
@@ -28,9 +30,12 @@ class GroupsViewModel @Inject constructor(
         }
     }
 
-    fun addGroup(group: String) {
+    fun addSchedule(group: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            domainRepository.addGroup(group)
+            remoteRepository.getSchedule(group) ?.let {
+                domainRepository.setSchedule(it.data)
+                getGroups()
+            }
         }
     }
 }

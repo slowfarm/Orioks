@@ -1,8 +1,14 @@
 package ru.eva.oriokslive.network.entity.schedule
 
+import androidx.room.ColumnInfo
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class Room(
-    @SerializedName("Code") val code: String,
-    @SerializedName("Name") val name: String,
+    @SerializedName("Code")
+    @ColumnInfo(name = "code")
+    val code: String,
+    @SerializedName("Name")
+    @ColumnInfo(name = "name")
+    val name: String,
 )
