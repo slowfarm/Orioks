@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/side_nav_bar"
     android:gravity="bottom"
     android:orientation="vertical"
@@ -19,30 +19,30 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="8dp">
 
             <TextView
-                android:id="@+id/week"
+                android:id="@+id/tvWeek"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                tools:text="100"
-                app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
-                app:layout_constraintEnd_toEndOf="@+id/progress_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/pbScore"
+                app:layout_constraintEnd_toEndOf="@+id/pbScore"
                 app:layout_constraintHorizontal_bias="0.571"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/progress_bar"
-                app:layout_constraintVertical_bias="0.511" />
+                app:layout_constraintTop_toTopOf="@+id/pbScore"
+                app:layout_constraintVertical_bias="0.511"
+                tools:text="100" />
 
-            <com.budiyev.android.circularprogressbar.CircularProgressBar
-                android:id="@+id/progress_bar"
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/pbScore"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="4dp"
@@ -52,23 +52,14 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                app:animateProgress="true"
-                app:backgroundStrokeColor="#BDBDBD"
-                app:backgroundStrokeWidth="4dp"
-                app:drawBackgroundStroke="true"
-                app:foregroundStrokeColor="#2196F3"
-                app:foregroundStrokeWidth="4dp"
-                app:indeterminate="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:maximum="100"
-                app:progress="50" />
-        </android.support.constraint.ConstraintLayout>
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/value"
+            android:id="@+id/tvGrade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -78,17 +69,17 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/username_text"
+        android:id="@+id/tvUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/nav_header_title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:text="Username" />
 
     <TextView
-        android:id="@+id/group_text"
+        android:id="@+id/tvGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nav_header_subtitle" />
+        tools:text="Group" />
 
 </LinearLayout>

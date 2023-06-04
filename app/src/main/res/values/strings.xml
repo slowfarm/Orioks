@@ -1,20 +1,14 @@
 <resources>
-    <string name="app_name">ORIOKS 2.0</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Orioks 2.0</string>
     <string name="main">Главная</string>
     <string name="events">Контрольные мероприятия</string>
-    <string name="audience">Аудитроия</string>
-    <string name="time">Время</string>
-    <string name="teacher">Преподаватели</string>
-    <string name="affair">Пара</string>
-    <string name="exam_date">Дата экзамена</string>
-    <string name="department">Кафедра</string>
-    <string name="form">Форма</string>
+    <string name="audience">Аудитроия:</string>
+    <string name="time">Время:</string>
+    <string name="teacher">Преподаватель:</string>
+    <string name="affair">Пара:</string>
+    <string name="exam_date">Дата экзамена:</string>
+    <string name="department">Кафедра:</string>
+    <string name="form">Форма:</string>
     <string name="teachers_name">Имя преподавателя</string>
     <string name="_1100">1100</string>
     <string name="subject">Предмет</string>
@@ -28,25 +22,36 @@
     <string name="log_in">Войти</string>
     <string name="_5">5</string>
     <string name="information">Информация</string>
-    <string name="name">Имя</string>
-    <string name="group">Группа</string>
-    <string name="cathedra">Кафедра</string>
-    <string name="cource">Курс</string>
-    <string name="id">Номер зачетной книжки</string>
-    <string name="semester">Семестр</string>
-    <string name="direction">Направление</string>
-    <string name="profile">Профиль</string>
-    <string name="year">Год</string>
+    <string name="name">Имя:</string>
+    <string name="group">Группа:</string>
+    <string name="cathedra">Кафедра:</string>
+    <string name="cource">Курс:</string>
+    <string name="id">ID:</string>
+    <string name="semester">Семестр:</string>
+    <string name="direction">Направление:</string>
+    <string name="profile">Профиль:</string>
+    <string name="year">Год:</string>
     <string name="logout">Выйти</string>
     <string name="refresh">Обновить</string>
-    <string name="studying">Обучение</string>
-    <string name="this_week">На этой неделе</string>
-    <string name="device">Устройство</string>
-    <string name="last_activity">Последняя активность</string>
-    <string name="security">Безопасность</string>
+
+
+    <string name="registration_activity_wrong_credentials">Неверный логин либо пароль</string>
+
+    <string name="second_delimiter">2 Знаменатель</string>
+    <string name="first_numerator">1 Числитель</string>
+    <string name="first_delimiter">1 Знаменатель</string>
+    <string name="second_numerator">2 Числитель</string>
+
+    <string name="no_connection">Отсутствует интернет соединение</string>
     <string name="delete">Удалить</string>
-    <string name="additionally">Дополнительно</string>
+    <string name="add">Добавить</string>
     <string name="news">Новости</string>
-    <string name="action_search">Поиск</string>
-    <string name="add">Добавить на РС</string>
+    <string name="groups">Группы</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>
