@@ -14,32 +14,42 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <activity
+            android:name=".ui.activity.splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".ui.activity.main.MainActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.activity.registration.RegistrationActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme.NoStatusBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false"
+            android:theme="@style/AppFullScreenTheme" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".ui.activity.events.EventsActivity"
             android:label="@string/events"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.activity.news.NewsActivity"
             android:label="@string/news"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.activity.group.GroupActivity"
             android:label="@string/groups"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.activity.schedule.SchedulerActivity"
             android:label="@string/schedule"

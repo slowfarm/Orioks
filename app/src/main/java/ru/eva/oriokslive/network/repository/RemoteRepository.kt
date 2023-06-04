@@ -1,11 +1,12 @@
 package ru.eva.oriokslive.network.repository
 
-import ru.eva.oriokslive.network.entity.Security
+import ru.eva.oriokslive.network.entity.news.News
+import ru.eva.oriokslive.network.entity.news.NewsResponse
+import ru.eva.oriokslive.network.entity.orioks.Security
 import ru.eva.oriokslive.network.entity.orioks.AccessToken
 import ru.eva.oriokslive.network.entity.orioks.Discipline
 import ru.eva.oriokslive.network.entity.orioks.Event
 import ru.eva.oriokslive.network.entity.orioks.Student
-import ru.eva.oriokslive.network.entity.schedule.Group
 import ru.eva.oriokslive.network.entity.schedule.Schedule
 
 interface RemoteRepository {
@@ -17,4 +18,5 @@ interface RemoteRepository {
     suspend fun getAllActiveTokens(): List<Security>?
     suspend fun getGroups(): List<String>?
     suspend fun getSchedule(group: String): Schedule?
+    suspend fun getNews(): NewsResponse?
 }

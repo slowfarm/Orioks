@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="ru.eva.oriokslive.ui.fragment.main.MainFragment"
+        android:label="@string/main"
+        tools:layout="@layout/fragment_main" />
+
+    <fragment
+        android:id="@+id/studentFragment"
+        android:name="ru.eva.oriokslive.ui.fragment.student.StudentFragment"
+        android:label="@string/about_student"
+        tools:layout="@layout/fragment_student" />
+
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="ru.eva.oriokslive.ui.fragment.groups.GroupsFragment"
+        android:label="@string/schedule"
+        tools:layout="@layout/fragment_groups" />
+
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="ru.eva.oriokslive.ui.fragment.news.NewsFragment"
+        android:label="@string/news"
+        tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/securityFragment"
+        android:name="ru.eva.oriokslive.ui.fragment.security.SecurityFragment"
+        android:label="@string/security"
+        tools:layout="@layout/fragment_security" />
+</navigation>

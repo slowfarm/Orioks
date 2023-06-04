@@ -1,8 +1,11 @@
 package ru.eva.oriokslive.utils
 
 import ru.eva.oriokslive.R
+import ru.eva.oriokslive.network.entity.news.News
+import ru.eva.oriokslive.network.entity.news.NewsResponse
 import ru.eva.oriokslive.network.entity.orioks.Discipline
 import ru.eva.oriokslive.network.entity.orioks.Event
+import ru.eva.oriokslive.network.entity.orioks.Security
 import ru.eva.oriokslive.network.entity.orioks.Student
 import ru.eva.oriokslive.network.entity.schedule.Data
 import ru.eva.oriokslive.ui.entity.DisciplineItem
@@ -62,6 +65,64 @@ fun mapWeek(schedule: List<Data>?): List<Data> {
     var result: MutableList<Data>? = schedule?.toMutableList()
     if (result == null) result = mutableListOf() else fillDataList(result)
     return result
+}
+
+//    public List<Discipline> disciplines(List<Discipline> disciplineList) {
+//        for(Discipline discipline : disciplineList) {
+//            if (discipline.getCurrentGrade() != -1.0) {
+//                discipline.setCurrentGradeValue(String.valueOf(discipline.getCurrentGrade()));
+//            } else {
+//                discipline.setCurrentGradeValue("-");
+//            }
+//            discipline.setMaxGradeValue(String.valueOf(discipline.getMaxGrade()));
+//
+//            double progress = discipline.getCurrentGrade() / discipline.getMaxGrade() * 100;
+//            discipline.setProgress(progress >= 0 ? (int)progress : 0);
+//
+//            if(progress < 50) {
+//                discipline.setColor(Color.parseColor("#FF6D00"));
+//            } else if(progress < 70) {
+//                discipline.setColor(Color.parseColor("#FFD600"));
+//            } else if(progress < 85) {
+//                discipline.setColor(Color.parseColor("#64DD17"));
+//            } else {
+//                discipline.setColor(Color.parseColor("#00C853"));
+//            }
+//        }
+//        return disciplineList;
+//    }
+fun mapTokens(tokens: List<Security>): MutableList<Security> {
+    val result = mutableListOf<Security>()
+    for (security in tokens) {
+        var item = security
+        item = if (security.userAgent.split("\\s").size > 1) {
+            item.copy(
+                application = security.userAgent.split("\\s")[0],
+                device = security.userAgent.replace("\\s", " "),
+                containDevice = true
+            )
+        } else {
+            item.copy(
+                application = security.userAgent,
+                containDevice = false
+            )
+        }
+        item = item.copy(
+            lastUsedValue = dataParser(security.lastUsed)
+        )
+        result.add(item)
+    }
+    return result
+}
+
+fun mapNews(response: NewsResponse): List<News> = response.channel.items.map {
+    News(
+        title = it.title,
+        link = it.link,
+        description = it.description,
+        imageUrl = it.link,
+        date = it.date,
+    )
 }
 
 private fun fillDataList(dataList: MutableList<Data>) {

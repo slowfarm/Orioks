@@ -7,9 +7,11 @@ import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import okhttp3.logging.HttpLoggingInterceptor.Level.NONE
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.jaxb.JaxbConverterFactory
 import ru.eva.oriokslive.BuildConfig
 import ru.eva.oriokslive.domain.repository.DomainRepository
 import ru.eva.oriokslive.network.MietApi
+import ru.eva.oriokslive.network.NewsApi
 import ru.eva.oriokslive.network.OrioksApi
 import ru.eva.oriokslive.network.utils.BasicAuthInterceptor
 import javax.inject.Inject
@@ -42,5 +44,14 @@ class RetrofitProviderImpl @Inject constructor(domainRepository: DomainRepositor
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
             .create(MietApi::class.java)
+    }
+
+    override fun provideNewsApi(): NewsApi {
+        return Retrofit.Builder()
+            .baseUrl("https:/miet.ru/")
+            .client(client)
+            .addConverterFactory(JaxbConverterFactory.create())
+            .build()
+            .create(NewsApi::class.java)
     }
 }

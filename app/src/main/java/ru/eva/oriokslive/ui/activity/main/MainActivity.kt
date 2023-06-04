@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -24,11 +23,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private val viewModel: MainViewModel by viewModels()
 
     override fun setupUI() {
-        setSupportActionBar(binding.appBarNavigationDrawer.toolbar)
+        setSupportActionBar(binding.toolbar)
+
         val navController = findNavController(R.id.navigationHostFragment)
-        val appBarConfiguration =  AppBarConfiguration(
-            setOf(R.id.nav_main, R.id.nav_student, R.id.nav_schedule), binding.drawerLayout
-        )
+        val appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navigationView.setupWithNavController(navController)
 
@@ -46,10 +44,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         viewModel.errorMessage.observe(this) {
             Toast.makeText(this, R.string.no_connection, Toast.LENGTH_SHORT).show()
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.activity_main_drawer, menu)
-        return true
     }
 }

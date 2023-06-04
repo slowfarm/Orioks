@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.eva.oriokslive.network.MietApi
+import ru.eva.oriokslive.network.NewsApi
 import ru.eva.oriokslive.network.OrioksApi
 import ru.eva.oriokslive.network.provider.RetrofitProvider
 
@@ -19,4 +20,8 @@ object RetrofitModule {
     @Provides
     fun provideMietApi(retrofitProvider: RetrofitProvider): MietApi =
         retrofitProvider.provideMietApi()
+
+    @Provides
+    fun provideNewsApi(retrofitProvider: RetrofitProvider): NewsApi =
+        retrofitProvider.provideNewsApi()
 }

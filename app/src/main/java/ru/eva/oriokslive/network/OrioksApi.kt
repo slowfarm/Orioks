@@ -4,7 +4,7 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
-import ru.eva.oriokslive.network.entity.Security
+import ru.eva.oriokslive.network.entity.orioks.Security
 import ru.eva.oriokslive.network.entity.orioks.AccessToken
 import ru.eva.oriokslive.network.entity.orioks.Discipline
 import ru.eva.oriokslive.network.entity.orioks.Event
