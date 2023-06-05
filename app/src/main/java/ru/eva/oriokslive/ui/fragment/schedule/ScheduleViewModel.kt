@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.eva.oriokslive.domain.repository.DomainRepository
 import ru.eva.oriokslive.ui.entity.ScheduleItem
-import ru.eva.oriokslive.utils.calculateCurrentDay
+import ru.eva.oriokslive.utils.dayNumber
 import ru.eva.oriokslive.utils.getDayOfWeek
 import ru.eva.oriokslive.utils.getNextDayOfWeek
 import ru.eva.oriokslive.utils.mapDay
@@ -24,7 +24,7 @@ class ScheduleViewModel @Inject constructor(
 
     fun getSchedule(group: String, position: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val dayNumber = calculateCurrentDay()
+            val dayNumber = dayNumber()
             val data = when (position) {
                 0 -> mapDay(domainRepository.getSchedule(dayNumber, getDayOfWeek(), group))
                 1 -> mapDay(domainRepository.getSchedule(dayNumber, getNextDayOfWeek(), group))

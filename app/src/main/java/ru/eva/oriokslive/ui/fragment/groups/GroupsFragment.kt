@@ -15,7 +15,7 @@ import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.FragmentGroupsBinding
 import ru.eva.oriokslive.ui.activity.schedule.SchedulerActivity
 import ru.eva.oriokslive.ui.activity.group.GroupActivity
-import ru.eva.oriokslive.ui.adapter.SchedulerFragmentAdapter
+import ru.eva.oriokslive.ui.adapter.GroupAdapter
 import ru.eva.oriokslive.ui.base.BaseFragment
 
 
@@ -26,8 +26,8 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
         FragmentGroupsBinding::inflate
     private val viewModel: GroupsViewModel by viewModels()
 
-    private val adapter: SchedulerFragmentAdapter by lazy {
-        SchedulerFragmentAdapter(
+    private val adapter: GroupAdapter by lazy {
+        GroupAdapter(
             { startSchedulerActivity(it) },
             { addPinnedShortcuts(it) },
             { group, position ->

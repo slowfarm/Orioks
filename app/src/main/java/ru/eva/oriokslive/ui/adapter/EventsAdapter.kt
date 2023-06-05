@@ -2,6 +2,7 @@ package ru.eva.oriokslive.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import ru.eva.oriokslive.databinding.ListItemEventBinding
 import ru.eva.oriokslive.ui.entity.EventItem
@@ -23,14 +24,14 @@ class EventsAdapter(private val events: List<EventItem>) :
 class EventsViewHolder(private val binding: ListItemEventBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(eventItem: EventItem) {
+    fun bind(item: EventItem) {
         with(binding) {
-            tvName.text = eventItem.name
-            tvGrade.text = eventItem.grade
-            tvMaxGrade.text = eventItem.maxGrade
-            tvWeek.text = eventItem.week
-            pbScore.progress = eventItem.progress
-            pbScore.setIndicatorColor(eventItem.color)
+            tvName.text = item.name
+            tvGrade.text = item.grade
+            tvMaxGrade.text = item.maxGrade
+            tvWeek.text = item.week
+            pbScore.progress = item.progress
+            pbScore.setIndicatorColor(ContextCompat.getColor(binding.root.context, item.color))
         }
     }
 }

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#1976d2</color>
     <color name="colorAccent">#03A9F4</color>
 
+    <color name="colorTrack">#08000000</color>
     <color name="progress50">#FF7535</color>
     <color name="progress70">#F1C40F</color>
     <color name="progress85">#9ACB31</color>

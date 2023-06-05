@@ -27,15 +27,15 @@ class SchedulerActivity : BaseActivity<ActivityScheduleBinding>() {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = titles[position]
-        }.attach()
         val group = intent.getStringExtra(EXTRA_GROUP) ?: ""
         val adapter = SchedulerPagerAdapter(this, group)
 
         viewModel.getSchedule(group)
         viewModel.scheduleExist.observe(this) {
             binding.viewPager.adapter = adapter
+            TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+                tab.text = titles[position]
+            }.attach()
         }
         viewModel.onError.observe(this) {
             Toast.makeText(this, R.string.no_connection, Toast.LENGTH_LONG).show()

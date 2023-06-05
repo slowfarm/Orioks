@@ -1,7 +1,6 @@
 package ru.eva.oriokslive.utils
 
 import ru.eva.oriokslive.R
-import ru.eva.oriokslive.ui.entity.NewsItem
 import ru.eva.oriokslive.network.entity.news.NewsResponse
 import ru.eva.oriokslive.network.entity.orioks.Discipline
 import ru.eva.oriokslive.network.entity.orioks.Event
@@ -11,6 +10,7 @@ import ru.eva.oriokslive.network.entity.schedule.Data
 import ru.eva.oriokslive.ui.entity.DisciplineItem
 import ru.eva.oriokslive.ui.entity.EventItem
 import ru.eva.oriokslive.ui.entity.Header
+import ru.eva.oriokslive.ui.entity.NewsItem
 import ru.eva.oriokslive.ui.entity.ScheduleItem
 import ru.eva.oriokslive.ui.entity.SecurityItem
 
@@ -21,11 +21,26 @@ fun mapStudent(student: Student): Header {
 }
 
 fun mapEvents(events: List<Event>) = events.map {
-    val progress = (it.currentGrade / it.maxGrade * 100).toInt()
+    val progress: Int
+    val grade: String
+    when (it.currentGrade) {
+        null -> {
+            progress = 0
+            grade = "н"
+        }
+        -1.0 -> {
+            progress = 0
+            grade = "-"
+        }
+        else -> {
+            progress = (it.currentGrade / it.maxGrade * 100).toInt()
+            grade = it.currentGrade.toString()
+        }
+    }
     EventItem(
         progress = progress,
         name = it.type,
-        grade = if (it.currentGrade == -1.0) "-" else it.currentGrade.toString(),
+        grade = grade,
         maxGrade = it.maxGrade.toString(),
         color = when {
             progress < 50 -> R.color.progress50
@@ -40,6 +55,7 @@ fun mapEvents(events: List<Event>) = events.map {
 fun mapDisciplines(disciplines: List<Discipline>) = disciplines.map {
     val progress = (it.currentGrade / it.maxGrade * 100).toInt()
     DisciplineItem(
+        id = it.id,
         progress = progress,
         name = it.name,
         grade = if (it.currentGrade == -1.0) "-" else it.currentGrade.toString(),
@@ -65,7 +81,11 @@ fun mapDay(schedule: List<Data>?): List<ScheduleItem> {
 
 fun mapWeek(schedule: List<Data>?): List<ScheduleItem> {
     var result: MutableList<ScheduleItem>? = mapSchedule(schedule)
-    if (result == null) result = mutableListOf() else fillDataList(result)
+    when {
+        result == null -> result = mutableListOf()
+        result.isNotEmpty() -> fillDataList(result)
+        else -> result.add(0, ScheduleItem())
+    }
     return result
 }
 
@@ -80,7 +100,7 @@ fun mapTokens(tokens: List<Security>): MutableList<SecurityItem> {
                         security.userAgent.split("\\s")[0],
                         security.userAgent.replace("\\s", " "),
                         true,
-                        dataParser(security.lastUsed)
+                        dateParser(security.lastUsed)
                     )
                 )
             }
@@ -91,7 +111,7 @@ fun mapTokens(tokens: List<Security>): MutableList<SecurityItem> {
                         security.userAgent,
                         security.userAgent,
                         false,
-                        dataParser(security.lastUsed)
+                        dateParser(security.lastUsed)
                     )
                 )
             }
@@ -106,7 +126,7 @@ fun mapNews(response: NewsResponse): List<NewsItem> = response.channel.items.map
         link = it.link,
         description = it.description,
         imageUrl = it.enclosure.url,
-        date = it.date,
+        date = newsDateParser(it.date),
     )
 }
 
@@ -114,7 +134,10 @@ private fun mapSchedule(items: List<Data>?) = items?.map {
     ScheduleItem(
         day = it.day,
         dayNumber = it.dayNumber,
-        time = it.time,
+        time = it.time.copy(
+            timeFrom = scheduleDateParser(it.time.timeFrom),
+            timeTo = scheduleDateParser(it.time.timeTo)
+        ),
         clazz = it.clazz,
         group = it.group,
         room = it.room,

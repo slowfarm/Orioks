@@ -20,10 +20,14 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>() {
     private val viewModel: GroupViewModel by viewModels()
 
     private val adapter: GroupAdapter by lazy {
-        GroupAdapter {
-            setResult(RESULT_OK, Intent().putExtra(EXTRA_GROUP, it))
-            finish()
-        }
+        GroupAdapter(
+            {
+                setResult(RESULT_OK, Intent().putExtra(EXTRA_GROUP, it))
+                finish()
+            },
+            {},
+            { group, position -> },
+        )
     }
 
     override fun setupUI() {
@@ -36,7 +40,7 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>() {
         binding.rvGroups.adapter = adapter
 
         viewModel.getGroups()
-        viewModel.groups.observe(this) { adapter.setItems(it) }
+        viewModel.groups.observe(this) { adapter.addItems(it) }
         viewModel.onError.observe(this) {
             Toast.makeText(this, R.string.no_connection, Toast.LENGTH_LONG).show()
         }

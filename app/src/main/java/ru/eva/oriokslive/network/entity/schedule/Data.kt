@@ -3,16 +3,17 @@ package ru.eva.oriokslive.network.entity.schedule
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import ru.eva.oriokslive.domain.Common
 
 @Entity(tableName = Common.TABLE_SCHEDULE)
 data class Data(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    val id: Int,
     @SerializedName("Day")
     @ColumnInfo(name = "day")
-    @PrimaryKey
     val day: Int,
     @SerializedName("DayNumber")
     @ColumnInfo(name = "dayNumber")

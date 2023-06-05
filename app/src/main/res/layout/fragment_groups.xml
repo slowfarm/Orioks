@@ -18,8 +18,8 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_add"
         app:elevation="8dp"
         app:fabSize="normal"
-        app:useCompatPadding="true"
-        tools:src="@drawable/ic_add" />
+        app:useCompatPadding="true" />
 </RelativeLayout>

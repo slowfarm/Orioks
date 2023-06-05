@@ -36,7 +36,7 @@ class ScheduleAdapter(private val schedule: List<ScheduleItem>) :
         }
     }
 
-    override fun getItemViewType(position: Int): Int = if (schedule[position].day == -1) 1 else 0
+    override fun getItemViewType(position: Int): Int = if (schedule[position].day == null) 1 else 0
 }
 
 class ScheduleSeparatorViewHolder(private val binding: ListItemScheduleSeparatorBinding) :

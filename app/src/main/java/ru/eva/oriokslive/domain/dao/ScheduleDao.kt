@@ -21,7 +21,7 @@ interface ScheduleDao {
     @Query("SELECT * FROM ${Common.TABLE_SCHEDULE} WHERE dayNumber=:dayNumber AND group_name=:group")
     fun getSchedule(dayNumber: Int, group: String): List<Data>?
 
-    @Query("SELECT group_name FROM ${Common.TABLE_SCHEDULE}")
+    @Query("SELECT group_name FROM ${Common.TABLE_SCHEDULE} GROUP BY group_name")
     fun getGroups(): List<String>?
 
     @Query("DELETE FROM ${Common.TABLE_SCHEDULE} WHERE group_name = :group")

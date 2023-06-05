@@ -44,7 +44,7 @@ class EventsActivity : BaseActivity<ActivityEventsBinding>() {
             DisciplineDialog(this, it).show()
         }
 
-        viewModel.errorMessage.observe(this) {
+        viewModel.onError.observe(this) {
             Toast.makeText(this, R.string.no_connection, Toast.LENGTH_LONG).show()
         }
     }

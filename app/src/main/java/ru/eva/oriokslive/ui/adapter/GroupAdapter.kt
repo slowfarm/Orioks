@@ -3,34 +3,60 @@ package ru.eva.oriokslive.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.chauthai.swipereveallayout.ViewBinderHelper
 import ru.eva.oriokslive.databinding.ListItemGroupBinding
 
 
-class GroupAdapter(private val listener: (String) -> Unit) :
-    RecyclerView.Adapter<GroupViewHolder>() {
+class GroupAdapter(
+    private val itemClickListener: (String) -> Unit,
+    private val addListener: (String) -> Unit,
+    private val deleteListener: (String, Int) -> Unit,
+) : RecyclerView.Adapter<GroupFragmentViewHolder>() {
 
-    private var groups: List<String> = listOf()
+    private var groups: MutableList<String> = mutableListOf()
 
-    fun setItems(items: List<String>) {
-        groups = items
-        notifyItemRangeChanged(0, groups.size)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GroupViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GroupFragmentViewHolder(
         ListItemGroupBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
-    override fun onBindViewHolder(holder: GroupViewHolder, position: Int) {
-        holder.bind(groups[position], listener)
+    override fun onBindViewHolder(holder: GroupFragmentViewHolder, position: Int) {
+        holder.bind(groups[position], itemClickListener, addListener, deleteListener)
     }
 
     override fun getItemCount(): Int = groups.size
+
+    fun addItems(items: List<String>) {
+        groups = items.toMutableList()
+        notifyItemRangeChanged(0, groups.size)
+    }
+
+    fun removeItem(position: Int) {
+        groups.removeAt(position)
+        notifyItemRemoved(position)
+    }
 }
 
-class GroupViewHolder(private val binding: ListItemGroupBinding) :
+class GroupFragmentViewHolder(private val binding: ListItemGroupBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(group: String, listener: (String) -> Unit) {
-        binding.tvGroup.text = group
-        binding.root.setOnClickListener { listener.invoke(group) }
+
+    private val binderHelper = ViewBinderHelper()
+
+    fun bind(
+        item: String,
+        itemClickListener: (String) -> Unit,
+        addListener: (String) -> Unit,
+        deleteListener: (String, Int) -> Unit,
+    ) {
+        binderHelper.bind(binding.swipeRevealLayout, item)
+        binding.tvGroup.text = item
+        binding.frontLayout.setOnClickListener { itemClickListener.invoke(item) }
+        binding.add.setOnClickListener {
+            addListener.invoke(item)
+            binding.swipeRevealLayout.close(true)
+        }
+        binding.delete.setOnClickListener {
+            deleteListener.invoke(item, adapterPosition)
+            binding.swipeRevealLayout.close(true)
+        }
     }
 }

@@ -22,7 +22,7 @@ class EventsViewModel @Inject constructor(
     val title = MutableLiveData<String>()
     val events = MutableLiveData<List<EventItem>>()
     val discipline = MutableLiveData<Discipline>()
-    val errorMessage = MutableLiveData<Unit>()
+    val onError = MutableLiveData<Unit>()
 
     fun getTitle(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -32,11 +32,13 @@ class EventsViewModel @Inject constructor(
 
     fun getEvents(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            remoteRepository.getEvents(id)?.let { events.postValue(mapEvents(it)) }
-                ?: run {
-                    errorMessage.postValue(Unit)
-                    domainRepository.getEvents(id)?.let { events.postValue(mapEvents(it)) }
-                }
+            remoteRepository.getEvents(id)?.let {
+                domainRepository.setEvents(it)
+                events.postValue(mapEvents(it))
+            } ?: run {
+                onError.postValue(Unit)
+                domainRepository.getEventsById(id)?.let { events.postValue(mapEvents(it)) }
+            }
         }
     }
 

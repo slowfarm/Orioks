@@ -3,6 +3,7 @@ package ru.eva.oriokslive.domain.repository
 import android.content.SharedPreferences
 import androidx.annotation.WorkerThread
 import ru.eva.oriokslive.domain.dao.DisciplinesDao
+import ru.eva.oriokslive.domain.dao.EventDao
 import ru.eva.oriokslive.domain.dao.ScheduleDao
 import ru.eva.oriokslive.domain.dao.StudentDao
 import ru.eva.oriokslive.network.entity.orioks.Discipline
@@ -18,12 +19,13 @@ class DomainRepositoryImpl @Inject constructor(
     private val studentDao: StudentDao,
     private val disciplinesDao: DisciplinesDao,
     private val scheduleDao: ScheduleDao,
+    private val eventDao: EventDao,
 ) : DomainRepository {
+
     override fun setAccessToken(value: String) {
         preferences.edit().putString(ACCESS_TOKEN, value).commit()
     }
 
-    @WorkerThread
     override fun getAccessToken(): String? = preferences.getString(ACCESS_TOKEN, null)
 
     @WorkerThread
@@ -34,17 +36,22 @@ class DomainRepositoryImpl @Inject constructor(
     @WorkerThread
     override suspend fun getStudent(): Student? = studentDao.getStudent()
 
-    override suspend fun getEvents(id: Int): List<Event>? {
-        TODO("Not yet implemented")
+    @WorkerThread
+    override suspend fun setEvents(events: List<Event>) {
+        eventDao.insert(events)
     }
 
-    override suspend fun getDisciplineById(id: Int): Discipline =
-        disciplinesDao.getDisciplineById(id)
+    @WorkerThread
+    override suspend fun getEventsById(id: Int): List<Event>? = eventDao.getEventsById(id)
 
     @WorkerThread
     override suspend fun setDisciplines(disciplines: List<Discipline>) {
         disciplinesDao.insert(disciplines)
     }
+
+    @WorkerThread
+    override suspend fun getDisciplineById(id: Int): Discipline =
+        disciplinesDao.getDisciplineById(id)
 
     @WorkerThread
     override suspend fun getDisciplines(): List<Discipline>? = disciplinesDao.getDisciplines()
@@ -54,19 +61,25 @@ class DomainRepositoryImpl @Inject constructor(
         preferences.edit().clear().apply()
     }
 
+    @WorkerThread
     override suspend fun getGroups(): List<String>? = scheduleDao.getGroups()
 
+    @WorkerThread
     override suspend fun removeGroup(group: String) = scheduleDao.removeGroup(group)
 
+    @WorkerThread
     override suspend fun setSchedule(schedule: List<Data>) {
         scheduleDao.insert(schedule)
     }
 
+    @WorkerThread
     override suspend fun getSchedule(group: String): List<Data>? = scheduleDao.getSchedule(group)
 
+    @WorkerThread
     override suspend fun getSchedule(dayNumber: Int, day: Int, group: String): List<Data>? =
         scheduleDao.getSchedule(dayNumber, day, group)
 
+    @WorkerThread
     override suspend fun getSchedule(dayNumber: Int, group: String): List<Data>? =
         scheduleDao.getSchedule(dayNumber, group)
 
