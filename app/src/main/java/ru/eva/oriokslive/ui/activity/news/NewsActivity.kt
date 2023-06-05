@@ -1,6 +1,7 @@
 package ru.eva.oriokslive.ui.activity.news
 
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import ru.eva.oriokslive.databinding.ActivityNewsBinding
@@ -12,17 +13,26 @@ class NewsActivity : BaseActivity<ActivityNewsBinding>() {
         ActivityNewsBinding::inflate
 
     override fun setupUI() {
+        setSupportActionBar(binding.toolbar)
+
         intent.getStringExtra(EXTRA_URL)?.let {
             binding.webView.apply {
-                loadUrl(it)
                 webViewClient = object : WebViewClient() {
                     override fun onPageFinished(view: WebView, url: String) {
-                        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-                        supportActionBar?.title = view.title
-                        supportActionBar?.subtitle = view.url
+                        supportActionBar?.apply {
+                            setDisplayHomeAsUpEnabled(true)
+                            title = view.title
+                            subtitle = view.url
+                        }
                     }
                 }
+                loadUrl(it)
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        onBackPressed()
+        return true
     }
 }

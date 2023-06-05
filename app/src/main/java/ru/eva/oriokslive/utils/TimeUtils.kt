@@ -1,5 +1,7 @@
 package ru.eva.oriokslive.utils
 
+import android.content.res.Resources
+import androidx.core.content.ContextCompat
 import ru.eva.oriokslive.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -26,16 +28,16 @@ fun getDayOfWeek(): Int = Calendar.getInstance(Locale.getDefault())[Calendar.DAY
 
 fun getNextDayOfWeek(): Int = if (getDayOfWeek() == 7) 1 else getDayOfWeek() + 1
 
-fun getDayOfWeek(day: Int): String {
+fun getDayOfWeek(day: Int): Int {
     return when (day) {
-        1 -> "Понедельник"
-        2 -> "Вторник"
-        3 -> "Среда"
-        4 -> "Четверг"
-        5 -> "Пятница"
-        6 -> "Суббота"
-        7 -> "Воскресенье"
-        else -> "Понедельник"
+        1 -> R.string.monday
+        2 -> R.string.tuesday
+        3 -> R.string.wednesday
+        4 -> R.string.thursday
+        5 -> R.string.friday
+        6 -> R.string.saturday
+        7 -> R.string.sunday
+        else -> R.string.monday
     }
 }
 
@@ -62,19 +64,21 @@ fun dateParser(inputDate: String): String {
     val day = hour * 24
     val week = day * 7
     val diff = dateNow.time - date.time - 3 * hour
-    if (diff < hour) return "Недавно"
+    if (diff < hour) return Resources.getSystem().getString(R.string.recently)
     if (diff < day) {
-        return if (HOURS.convert(diff, MILLISECONDS) == 1L) {
-            HOURS.convert(diff, MILLISECONDS).toString() + " час назад"
+        val hours = HOURS.convert(diff, MILLISECONDS)
+        return if (hours == 1L) {
+            Resources.getSystem().getString(R.string.hour_ago, hours)
         } else {
-            HOURS.convert(diff, MILLISECONDS).toString() + " часа(ов) назад"
+            Resources.getSystem().getString(R.string.hours_ago, hours)
         }
     }
     return if (diff < week) {
-        if (DAYS.convert(diff, MILLISECONDS) == 1L) {
-            DAYS.convert(diff, MILLISECONDS).toString() + " день назад"
+        val days = DAYS.convert(diff, MILLISECONDS)
+        if (days == 1L) {
+            Resources.getSystem().getString(R.string.day_ago, days)
         } else {
-            DAYS.convert(diff, MILLISECONDS).toString() + " дня(ей) назад"
+            Resources.getSystem().getString(R.string.days_ago, days)
         }
     } else {
         sdf.format(date)

@@ -27,7 +27,7 @@ class GroupAdapter(
 
     fun addItems(items: List<String>) {
         groups = items.toMutableList()
-        notifyItemRangeChanged(0, groups.size)
+        notifyDataSetChanged()
     }
 
     fun removeItem(position: Int) {

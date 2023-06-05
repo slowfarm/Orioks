@@ -34,7 +34,7 @@ class SchedulerActivity : BaseActivity<ActivityScheduleBinding>() {
         viewModel.scheduleExist.observe(this) {
             binding.viewPager.adapter = adapter
             TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-                tab.text = titles[position]
+                tab.setText(titles[position])
             }.attach()
         }
         viewModel.onError.observe(this) {

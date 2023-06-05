@@ -30,7 +30,7 @@ class RetrofitProviderImpl @Inject constructor(
 
     override fun provideOrioksApi(): OrioksApi = Retrofit.Builder()
         .baseUrl("https://orioks.miet.ru/")
-        .client(client.addInterceptor(AuthInterceptor(domainRepository.getAccessToken())).build())
+        .client(client.addInterceptor(AuthInterceptor(domainRepository)).build())
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
         .build()
         .create(OrioksApi::class.java)

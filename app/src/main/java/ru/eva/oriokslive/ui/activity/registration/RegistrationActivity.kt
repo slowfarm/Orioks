@@ -21,7 +21,7 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding>() {
         binding.btnLogin.setOnClickListener {
             viewModel.getAccessToken(
                 binding.etLogin.text.toString(),
-                binding.etPassword.text.toString()
+                binding.etPassword.text.toString(),
             )
         }
 

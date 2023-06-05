@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.eva.oriokslive.databinding.ListItemScheduleBinding
 import ru.eva.oriokslive.databinding.ListItemScheduleSeparatorBinding
-import ru.eva.oriokslive.network.entity.schedule.Data
 import ru.eva.oriokslive.ui.entity.ScheduleItem
 
-class ScheduleAdapter(private val schedule: List<ScheduleItem>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ScheduleAdapter(
+    private val schedule: List<ScheduleItem>,
+    private val listener: (ScheduleItem) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
         1 -> ScheduleSeparatorViewHolder(
@@ -29,10 +30,8 @@ class ScheduleAdapter(private val schedule: List<ScheduleItem>) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = schedule[position]
         when (holder) {
-            is ScheduleSeparatorViewHolder -> {
-                holder.bind(item)
-            }
-            is ScheduleViewHolder -> holder.bind(item)
+            is ScheduleSeparatorViewHolder -> holder.bind(item)
+            is ScheduleViewHolder -> holder.bind(item, listener)
         }
     }
 
@@ -42,18 +41,19 @@ class ScheduleAdapter(private val schedule: List<ScheduleItem>) :
 class ScheduleSeparatorViewHolder(private val binding: ListItemScheduleSeparatorBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(item: ScheduleItem) {
-        binding.tvDayOfWeek.text = item.dayOfWeek ?: "Нет занятий"
+        binding.tvDayOfWeek.setText(item.dayOfWeek)
     }
 }
 
 class ScheduleViewHolder(private val binding: ListItemScheduleBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: ScheduleItem) {
+    fun bind(item: ScheduleItem, listener: (ScheduleItem) -> Unit) {
         binding.tvName.text = item.clazz?.name
         binding.tvRoom.text = item.room?.name
         binding.tvTeacher.text = item.clazz?.teacher
         binding.timeStart.text = item.time?.timeFrom
         binding.timeEnd.text = item.time?.timeTo
+        binding.root.setOnClickListener { listener.invoke(item) }
     }
 }
 

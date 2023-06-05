@@ -74,7 +74,7 @@ fun mapDay(schedule: List<Data>?): List<ScheduleItem> {
     when {
         result == null -> result = mutableListOf()
         result.isNotEmpty() -> setDataToPosition(result, 0)
-        else -> result.add(0, ScheduleItem())
+        else -> result.add(0, ScheduleItem(dayOfWeek = R.string.no_classes))
     }
     return result
 }
@@ -84,7 +84,7 @@ fun mapWeek(schedule: List<Data>?): List<ScheduleItem> {
     when {
         result == null -> result = mutableListOf()
         result.isNotEmpty() -> fillDataList(result)
-        else -> result.add(0, ScheduleItem())
+        else -> result.add(0, ScheduleItem(dayOfWeek = R.string.no_classes))
     }
     return result
 }
@@ -158,6 +158,6 @@ private fun fillDataList(dataList: MutableList<ScheduleItem>) {
 }
 
 private fun setDataToPosition(items: MutableList<ScheduleItem>, position: Int) {
-    val data = ScheduleItem(dayOfWeek = getDayOfWeek(items[position].day ?: 0))
+    val data = ScheduleItem(dayOfWeek = getDayOfWeek(items[position].day ?: R.string.no_classes))
     items.add(position, data)
 }

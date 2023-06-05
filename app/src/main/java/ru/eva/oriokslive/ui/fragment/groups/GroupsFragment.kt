@@ -1,6 +1,7 @@
 package ru.eva.oriokslive.ui.fragment.groups
 
 import android.app.Activity.RESULT_OK
+import android.app.PendingIntent
 import android.app.PendingIntent.getBroadcast
 import android.content.Intent
 import android.content.pm.ShortcutInfo
@@ -13,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.FragmentGroupsBinding
-import ru.eva.oriokslive.ui.activity.schedule.SchedulerActivity
 import ru.eva.oriokslive.ui.activity.group.GroupActivity
+import ru.eva.oriokslive.ui.activity.schedule.SchedulerActivity
 import ru.eva.oriokslive.ui.adapter.GroupAdapter
 import ru.eva.oriokslive.ui.base.BaseFragment
 
@@ -62,7 +63,8 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
                 .setIntent(intent)
                 .build()
             val callbackIntent = shortcutManager.createShortcutResultIntent(info)
-            val successCallback = getBroadcast(requireContext(), 0, callbackIntent, 0)
+            val flag = PendingIntent.FLAG_IMMUTABLE
+            val successCallback = getBroadcast(requireContext(), 0, callbackIntent, flag)
             shortcutManager.requestPinShortcut(info, successCallback.intentSender)
         }
     }

@@ -12,11 +12,6 @@ class DisciplineAdapter(private val listener: (Int) -> Unit) :
 
     private var disciplines: List<DisciplineItem> = listOf()
 
-    fun addItems(items: List<DisciplineItem>) {
-        disciplines = items
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DisciplineViewHolder(
         ListItemDisciplineBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
@@ -26,6 +21,11 @@ class DisciplineAdapter(private val listener: (Int) -> Unit) :
     }
 
     override fun getItemCount(): Int = disciplines.size
+
+    fun addItems(items: List<DisciplineItem>) {
+        disciplines = items
+        notifyDataSetChanged()
+    }
 }
 
 class DisciplineViewHolder(private val binding: ListItemDisciplineBinding) :

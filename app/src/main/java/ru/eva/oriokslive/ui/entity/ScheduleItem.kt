@@ -12,5 +12,5 @@ data class ScheduleItem(
     val clazz: Clazz? = null,
     val group: Group? = null,
     val room: Room? = null,
-    val dayOfWeek: String? = null,
+    val dayOfWeek: Int,
 )

@@ -24,9 +24,8 @@ class NewsAdapter(private val listener: (String) -> Unit) : RecyclerView.Adapter
 
     fun addItems(items: List<NewsItem>) {
         newsItems = items
-        notifyItemRangeChanged(0, newsItems.size)
+        notifyDataSetChanged()
     }
-
 }
 
 class NewsViewHolder(private val binding: ListItemNewsBinding) :
