@@ -6,20 +6,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.ViewBinderHelper
 import ru.eva.oriokslive.databinding.ListItemGroupBinding
 
-
 class GroupAdapter(
     private val itemClickListener: (String) -> Unit,
     private val addListener: (String) -> Unit,
     private val deleteListener: (String, Int) -> Unit,
-) : RecyclerView.Adapter<GroupFragmentViewHolder>() {
+) : RecyclerView.Adapter<GroupViewHolder>() {
 
     private var groups: MutableList<String> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GroupFragmentViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GroupViewHolder(
         ListItemGroupBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
-    override fun onBindViewHolder(holder: GroupFragmentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GroupViewHolder, position: Int) {
         holder.bind(groups[position], itemClickListener, addListener, deleteListener)
     }
 
@@ -36,7 +35,7 @@ class GroupAdapter(
     }
 }
 
-class GroupFragmentViewHolder(private val binding: ListItemGroupBinding) :
+class GroupViewHolder(private val binding: ListItemGroupBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     private val binderHelper = ViewBinderHelper()

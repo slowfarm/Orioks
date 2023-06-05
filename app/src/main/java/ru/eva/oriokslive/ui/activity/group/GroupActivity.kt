@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.ActivityGroupBinding
-import ru.eva.oriokslive.ui.adapter.GroupAdapter
+import ru.eva.oriokslive.ui.adapter.GroupAddAdapter
 import ru.eva.oriokslive.ui.base.BaseActivity
 import ru.eva.oriokslive.ui.fragment.groups.GroupsFragment.Companion.EXTRA_GROUP
 
@@ -20,15 +20,11 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>() {
         ActivityGroupBinding::inflate
     private val viewModel: GroupViewModel by viewModels()
 
-    private val adapter: GroupAdapter by lazy {
-        GroupAdapter(
-            {
-                setResult(RESULT_OK, Intent().putExtra(EXTRA_GROUP, it))
-                finish()
-            },
-            {},
-            { group, position -> },
-        )
+    private val adapter: GroupAddAdapter by lazy {
+        GroupAddAdapter {
+            setResult(RESULT_OK, Intent().putExtra(EXTRA_GROUP, it))
+            finish()
+        }
     }
 
     override fun setupUI() {
