@@ -1,5 +1,7 @@
 package ru.eva.oriokslive.utils
 
+import android.content.res.Resources
+import ru.eva.oriokslive.App
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.network.entity.news.NewsResponse
 import ru.eva.oriokslive.network.entity.orioks.Discipline
@@ -48,7 +50,7 @@ fun mapEvents(events: List<Event>) = events.map {
             progress < 85 -> R.color.progress85
             else -> R.color.progress100
         },
-        week = it.week,
+        week = App.get().getString(R.string.week, it.week),
     )
 }
 

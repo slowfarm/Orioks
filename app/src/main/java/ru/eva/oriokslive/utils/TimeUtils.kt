@@ -2,6 +2,7 @@ package ru.eva.oriokslive.utils
 
 import android.content.res.Resources
 import androidx.core.content.ContextCompat
+import ru.eva.oriokslive.App
 import ru.eva.oriokslive.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -68,17 +69,17 @@ fun dateParser(inputDate: String): String {
     if (diff < day) {
         val hours = HOURS.convert(diff, MILLISECONDS)
         return if (hours == 1L) {
-            Resources.getSystem().getString(R.string.hour_ago, hours)
+            App.get().getString(R.string.hour_ago, hours)
         } else {
-            Resources.getSystem().getString(R.string.hours_ago, hours)
+            App.get().getString(R.string.hours_ago, hours)
         }
     }
     return if (diff < week) {
         val days = DAYS.convert(diff, MILLISECONDS)
         if (days == 1L) {
-            Resources.getSystem().getString(R.string.day_ago, days)
+            App.get().getString(R.string.day_ago, days)
         } else {
-            Resources.getSystem().getString(R.string.days_ago, days)
+            App.get().getString(R.string.days_ago, days)
         }
     } else {
         sdf.format(date)

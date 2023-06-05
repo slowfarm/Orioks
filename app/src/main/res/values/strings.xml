@@ -15,7 +15,7 @@
     <string name="_0000">00:00</string>
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
-    <string name="week">Неделя:</string>
+    <string name="week">Неделя: %s</string>
     <string name="_0_0">0.0</string>
     <string name="about_student">О студенте</string>
     <string name="schedule">Расписание</string>
@@ -33,7 +33,6 @@
     <string name="year">Год:</string>
     <string name="logout">Выйти</string>
     <string name="refresh">Обновить</string>
-
 
     <string name="registration_activity_wrong_credentials">Неверный логин либо пароль</string>
 
