@@ -65,7 +65,7 @@ fun dateParser(inputDate: String): String {
     val day = hour * 24
     val week = day * 7
     val diff = dateNow.time - date.time - 3 * hour
-    if (diff < hour) return Resources.getSystem().getString(R.string.recently)
+    if (diff < hour) return App.get().getString(R.string.recently)
     if (diff < day) {
         val hours = HOURS.convert(diff, MILLISECONDS)
         return if (hours == 1L) {

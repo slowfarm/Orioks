@@ -39,7 +39,7 @@ class SecurityViewHolder(private val binding: ListItemSecurityBinding) :
         binderHelper.bind(binding.swipeLayout, item.token)
         binding.tvApplication.text = item.application
         binding.tvDevice.text = item.device
-        binding.llDevice.visibility = if (item.containDevice) View.VISIBLE else View.GONE
+        binding.clDevice.visibility = if (item.containDevice) View.VISIBLE else View.GONE
         binding.tvDate.text = item.lastUsed
         binding.flDelete.setOnClickListener {
             listener.invoke(item.token, adapterPosition)

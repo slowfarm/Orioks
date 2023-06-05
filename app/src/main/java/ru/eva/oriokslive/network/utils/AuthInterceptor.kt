@@ -12,7 +12,7 @@ class AuthInterceptor(private val domainRepository: DomainRepository) : Intercep
         val original = chain.request()
         val builder = original.newBuilder()
             .header("Accept", "application/json")
-            .header("User-Agent", "orioks/2.0 android ${android.os.Build.VERSION.RELEASE}")
+            .header("User-Agent", "orioks/2.0 Android ${android.os.Build.VERSION.RELEASE}")
             .method(original.method, original.body)
         domainRepository.getAccessToken()?.let { builder.header("Authorization", "Bearer $it") }
         return chain.proceed(builder.build())
