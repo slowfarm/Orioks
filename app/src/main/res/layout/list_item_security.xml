@@ -47,7 +47,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_date"
+            android:id="@+id/tvDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
-            app:layout_constraintEnd_toEndOf="@+id/tv_date"
+            app:layout_constraintEnd_toEndOf="@+id/tvDate"
             app:layout_constraintStart_toEndOf="@+id/textView11"
             app:layout_constraintTop_toTopOf="@+id/textView11"
             tools:text="Orioks 2.0" />
@@ -86,7 +86,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_date"
+            app:layout_constraintEnd_toEndOf="@+id/tvDate"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView11">
 
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                app:layout_constraintEnd_toEndOf="@+id/tv_date"
+                app:layout_constraintEnd_toEndOf="@+id/tvDate"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
                 app:layout_constraintTop_toTopOf="@+id/textView12"
                 tools:text="Android 5.1" />

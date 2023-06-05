@@ -36,7 +36,8 @@ class NewsViewHolder(private val binding: ListItemNewsBinding) :
         binding.tvDate.text = item.date
         Picasso.get()
             .load(item.imageUrl)
-            .placeholder(R.drawable.placeholder)
+            .placeholder(R.drawable.ic_placeholder)
+            .error(R.drawable.ic_placeholder)
             .into(binding.ivPicture)
         binding.root.setOnClickListener { listener.invoke(item.link) }
     }

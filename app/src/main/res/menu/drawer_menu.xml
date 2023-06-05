@@ -31,7 +31,7 @@
 
     <item
         android:id="@+id/nav_theme_switch"
-        android:icon="@drawable/ic_theme_light"
+        android:icon="@drawable/ic_theme_dark"
         android:title="@string/dark_theme"
         app:actionLayout="@layout/switch_theme" />
 </menu>

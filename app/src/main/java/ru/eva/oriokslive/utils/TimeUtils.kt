@@ -97,7 +97,7 @@ fun scheduleDateParser(inputDate: String): String {
 
 fun newsDateParser(inputDate: String): String {
     val oldPattern = "EEE, dd MMM yyyy HH:mm:ss Z"
-    val newPattern = "d.MM.yyyy HH:mm"
+    val newPattern = "MMM d, yyyy"
     val sdf = SimpleDateFormat(oldPattern, Locale.ENGLISH)
     val date: Date = sdf.parse(inputDate) ?: Date()
     sdf.applyPattern(newPattern)

@@ -39,4 +39,9 @@
     <style name="SubTitleTextStyle" parent="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
         <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="ShapeAppearanceOverlay.Rounded" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
 </resources>
