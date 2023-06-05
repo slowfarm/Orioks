@@ -13,20 +13,20 @@ import ru.eva.oriokslive.network.entity.orioks.Student
 
 interface OrioksApi {
     @GET("/api/v1/auth")
-    suspend fun getToken(@Header("Authorization") loginPass: String): AccessToken?
+    suspend fun getToken(@Header("Authorization") loginPass: String): AccessToken
 
     @GET("/api/v1/student/disciplines")
-    suspend fun getDisciplines(): List<Discipline>?
+    suspend fun getDisciplines(): List<Discipline>
 
     @GET("/api/v1/student")
-    suspend fun getStudent(): Student?
+    suspend fun getStudent(): Student
 
     @GET("/api/v1/student/disciplines/{id}/events")
-    suspend fun getEvents(@Path("id") id: Int): List<Event>?
+    suspend fun getEvents(@Path("id") id: Int): List<Event>
 
     @DELETE("/api/v1/student/tokens/{token}")
-    suspend fun deleteAccessToken(@Path("token") token: String): AccessToken?
+    suspend fun deleteAccessToken(@Path("token") token: String): AccessToken
 
     @GET("/api/v1/student/tokens")
-    suspend fun getAllActiveTokens(): List<Security>?
+    suspend fun getAllActiveTokens(): List<Security>
 }

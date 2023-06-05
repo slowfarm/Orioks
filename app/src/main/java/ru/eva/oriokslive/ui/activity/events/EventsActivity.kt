@@ -3,15 +3,16 @@ package ru.eva.oriokslive.ui.activity.events
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.ActivityEventsBinding
+import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.adapter.EventsAdapter
 import ru.eva.oriokslive.ui.base.BaseActivity
 import ru.eva.oriokslive.ui.dialog.DisciplineDialog
+import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
 class EventsActivity : BaseActivity<ActivityEventsBinding>() {
@@ -43,9 +44,9 @@ class EventsActivity : BaseActivity<ActivityEventsBinding>() {
         viewModel.discipline.observe(this) {
             DisciplineDialog(this, it).show()
         }
-
         viewModel.onError.observe(this) {
-            Toast.makeText(this, R.string.no_connection, Toast.LENGTH_LONG).show()
+            if (it is NetworkException) viewModel.getLocalEvent(id)
+            showToast(it)
         }
     }
 

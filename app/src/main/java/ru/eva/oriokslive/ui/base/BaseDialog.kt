@@ -5,10 +5,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.viewbinding.ViewBinding
-import ru.eva.oriokslive.R
 
-abstract class BaseDialog<Binding : ViewBinding>(context: Context) :
-    Dialog(context, R.style.DialogTheme) {
+abstract class BaseDialog<Binding : ViewBinding>(context: Context) : Dialog(context) {
     protected val binding: Binding
         get() = _binding as Binding
     private var _binding: Binding? = null

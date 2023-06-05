@@ -1,19 +1,25 @@
 package ru.eva.oriokslive.ui.activity.main
 
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.switchmaterial.SwitchMaterial
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.ActivityMainBinding
+import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.base.BaseActivity
+import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -41,8 +47,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navigationView.setupWithNavController(navController)
 
-        viewModel.getStudent()
+        val menuItem = binding.navigationView.menu.findItem(R.id.nav_theme_switch) as MenuItem
+        val themeSwitch = menuItem.actionView?.findViewById<SwitchMaterial>(R.id.theme_switch)
+        themeSwitch?.setOnCheckedChangeListener { _, checked ->
+            val mode = if (checked) MODE_NIGHT_YES else MODE_NIGHT_NO
+            viewModel.setDefaultTheme(mode)
+        }
 
+        viewModel.getDefaultTheme()
+        viewModel.getStudent()
         viewModel.header.observe(this) {
             with(binding.navigationView.getHeaderView(0)) {
                 findViewById<TextView>(R.id.tvWeek).text = it.week
@@ -52,8 +65,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 findViewById<TextView>(R.id.tvGroup).text = it.group
             }
         }
-        viewModel.errorMessage.observe(this) {
-            Toast.makeText(this, R.string.no_connection, Toast.LENGTH_SHORT).show()
+        viewModel.onError.observe(this) {
+            if (it is NetworkException) viewModel.getLocalStudent()
+            showToast(it)
+        }
+        viewModel.theme.observe(this) {
+            themeSwitch?.isChecked = it == MODE_NIGHT_YES
+            AppCompatDelegate.setDefaultNightMode(it)
         }
     }
 

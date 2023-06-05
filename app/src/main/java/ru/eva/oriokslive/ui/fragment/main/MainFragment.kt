@@ -3,16 +3,16 @@ package ru.eva.oriokslive.ui.fragment.main
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.FragmentMainBinding
+import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.activity.events.EventsActivity
 import ru.eva.oriokslive.ui.activity.events.EventsActivity.Companion.EXTRA_ID
 import ru.eva.oriokslive.ui.adapter.DisciplineAdapter
 import ru.eva.oriokslive.ui.base.BaseFragment
+import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>() {
@@ -41,7 +41,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         }
 
         viewModel.onError.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), R.string.no_connection, Toast.LENGTH_LONG).show()
+            if (it is NetworkException) viewModel.getLocalDisciplines()
+            requireContext().showToast(it)
         }
     }
 }

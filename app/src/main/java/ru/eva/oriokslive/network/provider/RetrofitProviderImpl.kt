@@ -1,6 +1,8 @@
 package ru.eva.oriokslive.network.provider
 
+import android.content.Context
 import com.google.gson.GsonBuilder
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
@@ -16,17 +18,20 @@ import ru.eva.oriokslive.network.MietApi
 import ru.eva.oriokslive.network.NewsApi
 import ru.eva.oriokslive.network.OrioksApi
 import ru.eva.oriokslive.network.utils.AuthInterceptor
+import ru.eva.oriokslive.network.utils.CheckNetworkInterceptor
 import ru.eva.oriokslive.network.utils.MietInterceptor
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class RetrofitProviderImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val domainRepository: DomainRepository
 ) : RetrofitProvider {
 
     private val client = OkHttpClient.Builder()
         .addNetworkInterceptor(HttpLoggingInterceptor().apply { level = if (DEBUG) BODY else NONE })
+        .addInterceptor(CheckNetworkInterceptor(context))
 
     override fun provideOrioksApi(): OrioksApi = Retrofit.Builder()
         .baseUrl("https://orioks.miet.ru/")

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Orioks 2.0</string>
     <string name="main">Главная</string>
+    <string name="dark_theme">Темная тема</string>
     <string name="events">Контрольные мероприятия</string>
     <string name="audience">Аудитроия:</string>
     <string name="time">Время:</string>

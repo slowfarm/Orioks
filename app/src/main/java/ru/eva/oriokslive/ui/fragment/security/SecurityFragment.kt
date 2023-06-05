@@ -3,15 +3,16 @@ package ru.eva.oriokslive.ui.fragment.security
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.FragmentSecurityBinding
+import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.activity.registration.RegistrationActivity
 import ru.eva.oriokslive.ui.adapter.SecurityFragmentAdapter
 import ru.eva.oriokslive.ui.base.BaseFragment
+import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
 class SecurityFragment : BaseFragment<FragmentSecurityBinding>() {
@@ -37,9 +38,14 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>() {
             binding.swipeRefreshLayout.isRefreshing = false
         }
         viewModel.onError.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), R.string.token_deleted, Toast.LENGTH_SHORT).show()
-            requireActivity().finishAffinity()
-            startActivity(Intent(requireContext(), RegistrationActivity::class.java))
+            when (it) {
+                is NetworkException -> requireContext().showToast(it)
+                else -> {
+                    requireContext().showToast(R.string.token_deleted)
+                    requireActivity().finishAffinity()
+                    startActivity(Intent(requireContext(), RegistrationActivity::class.java))
+                }
+            }
         }
     }
 }

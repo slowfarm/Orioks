@@ -12,6 +12,7 @@ import ru.eva.oriokslive.databinding.ActivityGroupBinding
 import ru.eva.oriokslive.ui.adapter.GroupAddAdapter
 import ru.eva.oriokslive.ui.base.BaseActivity
 import ru.eva.oriokslive.ui.fragment.groups.GroupsFragment.Companion.EXTRA_GROUP
+import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
 class GroupActivity : BaseActivity<ActivityGroupBinding>() {
@@ -38,9 +39,7 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>() {
 
         viewModel.getGroups()
         viewModel.groups.observe(this) { adapter.addItems(it) }
-        viewModel.onError.observe(this) {
-            Toast.makeText(this, R.string.no_connection, Toast.LENGTH_LONG).show()
-        }
+        viewModel.onError.observe(this) { showToast(it) }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

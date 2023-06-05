@@ -18,6 +18,7 @@ import ru.eva.oriokslive.ui.activity.group.GroupActivity
 import ru.eva.oriokslive.ui.activity.schedule.SchedulerActivity
 import ru.eva.oriokslive.ui.adapter.GroupAdapter
 import ru.eva.oriokslive.ui.base.BaseFragment
+import ru.eva.oriokslive.utils.showToast
 
 
 @AndroidEntryPoint
@@ -47,6 +48,7 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
 
         viewModel.getGroups()
         viewModel.groups.observe(viewLifecycleOwner) { adapter.addItems(it) }
+        viewModel.onError.observe(viewLifecycleOwner) { requireContext().showToast(it) }
     }
 
     private fun addPinnedShortcuts(group: String) {

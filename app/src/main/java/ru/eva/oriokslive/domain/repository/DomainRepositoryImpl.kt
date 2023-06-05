@@ -1,5 +1,6 @@
 package ru.eva.oriokslive.domain.repository
 
+import android.app.UiModeManager.MODE_NIGHT_NO
 import android.content.SharedPreferences
 import androidx.annotation.WorkerThread
 import ru.eva.oriokslive.domain.dao.DisciplinesDao
@@ -27,6 +28,12 @@ class DomainRepositoryImpl @Inject constructor(
     }
 
     override fun getAccessToken(): String? = preferences.getString(ACCESS_TOKEN, null)
+
+    override fun setDefaultTheme(value: Int) {
+        preferences.edit().putInt(THEME, value).apply()
+    }
+
+    override fun getDefaultTheme(): Int = preferences.getInt(THEME, MODE_NIGHT_NO)
 
     @WorkerThread
     override suspend fun setStudent(student: Student) {
@@ -85,5 +92,6 @@ class DomainRepositoryImpl @Inject constructor(
 
     companion object {
         private const val ACCESS_TOKEN = "ACCESS_TOKEN"
+        private const val THEME = "THEME"
     }
 }

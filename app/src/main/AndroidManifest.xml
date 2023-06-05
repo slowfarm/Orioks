@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ru.eva.oriokslive">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,9 +16,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.activity.splash.SplashActivity"
+            android:name=".ui.activity.registration.RegistrationActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/AppFullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,27 +28,23 @@
         <activity
             android:name=".ui.activity.main.MainActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.activity.registration.RegistrationActivity"
-            android:exported="false"
-            android:theme="@style/AppFullScreenTheme" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.events.EventsActivity"
             android:label="@string/events"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.news.NewsActivity"
             android:label="@string/news"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.group.GroupActivity"
             android:label="@string/groups"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.schedule.SchedulerActivity"
             android:label="@string/schedule"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

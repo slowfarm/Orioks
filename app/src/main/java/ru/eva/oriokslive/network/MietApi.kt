@@ -6,8 +6,8 @@ import ru.eva.oriokslive.network.entity.schedule.Schedule
 
 interface MietApi {
     @POST("/schedule/data")
-    suspend fun getScheduler(@Query("group") group: String): Schedule?
+    suspend fun getScheduler(@Query("group") group: String): Schedule
 
     @POST("/schedule/groups")
-    suspend fun getGroups(): Array<String>?
+    suspend fun getGroups(): Array<String>
 }

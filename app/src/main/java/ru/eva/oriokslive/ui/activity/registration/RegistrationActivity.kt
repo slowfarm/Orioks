@@ -2,13 +2,16 @@ package ru.eva.oriokslive.ui.activity.registration
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.ActivityRegistrationBinding
+import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.activity.main.MainActivity
 import ru.eva.oriokslive.ui.base.BaseActivity
+import ru.eva.oriokslive.utils.showToast
+import java.util.concurrent.atomic.AtomicBoolean
 
 @AndroidEntryPoint
 class RegistrationActivity : BaseActivity<ActivityRegistrationBinding>() {
@@ -17,7 +20,12 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding>() {
 
     private val viewModel: RegistrationViewModel by viewModels()
 
+    private var needShowSplash = AtomicBoolean(true)
+
     override fun setupUI() {
+        val splashScreen = installSplashScreen()
+        splashScreen.setKeepOnScreenCondition { needShowSplash.get() }
+
         binding.btnLogin.setOnClickListener {
             viewModel.getAccessToken(
                 binding.etLogin.text.toString(),
@@ -27,11 +35,26 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding>() {
 
         viewModel.checkAccessToken()
         viewModel.startMainActivity.observe(this) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            needShowSplash.set(false)
+            startMainActivity()
         }
-        viewModel.errorMessage.observe(this) {
-            Toast.makeText(this, R.string.registration_activity_wrong_credentials, Toast.LENGTH_LONG).show()
+        viewModel.onError.observe(this) {
+            needShowSplash.set(false)
+            when (it) {
+                is NetworkException -> {
+                    startMainActivity()
+                    showToast(it)
+                }
+                else -> {
+                    viewModel.deleteToken()
+                    showToast(R.string.registration_activity_wrong_credentials)
+                }
+            }
         }
+    }
+
+    private fun startMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }

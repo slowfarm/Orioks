@@ -3,15 +3,14 @@ package ru.eva.oriokslive.ui.fragment.news
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.FragmentNewsBinding
 import ru.eva.oriokslive.ui.activity.news.NewsActivity
 import ru.eva.oriokslive.ui.adapter.NewsAdapter
 import ru.eva.oriokslive.ui.base.BaseFragment
+import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
 class NewsFragment : BaseFragment<FragmentNewsBinding>() {
@@ -37,9 +36,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
             adapter.addItems(it)
             binding.swipeRefreshLayout.isRefreshing = false
         }
-        viewModel.onError.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), R.string.no_connection, Toast.LENGTH_LONG).show()
-        }
+        viewModel.onError.observe(viewLifecycleOwner) { requireContext().showToast(it) }
     }
 
     companion object {

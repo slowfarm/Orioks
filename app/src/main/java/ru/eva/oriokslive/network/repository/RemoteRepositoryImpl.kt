@@ -20,24 +20,24 @@ class RemoteRepositoryImpl @Inject constructor(
     private val mietApi: MietApi,
     private val newsApi: NewsApi,
 ) : RemoteRepository {
-    override suspend fun getAccessToken(login: String, password: String): AccessToken? =
+    override suspend fun getAccessToken(login: String, password: String): AccessToken =
         orioksApi.getToken(Credentials.basic(login, password))
 
-    override suspend fun getStudent(): Student? = orioksApi.getStudent()
+    override suspend fun getStudent(): Student = orioksApi.getStudent()
 
-    override suspend fun getEvents(id: Int): List<Event>? = orioksApi.getEvents(id)
+    override suspend fun getEvents(id: Int): List<Event> = orioksApi.getEvents(id)
 
-    override suspend fun getDisciplines(): List<Discipline>? = orioksApi.getDisciplines()
+    override suspend fun getDisciplines(): List<Discipline> = orioksApi.getDisciplines()
 
-    override suspend fun deleteAccessToken(token: String): AccessToken? =
+    override suspend fun deleteAccessToken(token: String): AccessToken =
         orioksApi.deleteAccessToken(token)
 
-    override suspend fun getAllActiveTokens(): List<Security>? = orioksApi.getAllActiveTokens()
+    override suspend fun getAllActiveTokens(): List<Security> = orioksApi.getAllActiveTokens()
 
-    override suspend fun getGroups(): List<String>? = mietApi.getGroups()?.toList()
+    override suspend fun getGroups(): List<String> = mietApi.getGroups().toList()
 
-    override suspend fun getSchedule(group: String): Schedule? = mietApi.getScheduler(group)
+    override suspend fun getSchedule(group: String): Schedule = mietApi.getScheduler(group)
 
-    override suspend fun getNews(): NewsResponse? = newsApi.getNews()
+    override suspend fun getNews(): NewsResponse = newsApi.getNews()
 }
 

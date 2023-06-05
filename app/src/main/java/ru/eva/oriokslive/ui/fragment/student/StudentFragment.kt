@@ -3,13 +3,13 @@ package ru.eva.oriokslive.ui.fragment.student
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.FragmentStudentBinding
+import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.activity.registration.RegistrationActivity
 import ru.eva.oriokslive.ui.base.BaseFragment
+import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
 class StudentFragment : BaseFragment<FragmentStudentBinding>() {
@@ -35,8 +35,9 @@ class StudentFragment : BaseFragment<FragmentStudentBinding>() {
                 tvYear.text = it.year
             }
         }
-        viewModel.errorMessage.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), R.string.no_connection, Toast.LENGTH_LONG).show()
+        viewModel.onError.observe(viewLifecycleOwner) {
+            if (it is NetworkException) viewModel.getLocalStudent()
+            requireContext().showToast(it)
         }
 
         viewModel.finishActivity.observe(viewLifecycleOwner) {

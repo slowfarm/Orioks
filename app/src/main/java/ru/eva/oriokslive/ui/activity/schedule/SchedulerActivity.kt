@@ -13,6 +13,7 @@ import ru.eva.oriokslive.ui.adapter.SchedulerPagerAdapter
 import ru.eva.oriokslive.ui.adapter.SchedulerPagerAdapter.Companion.titles
 import ru.eva.oriokslive.ui.base.BaseActivity
 import ru.eva.oriokslive.ui.fragment.groups.GroupsFragment.Companion.EXTRA_GROUP
+import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
 class SchedulerActivity : BaseActivity<ActivityScheduleBinding>() {
@@ -37,9 +38,7 @@ class SchedulerActivity : BaseActivity<ActivityScheduleBinding>() {
                 tab.setText(titles[position])
             }.attach()
         }
-        viewModel.onError.observe(this) {
-            Toast.makeText(this, R.string.no_connection, Toast.LENGTH_LONG).show()
-        }
+        viewModel.onError.observe(this) { showToast(it) }
         viewModel.viewPagerPosition.observe(this) {
             binding.viewPager.currentItem = it
         }

@@ -28,10 +28,7 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:tabIndicatorColor="@color/colorPrimaryDark"
-            app:tabMode="scrollable"
-            app:tabTextColor="#FFFFFF" />
+            app:tabMode="scrollable" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"

@@ -8,6 +8,8 @@ import ru.eva.oriokslive.network.entity.schedule.Data
 interface DomainRepository {
     fun setAccessToken(value: String)
     fun getAccessToken(): String?
+    fun setDefaultTheme(value: Int)
+    fun getDefaultTheme(): Int
     suspend fun setStudent(student: Student)
     suspend fun getStudent(): Student?
     suspend fun setEvents(events: List<Event>)
