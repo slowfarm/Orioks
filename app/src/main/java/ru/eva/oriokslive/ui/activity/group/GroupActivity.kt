@@ -2,6 +2,7 @@ package ru.eva.oriokslive.ui.activity.group
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,5 +45,10 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>() {
         viewModel.onError.observe(this) {
             Toast.makeText(this, R.string.no_connection, Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        onBackPressed()
+        return true
     }
 }
