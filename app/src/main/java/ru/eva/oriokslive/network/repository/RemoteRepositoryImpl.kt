@@ -1,6 +1,7 @@
 package ru.eva.oriokslive.network.repository
 
 import okhttp3.Credentials
+import ru.eva.oriokslive.network.CookieApi
 import ru.eva.oriokslive.network.MietApi
 import ru.eva.oriokslive.network.NewsApi
 import ru.eva.oriokslive.network.OrioksApi
@@ -19,6 +20,7 @@ class RemoteRepositoryImpl @Inject constructor(
     private val orioksApi: OrioksApi,
     private val mietApi: MietApi,
     private val newsApi: NewsApi,
+    private val cookieApi: CookieApi,
 ) : RemoteRepository {
     override suspend fun getAccessToken(login: String, password: String): AccessToken =
         orioksApi.getToken(Credentials.basic(login, password))
@@ -39,5 +41,7 @@ class RemoteRepositoryImpl @Inject constructor(
     override suspend fun getSchedule(group: String): Schedule = mietApi.getScheduler(group)
 
     override suspend fun getNews(): NewsResponse = newsApi.getNews()
+
+    override suspend fun getCookie(): String = cookieApi.getCookie()
 }
 

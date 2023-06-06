@@ -1,6 +1,5 @@
 package ru.eva.oriokslive.utils
 
-import android.content.res.Resources
 import ru.eva.oriokslive.App
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.network.entity.news.NewsResponse

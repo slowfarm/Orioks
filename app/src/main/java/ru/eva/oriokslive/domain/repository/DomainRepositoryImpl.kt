@@ -28,6 +28,11 @@ class DomainRepositoryImpl @Inject constructor(
     }
 
     override fun getAccessToken(): String? = preferences.getString(ACCESS_TOKEN, null)
+    override fun setCookie(value: String) {
+        preferences.edit().putString(COOKIE, value).commit()
+    }
+
+    override fun getCookie(): String? = preferences.getString(COOKIE, null)
 
     override fun setDefaultTheme(value: Int) {
         preferences.edit().putInt(THEME, value).apply()
@@ -93,5 +98,6 @@ class DomainRepositoryImpl @Inject constructor(
     companion object {
         private const val ACCESS_TOKEN = "ACCESS_TOKEN"
         private const val THEME = "THEME"
+        private const val COOKIE = "COOKIE"
     }
 }

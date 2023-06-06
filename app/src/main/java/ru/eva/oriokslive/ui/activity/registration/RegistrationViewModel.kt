@@ -36,9 +36,19 @@ class RegistrationViewModel @Inject constructor(
             }
         }
     }
+
     fun deleteToken() {
         viewModelScope.launch(Dispatchers.IO) {
             domainRepository.clearAll()
+        }
+    }
+
+    fun getCookie() {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            remoteRepository.getCookie().let {
+                val cookie = it.substringAfter("\"").substringBefore(";")
+                domainRepository.setCookie(cookie)
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import ru.eva.oriokslive.network.CookieApi
 import ru.eva.oriokslive.network.MietApi
 import ru.eva.oriokslive.network.NewsApi
 import ru.eva.oriokslive.network.OrioksApi
@@ -24,4 +25,8 @@ object RetrofitModule {
     @Provides
     fun provideNewsApi(retrofitProvider: RetrofitProvider): NewsApi =
         retrofitProvider.provideNewsApi()
+
+    @Provides
+    fun provideCookieApi(retrofitProvider: RetrofitProvider): CookieApi =
+        retrofitProvider.provideCookieApi()
 }

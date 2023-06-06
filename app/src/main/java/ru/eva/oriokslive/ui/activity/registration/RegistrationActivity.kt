@@ -34,6 +34,7 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding>() {
         }
 
         viewModel.checkAccessToken()
+        viewModel.getCookie()
         viewModel.startMainActivity.observe(this) {
             needShowSplash.set(false)
             startMainActivity()
