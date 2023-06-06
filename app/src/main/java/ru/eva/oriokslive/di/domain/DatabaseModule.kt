@@ -9,8 +9,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.eva.oriokslive.domain.GeneralDatabase
+import ru.eva.oriokslive.domain.dao.DebtsDao
 import ru.eva.oriokslive.domain.dao.DisciplinesDao
 import ru.eva.oriokslive.domain.dao.EventDao
+import ru.eva.oriokslive.domain.dao.ResitDao
 import ru.eva.oriokslive.domain.dao.ScheduleDao
 import ru.eva.oriokslive.domain.dao.StudentDao
 import ru.eva.oriokslive.domain.provider.DatabaseProvider
@@ -33,6 +35,12 @@ object DatabaseModule {
 
     @Provides
     fun provideEventDao(database: GeneralDatabase): EventDao = database.getEventDao()
+
+    @Provides
+    fun provideDebtDao(database: GeneralDatabase): DebtsDao = database.getDebtDao()
+
+    @Provides
+    fun provideResitDao(database: GeneralDatabase): ResitDao = database.getResitDao()
 
     @Provides
     fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences =

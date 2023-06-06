@@ -10,6 +10,10 @@
             android:icon="@drawable/ic_menu_home"
             android:title="@string/main" />
         <item
+            android:id="@+id/nav_debts"
+            android:icon="@drawable/ic_menu_debts"
+            android:title="@string/debts" />
+        <item
             android:id="@+id/nav_student"
             android:icon="@drawable/ic_menu_person"
             android:title="@string/about_student" />

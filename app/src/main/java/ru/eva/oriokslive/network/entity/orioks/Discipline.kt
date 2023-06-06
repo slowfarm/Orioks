@@ -8,7 +8,6 @@ import ru.eva.oriokslive.domain.Common
 
 @Entity(tableName = Common.TABLE_DISCIPLINE)
 data class Discipline(
-    @SerializedName("id")
     @ColumnInfo(name = "id")
     @PrimaryKey
     val id: Int,
@@ -18,7 +17,6 @@ data class Discipline(
     @SerializedName("current_grade")
     @ColumnInfo(name = "currentGrade")
     val currentGrade: Double,
-    @SerializedName("department")
     @ColumnInfo(name = "department")
     val department: String,
     @SerializedName("exam_date")
@@ -30,10 +28,8 @@ data class Discipline(
     @SerializedName("max_grade")
     @ColumnInfo(name = "maxGrade")
     val maxGrade: Double,
-    @SerializedName("name")
     @ColumnInfo("name")
     val name: String,
-    @SerializedName("teachers")
     @ColumnInfo("teachers")
     val teachers: List<String>,
 )

@@ -11,6 +11,12 @@
         tools:layout="@layout/fragment_main" />
 
     <fragment
+        android:id="@+id/nav_debts"
+        android:name="ru.eva.oriokslive.ui.fragment.debt.DebtFragment"
+        android:label="@string/debts"
+        tools:layout="@layout/fragment_debt" />
+
+    <fragment
         android:id="@+id/nav_student"
         android:name="ru.eva.oriokslive.ui.fragment.student.StudentFragment"
         android:label="@string/about_student"

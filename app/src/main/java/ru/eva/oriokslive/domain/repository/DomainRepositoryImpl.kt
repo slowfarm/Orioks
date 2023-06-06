@@ -3,12 +3,16 @@ package ru.eva.oriokslive.domain.repository
 import android.app.UiModeManager.MODE_NIGHT_NO
 import android.content.SharedPreferences
 import androidx.annotation.WorkerThread
+import ru.eva.oriokslive.domain.dao.DebtsDao
 import ru.eva.oriokslive.domain.dao.DisciplinesDao
 import ru.eva.oriokslive.domain.dao.EventDao
+import ru.eva.oriokslive.domain.dao.ResitDao
 import ru.eva.oriokslive.domain.dao.ScheduleDao
 import ru.eva.oriokslive.domain.dao.StudentDao
+import ru.eva.oriokslive.network.entity.orioks.Debt
 import ru.eva.oriokslive.network.entity.orioks.Discipline
 import ru.eva.oriokslive.network.entity.orioks.Event
+import ru.eva.oriokslive.network.entity.orioks.Resit
 import ru.eva.oriokslive.network.entity.orioks.Student
 import ru.eva.oriokslive.network.entity.schedule.Data
 import javax.inject.Inject
@@ -21,6 +25,8 @@ class DomainRepositoryImpl @Inject constructor(
     private val disciplinesDao: DisciplinesDao,
     private val scheduleDao: ScheduleDao,
     private val eventDao: EventDao,
+    private val debtsDao: DebtsDao,
+    private val resitDao: ResitDao,
 ) : DomainRepository {
 
     override fun setAccessToken(value: String) {
@@ -67,6 +73,25 @@ class DomainRepositoryImpl @Inject constructor(
 
     @WorkerThread
     override suspend fun getDisciplines(): List<Discipline>? = disciplinesDao.getDisciplines()
+
+    @WorkerThread
+    override suspend fun setDebts(debts: List<Debt>) {
+        debtsDao.insert(debts)
+    }
+
+    @WorkerThread
+    override suspend fun getDebts(): List<Debt>? = debtsDao.getDebts()
+
+    @WorkerThread
+    override suspend fun getDebtsById(id: Int): Debt = debtsDao.getDebtsById(id)
+
+    @WorkerThread
+    override fun setResits(resits: List<Resit>) {
+        resitDao.insert(resits)
+    }
+
+    @WorkerThread
+    override fun getResitsById(id: Int): List<Resit>? = resitDao.getResitById(id)
 
     @WorkerThread
     override suspend fun clearAll() {

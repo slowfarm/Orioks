@@ -3,8 +3,10 @@ package ru.eva.oriokslive.utils
 import ru.eva.oriokslive.App
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.network.entity.news.NewsResponse
+import ru.eva.oriokslive.network.entity.orioks.Debt
 import ru.eva.oriokslive.network.entity.orioks.Discipline
 import ru.eva.oriokslive.network.entity.orioks.Event
+import ru.eva.oriokslive.network.entity.orioks.Resit
 import ru.eva.oriokslive.network.entity.orioks.Security
 import ru.eva.oriokslive.network.entity.orioks.Student
 import ru.eva.oriokslive.network.entity.schedule.Data
@@ -12,6 +14,7 @@ import ru.eva.oriokslive.ui.entity.DisciplineItem
 import ru.eva.oriokslive.ui.entity.EventItem
 import ru.eva.oriokslive.ui.entity.Header
 import ru.eva.oriokslive.ui.entity.NewsItem
+import ru.eva.oriokslive.ui.entity.ResitItem
 import ru.eva.oriokslive.ui.entity.ScheduleItem
 import ru.eva.oriokslive.ui.entity.SecurityItem
 
@@ -53,6 +56,15 @@ fun mapEvents(events: List<Event>) = events.map {
     )
 }
 
+fun mapResits(resits: List<Resit>) = resits.map {
+    ResitItem(
+        id = it.id,
+        room = it.classroom,
+        datetime = resitDateParser(it.datetime),
+        resitNumber = it.resitNumber,
+    )
+}
+
 fun mapDisciplines(disciplines: List<Discipline>) = disciplines.map {
     val progress = (it.currentGrade / it.maxGrade * 100).toInt()
     DisciplineItem(
@@ -61,6 +73,23 @@ fun mapDisciplines(disciplines: List<Discipline>) = disciplines.map {
         name = it.name,
         grade = if (it.currentGrade == -1.0) "-" else it.currentGrade.toString(),
         maxGrade = it.maxGrade.toString(),
+        color = when {
+            progress < 50 -> R.color.progress50
+            progress < 70 -> R.color.progress70
+            progress < 85 -> R.color.progress85
+            else -> R.color.progress100
+        },
+    )
+}
+
+fun mapDebts(disciplines: List<Debt>) = disciplines.map {
+    val progress = (it.currentScore / it.maxScore * 100).toInt()
+    DisciplineItem(
+        id = it.id,
+        progress = progress,
+        name = it.name,
+        grade = if (it.currentScore == -1.0) "-" else it.currentScore.toString(),
+        maxGrade = it.maxScore.toString(),
         color = when {
             progress < 50 -> R.color.progress50
             progress < 70 -> R.color.progress70

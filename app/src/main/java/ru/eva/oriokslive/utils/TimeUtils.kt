@@ -86,6 +86,15 @@ fun dateParser(inputDate: String): String {
     }
 }
 
+fun resitDateParser(inputDate: String): String {
+    val oldPattern = "dd-MM-yyyy'T'HH:mm"
+    val newPattern = "HH:mm dd.MM.yyyy"
+    val sdf = SimpleDateFormat(oldPattern, Locale.getDefault())
+    val date: Date = sdf.parse(inputDate) ?: Date()
+    sdf.applyPattern(newPattern)
+    return sdf.format(date)
+}
+
 fun scheduleDateParser(inputDate: String): String {
     val oldPattern = "yyyy-MM-dd'T'HH:mm"
     val newPattern = "HH:mm"

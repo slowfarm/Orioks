@@ -5,13 +5,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import ru.eva.oriokslive.domain.Common
-import ru.eva.oriokslive.network.entity.orioks.Event
+import ru.eva.oriokslive.network.entity.orioks.Resit
 
 @Dao
-interface EventDao {
+interface ResitDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(events: List<Event>)
+    fun insert(resits: List<Resit>)
 
-    @Query("SELECT * FROM ${Common.TABLE_EVENT} WHERE id =:id")
-    fun getEventsById(id: Int): List<Event>?
+    @Query("SELECT * FROM ${Common.TABLE_RESIT} WHERE id =:id")
+    fun getResitById(id: Int): List<Resit>?
 }

@@ -32,6 +32,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         AppBarConfiguration(
             setOf(
                 R.id.nav_main,
+                R.id.nav_debts,
                 R.id.nav_student,
                 R.id.nav_schedule,
                 R.id.nav_news,
