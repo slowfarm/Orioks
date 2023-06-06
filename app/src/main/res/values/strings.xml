@@ -58,9 +58,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="last_activity">Последняя активность</string>
-    <string name="device">Устройство</string>
-    <string name="app">Проиложение</string>
+    <string name="last_activity">Последняя активность: %s</string>
+    <string name="device">Устройство: %s</string>
+    <string name="app">Проиложение: %s</string>
     <string name="security">Безопасность</string>
     <string name="date_not_assigned">Не назначена</string>
     <string name="teacher_not_assigned">Не назначен</string>

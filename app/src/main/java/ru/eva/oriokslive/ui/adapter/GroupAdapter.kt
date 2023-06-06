@@ -48,7 +48,7 @@ class GroupViewHolder(private val binding: ListItemGroupBinding) :
     ) {
         binderHelper.bind(binding.swipeRevealLayout, item)
         binding.tvGroup.text = item
-        binding.frontLayout.setOnClickListener { itemClickListener.invoke(item) }
+        binding.clFront.setOnClickListener { itemClickListener.invoke(item) }
         binding.add.setOnClickListener {
             addListener.invoke(item)
             binding.swipeRevealLayout.close(true)

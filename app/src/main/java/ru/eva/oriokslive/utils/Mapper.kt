@@ -93,30 +93,20 @@ fun mapWeek(schedule: List<Data>?): List<ScheduleItem> {
 fun mapTokens(tokens: List<Security>): MutableList<SecurityItem> {
     val result = mutableListOf<SecurityItem>()
     for (security in tokens) {
-        when {
-            security.userAgent.split("\\s").size > 1 -> {
-                result.add(
-                    SecurityItem(
-                        security.token,
-                        security.userAgent.split("\\s")[0],
-                        security.userAgent.replace("\\s", " "),
-                        true,
-                        dateParser(security.lastUsed)
-                    )
-                )
-            }
-            else -> {
-                result.add(
-                    SecurityItem(
-                        security.token,
-                        security.userAgent,
-                        security.userAgent,
-                        false,
-                        dateParser(security.lastUsed)
-                    )
-                )
-            }
-        }
+        val containDevice = security.userAgent.split(" ").size > 1
+        val application =
+            if (containDevice) security.userAgent.substringBefore(" ") else security.userAgent
+        val device =
+            if (containDevice) security.userAgent.substringAfter(" ") else security.userAgent
+        result.add(
+            SecurityItem(
+                security.token,
+                App.get().getString(R.string.app, application),
+                App.get().getString(R.string.device, device),
+                containDevice,
+                App.get().getString(R.string.last_activity, dateParser(security.lastUsed))
+            )
+        )
     }
     return result
 }
