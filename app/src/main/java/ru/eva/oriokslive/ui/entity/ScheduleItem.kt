@@ -8,9 +8,9 @@ import ru.eva.oriokslive.network.entity.schedule.Time
 data class ScheduleItem(
     val day: Int? = null,
     val dayNumber: Int? = null,
-    val time: Time? = null,
-    val clazz: Clazz? = null,
-    val group: Group? = null,
-    val room: Room? = null,
+    val name: String? = null,
+    val room: String? = null,
+    val teacher: String? = null,
+    val time: String? = null,
     val dayOfWeek: Int,
 )

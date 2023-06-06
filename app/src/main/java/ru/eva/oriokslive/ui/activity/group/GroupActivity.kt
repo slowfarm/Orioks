@@ -2,9 +2,10 @@ package ru.eva.oriokslive.ui.activity.group
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eva.oriokslive.R
@@ -12,6 +13,7 @@ import ru.eva.oriokslive.databinding.ActivityGroupBinding
 import ru.eva.oriokslive.ui.adapter.GroupAddAdapter
 import ru.eva.oriokslive.ui.base.BaseActivity
 import ru.eva.oriokslive.ui.fragment.groups.GroupsFragment.Companion.EXTRA_GROUP
+import ru.eva.oriokslive.utils.setOnQueryChangeListener
 import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
@@ -42,7 +44,18 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>() {
         viewModel.onError.observe(this) { showToast(it) }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.group_menu, menu)
+        val searchView = menu?.findItem(R.id.searchView)?.actionView as? SearchView
+        searchView?.setOnQueryChangeListener { query ->
+            viewModel.groups.value?.filter { it.lowercase().contains(query.lowercase()) }
+                ?.let { adapter.addItems(it) }
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         onBackPressed()
         return true
     }

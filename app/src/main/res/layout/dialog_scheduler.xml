@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTeacher" />
 
     <TextView
-        android:id="@+id/tvDate"
+        android:id="@+id/tvTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -78,10 +78,10 @@
         android:text="@string/audience"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTime" />
 
     <TextView
-        android:id="@+id/tv_room"
+        android:id="@+id/tvRoom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -101,5 +101,5 @@
         android:text="@android:string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvName"
-        app:layout_constraintTop_toBottomOf="@+id/tv_room" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRoom" />
 </androidx.constraintlayout.widget.ConstraintLayout>

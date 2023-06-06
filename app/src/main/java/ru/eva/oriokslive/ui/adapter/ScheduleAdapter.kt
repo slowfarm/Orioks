@@ -48,11 +48,10 @@ class ScheduleSeparatorViewHolder(private val binding: ListItemScheduleSeparator
 class ScheduleViewHolder(private val binding: ListItemScheduleBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(item: ScheduleItem, listener: (ScheduleItem) -> Unit) {
-        binding.tvName.text = item.clazz?.name
-        binding.tvRoom.text = item.room?.name
-        binding.tvTeacher.text = item.clazz?.teacher
-        binding.timeStart.text = item.time?.timeFrom
-        binding.timeEnd.text = item.time?.timeTo
+        binding.tvName.text = item.name
+        binding.tvTeacher.text = item.teacher
+        binding.tvTime.text = item.time
+        binding.tvRoom.text = item.room
         binding.root.setOnClickListener { listener.invoke(item) }
     }
 }

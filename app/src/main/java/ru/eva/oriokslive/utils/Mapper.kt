@@ -135,13 +135,14 @@ private fun mapSchedule(items: List<Data>?) = items?.map {
     ScheduleItem(
         day = it.day,
         dayNumber = it.dayNumber,
-        time = it.time.copy(
-            timeFrom = scheduleDateParser(it.time.timeFrom),
-            timeTo = scheduleDateParser(it.time.timeTo)
+        name = it.clazz.name,
+        room = App.get().getString(R.string.room_name, it.room.name),
+        teacher = App.get().getString(R.string.teacher_name, it.clazz.teacher),
+        time = App.get().getString(
+            R.string.date_range,
+            scheduleDateParser(it.time.timeFrom),
+            scheduleDateParser(it.time.timeTo)
         ),
-        clazz = it.clazz,
-        group = it.group,
-        room = it.room,
         dayOfWeek = getDayOfWeek(it.day),
     )
 }?.toMutableList()

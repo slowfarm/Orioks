@@ -10,7 +10,7 @@
     app:mode="same_level">
 
     <FrameLayout
-        android:id="@+id/fl_delete"
+        android:id="@+id/flDelete"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="#ffcc0000">
@@ -69,7 +69,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <TextView
-            android:id="@+id/tv_application"
+            android:id="@+id/tvApplication"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -101,12 +101,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_device"
+                android:id="@+id/tvDevice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                app:layout_constraintEnd_toEndOf="@+id/tvDate"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
                 app:layout_constraintTop_toTopOf="@+id/textView12"
                 tools:text="Android 5.1" />

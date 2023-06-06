@@ -80,4 +80,8 @@
     <string name="hours_ago">%d часа(ов) назад</string>
     <string name="day_ago">%d день назад</string>
     <string name="days_ago">%d дня(ей) назад</string>
+    <string name="search">Посик</string>
+
+    <string name="teacher_name">Преподаватель: %s</string>
+    <string name="room_name">Аудитория: %s</string>
 </resources>
