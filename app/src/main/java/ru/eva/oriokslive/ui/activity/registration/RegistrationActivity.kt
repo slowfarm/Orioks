@@ -38,6 +38,9 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding>() {
             needShowSplash.set(false)
             startMainActivity()
         }
+        viewModel.noToken.observe(this) {
+            needShowSplash.set(false)
+        }
         viewModel.onError.observe(this) {
             needShowSplash.set(false)
             when (it) {

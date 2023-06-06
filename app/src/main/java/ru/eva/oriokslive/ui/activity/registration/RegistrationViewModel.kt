@@ -17,13 +17,14 @@ class RegistrationViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val startMainActivity = MutableLiveData<Unit>()
+    val noToken = MutableLiveData<Unit>()
 
     fun checkAccessToken() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             domainRepository.getAccessToken()?.let {
                 domainRepository.setStudent(remoteRepository.getStudent())
                 startMainActivity.postValue(Unit)
-            }
+            } ?: noToken.postValue(Unit)
         }
     }
 

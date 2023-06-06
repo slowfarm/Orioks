@@ -19,37 +19,55 @@ import ru.eva.oriokslive.network.NewsApi
 import ru.eva.oriokslive.network.OrioksApi
 import ru.eva.oriokslive.network.utils.AuthInterceptor
 import ru.eva.oriokslive.network.utils.CheckNetworkInterceptor
-import ru.eva.oriokslive.network.utils.MietInterceptor
+import java.net.CookieHandler
+import java.net.CookieManager
+import java.net.CookiePolicy
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class RetrofitProviderImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
-    private val domainRepository: DomainRepository
+    @ApplicationContext context: Context,
+    domainRepository: DomainRepository
 ) : RetrofitProvider {
 
-    private val client = OkHttpClient.Builder()
-        .addNetworkInterceptor(HttpLoggingInterceptor().apply { level = if (DEBUG) BODY else NONE })
-        .addInterceptor(CheckNetworkInterceptor(context))
+    private val logging = HttpLoggingInterceptor().apply { level = if (DEBUG) BODY else NONE }
+    private val checkNetworkInterceptor = CheckNetworkInterceptor(context)
+
+    private val orioksClient = OkHttpClient.Builder()
+        .addNetworkInterceptor(logging)
+        .addInterceptor(checkNetworkInterceptor)
+        .addInterceptor(AuthInterceptor(domainRepository))
+        .build()
+
+    private val cookieManager: CookieManager = CookieManager().apply {
+        setCookiePolicy(CookiePolicy.ACCEPT_ALL)
+        CookieHandler.setDefault(this)
+    }
+
+    private val mietClient = OkHttpClient.Builder()
+        .addNetworkInterceptor(logging)
+        .addInterceptor(checkNetworkInterceptor)
+        //.addInterceptor(MietInterceptor(cookieManager))
+        .build()
 
     override fun provideOrioksApi(): OrioksApi = Retrofit.Builder()
         .baseUrl("https://orioks.miet.ru/")
-        .client(client.addInterceptor(AuthInterceptor(domainRepository)).build())
+        .client(orioksClient)
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
         .build()
         .create(OrioksApi::class.java)
 
     override fun provideMietApi(): MietApi = Retrofit.Builder()
         .baseUrl("https:/miet.ru/")
-        .client(client.addInterceptor(MietInterceptor()).build())
+        .client(mietClient)
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         .build()
         .create(MietApi::class.java)
 
     override fun provideNewsApi(): NewsApi = Retrofit.Builder()
         .baseUrl("https:/miet.ru/")
-        .client(client.addInterceptor(MietInterceptor()).build())
+        .client(mietClient)
         .addConverterFactory(SimpleXmlConverterFactory.createNonStrict(Persister(AnnotationStrategy())))
         .build()
         .create(NewsApi::class.java)
