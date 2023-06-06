@@ -14,15 +14,15 @@ class DisciplineDialog(private val context: Context, private val discipline: Dis
         DialogEventsBinding::inflate
 
     override fun setupUI() {
-        binding.tvForm.text = discipline.controlForm
-        binding.tvDepartment.text = discipline.department
+        binding.tvForm.text = context.getString(R.string.form, discipline.controlForm)
+        binding.tvDepartment.text = context.getString(R.string.department, discipline.department)
         binding.tvDate.text = if (discipline.examDate != "") {
-            discipline.examDate
+            context.getString(R.string.exam_date, discipline.examDate)
         } else {
             context.getString(R.string.date_not_assigned)
         }
         binding.tvTeacher.text = if (discipline.teachers.isNotEmpty()) {
-            discipline.teachers.joinToString(",")
+            context.getString(R.string.teacher,  discipline.teachers.joinToString(","))
         } else {
             context.getString(R.string.teacher_not_assigned)
         }

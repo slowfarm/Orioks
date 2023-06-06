@@ -6,92 +6,50 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/form"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </TextView>
-
-    <TextView
         android:id="@+id/tvForm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toTopOf="@+id/textView17"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvTeacher"
+        app:layout_constraintStart_toStartOf="@+id/tvTeacher"
+        app:layout_constraintTop_toBottomOf="@+id/tvTeacher"
         tools:text="экзамен">
 
     </TextView>
 
     <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/department"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/tvForm" />
-
-    <TextView
         android:id="@+id/tvDepartment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_weight="1"
-        app:layout_constraintEnd_toEndOf="@+id/tvForm"
-        app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toTopOf="@+id/textView18"
-        tools:text="ИПОВС" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/exam_date"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/tvDepartment" />
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="@+id/tvTeacher"
+        app:layout_constraintStart_toStartOf="@+id/tvTeacher"
+        app:layout_constraintTop_toBottomOf="@+id/tvForm"
+        tools:text="ИПОВС" />
 
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_weight="1"
-        app:layout_constraintEnd_toEndOf="@+id/tvForm"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toTopOf="@+id/textView19"
-        tools:text="31.12.2000" />
-
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/teacher"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="@+id/tvTeacher"
+        app:layout_constraintStart_toStartOf="@+id/tvTeacher"
+        app:layout_constraintTop_toBottomOf="@+id/tvDepartment"
+        tools:text="31.12.2000" />
 
     <TextView
         android:id="@+id/tvTeacher"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:layout_weight="1"
-        app:layout_constraintEnd_toEndOf="@+id/tvForm"
-        app:layout_constraintStart_toEndOf="@+id/textView20"
-        app:layout_constraintTop_toTopOf="@+id/textView20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Имя" />
 
     <Button
@@ -103,6 +61,6 @@
         android:layout_marginBottom="16dp"
         android:text="@android:string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tvForm"
-        app:layout_constraintTop_toBottomOf="@+id/tvTeacher" />
+        app:layout_constraintEnd_toEndOf="@+id/tvTeacher"
+        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 </androidx.constraintlayout.widget.ConstraintLayout>

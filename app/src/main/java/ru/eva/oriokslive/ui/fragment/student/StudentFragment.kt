@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.FragmentStudentBinding
 import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.activity.registration.RegistrationActivity
@@ -24,15 +25,15 @@ class StudentFragment : BaseFragment<FragmentStudentBinding>() {
         viewModel.getStudent()
         viewModel.student.observe(viewLifecycleOwner) {
             with(binding) {
-                tvName.text = it.fullName
-                tvGroup.text = it.group
-                tvDepartment.text = it.department
-                tvCourse.text = it.course.toString()
-                tvId.text = it.recordBookId
-                tvSemester.text = it.semester.toString()
-                tvDirection.text = it.studyDirection
-                tvProfile.text = it.studyProfile
-                tvYear.text = it.year
+                tvName.text = getString(R.string.name, it.fullName)
+                tvGroup.text = getString(R.string.group, it.group)
+                tvDepartment.text = getString(R.string.cathedra, it.department)
+                tvCourse.text = getString(R.string.course, it.course)
+                tvId.text = getString(R.string.id, it.recordBookId)
+                tvSemester.text = getString(R.string.semester, it.semester)
+                tvDirection.text = getString(R.string.direction, it.studyDirection)
+                tvProfile.text = getString(R.string.profile, it.studyProfile)
+                tvYear.text = getString(R.string.year, it.year)
             }
         }
         viewModel.onError.observe(viewLifecycleOwner) {

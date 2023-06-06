@@ -126,8 +126,8 @@ private fun mapSchedule(items: List<Data>?) = items?.map {
         day = it.day,
         dayNumber = it.dayNumber,
         name = it.clazz.name,
-        room = App.get().getString(R.string.room_name, it.room.name),
-        teacher = App.get().getString(R.string.teacher_name, it.clazz.teacher),
+        room = App.get().getString(R.string.room, it.room.name),
+        teacher = App.get().getString(R.string.teacher, it.clazz.teacher),
         time = App.get().getString(
             R.string.date_range,
             scheduleDateParser(it.time.timeFrom),
