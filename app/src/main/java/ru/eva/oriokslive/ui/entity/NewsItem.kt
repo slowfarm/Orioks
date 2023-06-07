@@ -6,4 +6,5 @@ data class NewsItem(
     val description: String,
     val imageUrl: String,
     val date: String,
+    val cookie: String?
 )

@@ -140,13 +140,14 @@ fun mapTokens(tokens: List<Security>): MutableList<SecurityItem> {
     return result
 }
 
-fun mapNews(response: NewsResponse): List<NewsItem> = response.channel.items.map {
+fun mapNews(response: NewsResponse, cookie: String?): List<NewsItem> = response.channel.items.map {
     NewsItem(
         title = it.title,
         link = it.link,
         description = it.description,
         imageUrl = it.enclosure.url,
         date = newsDateParser(it.date),
+        cookie = cookie
     )
 }
 

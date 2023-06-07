@@ -18,11 +18,11 @@ class NewsViewModel @Inject constructor(
     private val remoteRepository: RemoteRepository,
 ) : BaseViewModel() {
 
-    val news = MutableLiveData<Pair<List<NewsItem>, String?>>()
+    val news = MutableLiveData<List<NewsItem>>()
 
     fun getNews() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            news.postValue(Pair(mapNews(remoteRepository.getNews()), domainRepository.getCookie()))
+            news.postValue(mapNews(remoteRepository.getNews(), domainRepository.getCookie()))
         }
     }
 }
