@@ -16,3 +16,5 @@ fun networkAvailable(context: Context): Boolean {
         else -> false
     }
 }
+
+fun getCookie(response: String) = response.substringAfter("\"").substringBefore(";")

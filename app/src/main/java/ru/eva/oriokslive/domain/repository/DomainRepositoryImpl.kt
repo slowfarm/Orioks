@@ -3,6 +3,7 @@ package ru.eva.oriokslive.domain.repository
 import android.app.UiModeManager.MODE_NIGHT_NO
 import android.content.SharedPreferences
 import androidx.annotation.WorkerThread
+import ru.eva.oriokslive.domain.GeneralDatabase
 import ru.eva.oriokslive.domain.dao.DebtsDao
 import ru.eva.oriokslive.domain.dao.DisciplinesDao
 import ru.eva.oriokslive.domain.dao.EventDao
@@ -21,6 +22,7 @@ import javax.inject.Singleton
 @Singleton
 class DomainRepositoryImpl @Inject constructor(
     private val preferences: SharedPreferences,
+    private val generalDatabase: GeneralDatabase,
     private val studentDao: StudentDao,
     private val disciplinesDao: DisciplinesDao,
     private val scheduleDao: ScheduleDao,
@@ -96,6 +98,7 @@ class DomainRepositoryImpl @Inject constructor(
     @WorkerThread
     override suspend fun clearAll() {
         preferences.edit().clear().apply()
+        generalDatabase.clearAllTables()
     }
 
     @WorkerThread
