@@ -19,8 +19,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="colorTrack">#0A000000</color>
-    <color name="progress50">#FF7535</color>
-    <color name="progress70">#F1C40F</color>
-    <color name="progress85">#9ACB31</color>
-    <color name="progress100">#28D002</color>
+    <color name="progress50">#D32F2F</color>
+    <color name="progress70">#F57C00</color>
+    <color name="progress85">#689F38</color>
+    <color name="progress100">#388E3C</color>
 </resources>

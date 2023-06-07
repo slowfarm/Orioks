@@ -18,7 +18,8 @@
         <activity
             android:name=".ui.activity.registration.RegistrationActivity"
             android:exported="true"
-            android:theme="@style/AppFullScreenTheme">
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
