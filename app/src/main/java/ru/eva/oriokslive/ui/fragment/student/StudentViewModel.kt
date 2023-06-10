@@ -23,10 +23,9 @@ class StudentViewModel @Inject constructor(
     fun clearAll() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             domainRepository.getAccessToken()?.let {
-                remoteRepository.deleteAccessToken(it).let {
-                    domainRepository.clearAll()
-                    finishActivity.postValue(Unit)
-                }
+                remoteRepository.deleteAccessToken(it)
+                domainRepository.clearAll()
+                finishActivity.postValue(Unit)
             }
         }
     }

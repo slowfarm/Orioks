@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.FragmentSecurityBinding
-import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.activity.registration.RegistrationActivity
 import ru.eva.oriokslive.ui.adapter.SecurityFragmentAdapter
 import ru.eva.oriokslive.ui.base.BaseFragment
@@ -37,15 +36,11 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>() {
             adapter.addItems(it)
             binding.swipeRefreshLayout.isRefreshing = false
         }
-        viewModel.onError.observe(viewLifecycleOwner) {
-            when (it) {
-                is NetworkException -> requireContext().showToast(it)
-                else -> {
-                    requireContext().showToast(R.string.token_deleted)
-                    requireActivity().finishAffinity()
-                    startActivity(Intent(requireContext(), RegistrationActivity::class.java))
-                }
-            }
+        viewModel.onError.observe(viewLifecycleOwner) { requireContext().showToast(it) }
+        viewModel.finishActivity.observe(viewLifecycleOwner) {
+            requireContext().showToast(R.string.token_deleted)
+            requireActivity().finishAffinity()
+            startActivity(Intent(requireContext(), RegistrationActivity::class.java))
         }
     }
 }
