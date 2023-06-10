@@ -11,8 +11,8 @@ import ru.eva.oriokslive.ui.entity.ScheduleItem
 import ru.eva.oriokslive.utils.dayNumber
 import ru.eva.oriokslive.utils.getDayOfWeek
 import ru.eva.oriokslive.utils.getNextDayOfWeek
-import ru.eva.oriokslive.utils.mapDay
-import ru.eva.oriokslive.utils.mapWeek
+import ru.eva.oriokslive.utils.mapper.mapDay
+import ru.eva.oriokslive.utils.mapper.mapWeek
 import javax.inject.Inject
 
 @HiltViewModel

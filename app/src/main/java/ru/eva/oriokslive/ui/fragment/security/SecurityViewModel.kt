@@ -9,7 +9,7 @@ import ru.eva.oriokslive.domain.repository.DomainRepository
 import ru.eva.oriokslive.network.repository.RemoteRepository
 import ru.eva.oriokslive.ui.base.BaseViewModel
 import ru.eva.oriokslive.ui.entity.SecurityItem
-import ru.eva.oriokslive.utils.mapTokens
+import ru.eva.oriokslive.utils.mapper.mapSecurity
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,7 +25,7 @@ class SecurityViewModel @Inject constructor(
     fun getActiveTokens() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             remoteRepository.getAllActiveTokens().let {
-                items = mapTokens(it)
+                items = mapSecurity(it)
                 tokens.postValue(items)
             }
         }

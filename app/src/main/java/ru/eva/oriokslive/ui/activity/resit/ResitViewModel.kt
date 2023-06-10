@@ -10,7 +10,7 @@ import ru.eva.oriokslive.network.entity.orioks.Debt
 import ru.eva.oriokslive.network.repository.RemoteRepository
 import ru.eva.oriokslive.ui.base.BaseViewModel
 import ru.eva.oriokslive.ui.entity.ResitItem
-import ru.eva.oriokslive.utils.mapResits
+import ru.eva.oriokslive.utils.mapper.mapResits
 import javax.inject.Inject
 
 @HiltViewModel

@@ -10,7 +10,7 @@ import ru.eva.oriokslive.network.entity.orioks.Discipline
 import ru.eva.oriokslive.network.repository.RemoteRepository
 import ru.eva.oriokslive.ui.base.BaseViewModel
 import ru.eva.oriokslive.ui.entity.EventItem
-import ru.eva.oriokslive.utils.mapEvents
+import ru.eva.oriokslive.utils.mapper.mapEvents
 import javax.inject.Inject
 
 @HiltViewModel

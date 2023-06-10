@@ -9,7 +9,7 @@ import ru.eva.oriokslive.domain.repository.DomainRepository
 import ru.eva.oriokslive.network.repository.RemoteRepository
 import ru.eva.oriokslive.ui.base.BaseViewModel
 import ru.eva.oriokslive.ui.entity.DisciplineItem
-import ru.eva.oriokslive.utils.mapDebts
+import ru.eva.oriokslive.utils.mapper.mapDebts
 import javax.inject.Inject
 
 @HiltViewModel
