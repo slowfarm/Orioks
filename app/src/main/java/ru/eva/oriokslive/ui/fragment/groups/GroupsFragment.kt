@@ -1,14 +1,12 @@
 package ru.eva.oriokslive.ui.fragment.groups
 
 import android.app.Activity.RESULT_OK
-import android.app.PendingIntent
-import android.app.PendingIntent.getBroadcast
 import android.content.Intent
-import android.content.pm.ShortcutInfo
-import android.content.pm.ShortcutManager
-import android.graphics.drawable.Icon
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,10 +30,7 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
         GroupAdapter(
             { startSchedulerActivity(it) },
             { addPinnedShortcuts(it) },
-            { group, position ->
-                viewModel.removeGroup(group)
-                adapter.removeItem(position)
-            }
+            { group, position -> deleteItem(group, position)}
         )
     }
 
@@ -51,26 +46,6 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
         viewModel.onError.observe(viewLifecycleOwner) { requireContext().showToast(it) }
     }
 
-    private fun addPinnedShortcuts(group: String) {
-        val shortcutManager = requireContext().getSystemService(ShortcutManager::class.java)
-        if (shortcutManager.isRequestPinShortcutSupported) {
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                setClass(requireContext(), SchedulerActivity::class.java)
-                putExtra(EXTRA_GROUP, group)
-            }
-            val info = ShortcutInfo.Builder(requireContext(), group)
-                .setShortLabel(group.split("\\s")[0])
-                .setLongLabel(group)
-                .setIcon(Icon.createWithResource(requireContext(), R.drawable.ic_schedule))
-                .setIntent(intent)
-                .build()
-            val callbackIntent = shortcutManager.createShortcutResultIntent(info)
-            val flag = PendingIntent.FLAG_IMMUTABLE
-            val successCallback = getBroadcast(requireContext(), 0, callbackIntent, flag)
-            shortcutManager.requestPinShortcut(info, successCallback.intentSender)
-        }
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
             data?.getStringExtra(EXTRA_GROUP)?.let { viewModel.addSchedule(it) }
@@ -81,6 +56,25 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
         val intent =
             Intent(requireContext(), SchedulerActivity::class.java).putExtra(EXTRA_GROUP, group)
         startActivity(intent)
+    }
+
+    private fun addPinnedShortcuts(group: String) {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setClass(requireContext(), SchedulerActivity::class.java)
+            putExtra(EXTRA_GROUP, group)
+        }
+        val shortcut = ShortcutInfoCompat.Builder(requireContext(), group)
+            .setShortLabel(group.split("\\s")[0])
+            .setLongLabel(group)
+            .setIcon(IconCompat.createWithResource(requireContext(), R.drawable.ic_schedule))
+            .setIntent(intent)
+            .build()
+        ShortcutManagerCompat.pushDynamicShortcut(requireContext(), shortcut)
+    }
+
+    private fun deleteItem(group: String, position: Int) {
+        viewModel.removeGroup(group)
+        adapter.removeItem(position)
     }
 
     companion object {
