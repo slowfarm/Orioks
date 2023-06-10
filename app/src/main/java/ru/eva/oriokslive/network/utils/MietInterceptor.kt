@@ -10,9 +10,17 @@ class MietInterceptor(private val domainRepository: DomainRepository) : Intercep
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
-        val builder = original.newBuilder()
-            .method(original.method, original.body)
+        val builder = original.newBuilder().method(original.method, original.body)
         domainRepository.getCookie()?.let { builder.header("Cookie", it) }
-        return chain.proceed(builder.build())
+        var response = chain.proceed(builder.build())
+        response.body?.string()?.let { parseCookie(it) }?.let {
+            domainRepository.setCookie(it)
+            builder.header("Cookie", it)
+            response.close()
+            response = chain.proceed(builder.build())
+        }
+        return response
     }
+
+    private fun parseCookie(response: String) = """(?<=cookie=").*(?=;path=/)""".toRegex().find(response)?.value
 }

@@ -22,9 +22,6 @@ import ru.eva.oriokslive.network.OrioksApi
 import ru.eva.oriokslive.network.utils.AuthInterceptor
 import ru.eva.oriokslive.network.utils.CheckNetworkInterceptor
 import ru.eva.oriokslive.network.utils.MietInterceptor
-import java.net.CookieHandler
-import java.net.CookieManager
-import java.net.CookiePolicy
 import javax.inject.Inject
 import javax.inject.Singleton
 

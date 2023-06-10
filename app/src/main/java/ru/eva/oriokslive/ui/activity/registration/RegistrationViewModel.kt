@@ -8,7 +8,6 @@ import kotlinx.coroutines.launch
 import ru.eva.oriokslive.domain.repository.DomainRepository
 import ru.eva.oriokslive.network.repository.RemoteRepository
 import ru.eva.oriokslive.ui.base.BaseViewModel
-import ru.eva.oriokslive.utils.getCookie
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +22,6 @@ class RegistrationViewModel @Inject constructor(
     fun checkAccessToken() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             domainRepository.getAccessToken()?.let {
-                domainRepository.setCookie(getCookie(remoteRepository.getCookie()))
                 domainRepository.setStudent(remoteRepository.getStudent())
                 startMainActivity.postValue(Unit)
             } ?: noToken.postValue(Unit)

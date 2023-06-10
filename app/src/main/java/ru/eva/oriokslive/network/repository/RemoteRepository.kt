@@ -17,9 +17,9 @@ interface RemoteRepository {
     suspend fun getDisciplines(): List<Discipline>
     suspend fun deleteAccessToken(token: String): AccessToken
     suspend fun getAllActiveTokens(): List<Security>
-    suspend fun getGroups(): List<String>
     suspend fun getDebts(): List<Debt>
     suspend fun getResits(id: Int): List<Resit>
+    suspend fun getGroups(): List<String>
     suspend fun getSchedule(group: String): Schedule
     suspend fun getNews(): NewsResponse
     suspend fun getCookie(): String

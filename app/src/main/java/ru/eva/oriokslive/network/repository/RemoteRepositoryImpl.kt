@@ -38,10 +38,11 @@ class RemoteRepositoryImpl @Inject constructor(
 
     override suspend fun getAllActiveTokens(): List<Security> = orioksApi.getAllActiveTokens()
 
-    override suspend fun getGroups(): List<String> = mietApi.getGroups().toList()
     override suspend fun getDebts(): List<Debt> = orioksApi.getDebts()
 
     override suspend fun getResits(id: Int): List<Resit> = orioksApi.getResits(id)
+
+    override suspend fun getGroups(): List<String> = mietApi.getGroups().toList()
 
     override suspend fun getSchedule(group: String): Schedule = mietApi.getScheduler(group)
 
