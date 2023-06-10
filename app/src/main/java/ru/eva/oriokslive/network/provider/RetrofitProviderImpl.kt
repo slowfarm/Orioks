@@ -11,11 +11,9 @@ import org.simpleframework.xml.convert.AnnotationStrategy
 import org.simpleframework.xml.core.Persister
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import ru.eva.oriokslive.BuildConfig.DEBUG
 import ru.eva.oriokslive.domain.repository.DomainRepository
-import ru.eva.oriokslive.network.CookieApi
 import ru.eva.oriokslive.network.MietApi
 import ru.eva.oriokslive.network.NewsApi
 import ru.eva.oriokslive.network.OrioksApi
@@ -46,11 +44,6 @@ class RetrofitProviderImpl @Inject constructor(
         .addInterceptor(MietInterceptor(domainRepository))
         .build()
 
-    private val cookieClient = OkHttpClient.Builder()
-        .addNetworkInterceptor(logging)
-        .addInterceptor(checkNetworkInterceptor)
-        .build()
-
     override fun provideOrioksApi(): OrioksApi = Retrofit.Builder()
         .baseUrl("https://orioks.miet.ru/")
         .client(orioksClient)
@@ -71,11 +64,4 @@ class RetrofitProviderImpl @Inject constructor(
         .addConverterFactory(SimpleXmlConverterFactory.createNonStrict(Persister(AnnotationStrategy())))
         .build()
         .create(NewsApi::class.java)
-
-    override fun provideCookieApi(): CookieApi = Retrofit.Builder()
-        .baseUrl("https://miet.ru/")
-        .client(cookieClient)
-        .addConverterFactory(ScalarsConverterFactory.create())
-        .build()
-        .create(CookieApi::class.java)
 }

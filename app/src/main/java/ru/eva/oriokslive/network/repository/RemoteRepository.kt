@@ -22,5 +22,4 @@ interface RemoteRepository {
     suspend fun getGroups(): List<String>
     suspend fun getSchedule(group: String): Schedule
     suspend fun getNews(): NewsResponse
-    suspend fun getCookie(): String
 }
