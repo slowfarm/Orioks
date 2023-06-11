@@ -41,7 +41,7 @@ fun showDisciplinesUpdatedNotification(context: Context, text: String) {
         .createPendingIntent()
     val notification = NotificationCompat.Builder(context, channelId)
         .setContentIntent(pendingIntent)
-        .setContentTitle(context.getString(R.string.grade_changed))
+        .setContentTitle(context.getString(R.string.score_changed))
         .setStyle(NotificationCompat.BigTextStyle().bigText(text))
         .setSmallIcon(R.drawable.ic_menu_home)
         .build()
@@ -71,7 +71,7 @@ fun showDebtUpdatedNotification(context: Context, text: String) {
 }
 
 fun createGradeUpdateForegroundInfo(context: Context): ForegroundInfo {
-    val name = context.getString(R.string.grade_update)
+    val name = context.getString(R.string.score_update)
     val channelId = createNotificationChannelId(context, GRADE_UPDATE_CHANNEL_ID)
     val notification = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(R.drawable.ic_update)
@@ -83,7 +83,7 @@ fun createGradeUpdateForegroundInfo(context: Context): ForegroundInfo {
 }
 
 private fun createNotificationChannelId(context: Context, channelId: String): String {
-    val name = context.getString(R.string.grade_update)
+    val name = context.getString(R.string.score_update)
     val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     var channel = notificationManager.getNotificationChannel(channelId)
     if (channel == null) {

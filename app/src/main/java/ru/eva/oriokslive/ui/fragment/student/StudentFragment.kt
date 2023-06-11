@@ -27,7 +27,7 @@ class StudentFragment : BaseFragment<FragmentStudentBinding>() {
             with(binding) {
                 tvName.text = getString(R.string.name, it.fullName)
                 tvGroup.text = getString(R.string.group, it.group)
-                tvDepartment.text = getString(R.string.cathedra, it.department)
+                tvDepartment.text = getString(R.string.department, it.department)
                 tvCourse.text = getString(R.string.course, it.course)
                 tvId.text = getString(R.string.id, it.recordBookId)
                 tvSemester.text = getString(R.string.semester, it.semester)

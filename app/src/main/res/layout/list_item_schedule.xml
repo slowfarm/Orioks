@@ -13,11 +13,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_weight="1"
-        android:text="@string/subject"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_time"
-        app:layout_constraintTop_toBottomOf="@+id/tv_time" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_time"
+        tools:text="Предмет" />
 
     <TextView
         android:id="@+id/tvRoom"
@@ -25,11 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/_1100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvTeacher"
         app:layout_constraintStart_toStartOf="@+id/tvTeacher"
-        app:layout_constraintTop_toBottomOf="@+id/tvTeacher" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTeacher"
+        tools:text="1100" />
 
     <TextView
         android:id="@+id/tvTeacher"
@@ -37,10 +37,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_weight="1"
-        android:text="@string/teachers_name"
         app:layout_constraintEnd_toEndOf="@+id/tvName"
         app:layout_constraintStart_toStartOf="@+id/tvName"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvName"
+        tools:text="Имя преподавателя" />
 
     <TextView
         android:id="@+id/tv_time"

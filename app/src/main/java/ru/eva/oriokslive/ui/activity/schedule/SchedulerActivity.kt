@@ -22,13 +22,15 @@ class SchedulerActivity : BaseActivity<ActivityScheduleBinding>() {
     private val viewModel: ScheduleViewModel by viewModels()
 
     override fun setupUI() {
+        val group = intent.getStringExtra(EXTRA_GROUP) ?: ""
+        val adapter = SchedulerPagerAdapter(this, group)
+
+        title = group
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
-        val group = intent.getStringExtra(EXTRA_GROUP) ?: ""
-        val adapter = SchedulerPagerAdapter(this, group)
 
         viewModel.getSchedule(group)
         viewModel.scheduleExist.observe(this) {

@@ -26,6 +26,7 @@
         app:indicatorSize="64dp"
         app:layout_constraintBottom_toTopOf="@+id/tvUsername"
         app:layout_constraintStart_toStartOf="@+id/tvUsername"
+        app:indicatorColor="?attr/colorPrimaryVariant"
         app:trackColor="@color/colorTrack"
         app:trackThickness="6dp" />
 

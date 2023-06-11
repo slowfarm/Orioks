@@ -1,94 +1,92 @@
 <resources>
     <string name="app_name">Orioks 2.0</string>
-    <string name="main">Главная</string>
-    <string name="debts">Долги</string>
-    <string name="dark_theme">Темная тема</string>
-    <string name="events">Контрольные мероприятия</string>
-    <string name="audience">Аудитроия:</string>
-    <string name="time">Время: %s</string>
-    <string name="teacher">Преподаватель: %s</string>
-    <string name="affair">Пара: %s</string>
-    <string name="room">Аудитория: %s</string>
-    <string name="exam_date">Дата экзамена: %s</string>
-    <string name="department">Кафедра: %s</string>
-    <string name="form">Форма: %s</string>
-    <string name="teachers_name">Имя преподавателя</string>
-    <string name="_1100">1100</string>
-    <string name="subject">Предмет</string>
-    <string name="_0000">00:00</string>
-    <string name="login">Логин</string>
-    <string name="password">Пароль</string>
-    <string name="week">Неделя: %s</string>
-    <string name="_0_0">0.0</string>
-    <string name="about_student">О студенте</string>
-    <string name="schedule">Расписание</string>
-    <string name="log_in">Войти</string>
-    <string name="_5">5</string>
-    <string name="information">Информация</string>
-    <string name="name">Имя: %s</string>
-    <string name="group">Группа: %s</string>
-    <string name="cathedra">Кафедра: %s</string>
-    <string name="course">Курс: %d</string>
+
+    // Registration activity
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="wrong_credentials">Invalid username or password</string>
+
+    // Main activity
+    <string name="main">Home</string>
+    <string name="debts">Debts</string>
+    <string name="about_student">About student</string>
+    <string name="schedule">Schedule</string>
+    <string name="news">News</string>
+    <string name="security">Security</string>
+    <string name="dark_theme">Dark theme</string>
+
+    // Groups activity
+    <string name="groups_title">Groups</string>
+    <string name="shortcut_added">Shortcut added</string>
+    <string name="delete">Delete</string>
+    <string name="add">Add</string>
+
+    // Resits activity
+    <string name="resit_date">Date: %s</string>
+
+    // Student fragment
+    <string name="time">Time: %s</string>
+    <string name="teacher">Teacher: %s</string>
+    <string name="lesson">Lesson: %s</string>
+    <string name="room">Audience: %s</string>
+    <string name="exam_date">Exam date: %s</string>
+    <string name="department">Department: %s</string>
+    <string name="form">From: %s</string>
+    <string name="week">Week: %s</string>
+    <string name="name">Name: %s</string>
+    <string name="group">Group: %s</string>
+    <string name="course">Course: %d</string>
     <string name="id">ID: %s</string>
-    <string name="semester">Семестр: %d</string>
-    <string name="direction">Направление: %s</string>
-    <string name="profile">Профиль: %s</string>
-    <string name="year">Год: %s</string>
-    <string name="logout">Выйти</string>
-    <string name="refresh">Обновить</string>
+    <string name="semester">Semester: %d</string>
+    <string name="direction">Direction: %s</string>
+    <string name="profile">Profile: %s</string>
+    <string name="year">Year: %s</string>
+    <string name="logout">Log out</string>
 
-    <string name="registration_activity_wrong_credentials">Неверный логин либо пароль</string>
+    // Security fragment
+    <string name="token_deleted">Token cancelled</string>
+    <string name="last_activity">Last activity: %s</string>
+    <string name="device">Device: %s</string>
+    <string name="app">Application: %s</string>
+    <string name="recently">Recently</string>
+    <string name="hour_ago">%d hour ago</string>
+    <string name="hours_ago">%d hour(s) ago</string>
+    <string name="day_ago">%d day ago</string>
+    <string name="days_ago">%d day(s) ago</string>
 
-    <string name="today">Сегодня</string>
-    <string name="tomorrow">Завтра</string>
-    <string name="second_delimiter">2 Знаменатель</string>
-    <string name="first_numerator">1 Числитель</string>
-    <string name="first_delimiter">1 Знаменатель</string>
-    <string name="second_numerator">2 Числитель</string>
-
-    <string name="no_connection">Отсутствует интернет соединение</string>
-    <string name="token_deleted">Токен аннулирован</string>
-
-    <string name="delete">Удалить</string>
-    <string name="add">Добавить</string>
-    <string name="news">Новости</string>
-    <string name="groups">Группы</string>
-    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="last_activity">Последняя активность: %s</string>
-    <string name="device">Устройство: %s</string>
-    <string name="app">Проиложение: %s</string>
-    <string name="security">Безопасность</string>
-    <string name="date_not_assigned">Дата экзамена: не назначена</string>
-    <string name="teacher_not_assigned">Не назначен</string>
+    // Schedule
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="second_delimiter">2 Denominator</string>
+    <string name="first_numerator">1 Numerator</string>
+    <string name="first_delimiter">1 Denominator</string>
+    <string name="second_numerator">2 Numerator</string>
     <string name="date_range">%s - %s</string>
+    <string name="no_classes">No classes</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
 
-    <string name="no_classes">Нет занятий</string>
-    <string name="monday">Понедельник</string>
-    <string name="tuesday">Вторник</string>
-    <string name="wednesday">Среда</string>
-    <string name="thursday">Четверг</string>
-    <string name="friday">Пятница</string>
-    <string name="saturday">Суббота</string>
-    <string name="sunday">Воскресенье</string>
+    // Discipline/Debt dialog
+    <string name="date_not_assigned">Exam date: not assigned</string>
+    <string name="teacher_not_assigned">Not assigned</string>
 
-    <string name="recently">Недавно</string>
-    <string name="hour_ago">%d час назад</string>
-    <string name="hours_ago">%d часа(ов) назад</string>
-    <string name="day_ago">%d день назад</string>
-    <string name="days_ago">%d дня(ей) назад</string>
-    <string name="search">Посик</string>
-    <string name="resits">Академические задолженности</string>
-    <string name="resit_date">Дата: %s</string>
-    <string name="shortcut_added">Ядрлык добавлен</string>
+    // Menu
+    <string name="information">Information</string>
+    <string name="refresh">Refresh</string>
+    <string name="search">Search</string>
 
-    <string name="grade_update">Обновление оценки</string>
-    <string name="grade_changed">Оценка изменена</string>
-    <string name="debts_changed">Долги изменены</string>
-    <string name="permission_not_granted">Разрешение на уведомление не предоставлено</string>
+    // Network exception
+    <string name="no_connection">No internet connection</string>
+
+    // Notification
+    <string name="score_update">Updating the score</string>
+    <string name="score_changed">Score changed</string>
+    <string name="debts_changed">Debts changed</string>
+    <string name="permission_not_granted">Notification permission not granted</string>
 </resources>

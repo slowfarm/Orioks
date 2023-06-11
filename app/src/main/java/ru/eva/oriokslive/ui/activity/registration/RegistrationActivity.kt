@@ -50,7 +50,7 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding>() {
                 }
                 else -> {
                     viewModel.deleteToken()
-                    showToast(R.string.registration_activity_wrong_credentials)
+                    showToast(R.string.wrong_credentials)
                 }
             }
         }

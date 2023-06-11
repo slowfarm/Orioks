@@ -34,23 +34,19 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.events.EventsActivity"
-            android:label="@string/events"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.resit.ResitActivity"
-            android:label="@string/resits"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.news.NewsActivity"
-            android:label="@string/news"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.group.GroupActivity"
-            android:label="@string/groups"
+            android:label="@string/groups_title"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.schedule.SchedulerActivity"
-            android:label="@string/schedule"
             android:theme="@style/AppTheme" />
 
         <receiver

@@ -14,7 +14,7 @@ class ScheduleDialog(private val context: Context, private val item: ScheduleIte
         DialogSchedulerBinding::inflate
 
     override fun setupUI() {
-        binding.tvName.text = context.getString(R.string.affair, item.name)
+        binding.tvName.text = context.getString(R.string.lesson, item.name)
         binding.tvTeacher.text = context.getString(R.string.teacher, item.teacher)
         binding.tvTime.text = context.getString(R.string.time, item.time)
         binding.tvRoom.text = context.getString(R.string.room, item.room)
