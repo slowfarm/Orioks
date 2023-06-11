@@ -19,7 +19,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/ic_add"
+        app:backgroundTint="?attr/colorPrimaryVariant"
         app:elevation="8dp"
         app:fabSize="normal"
+        app:tint="@color/white"
         app:useCompatPadding="true" />
 </RelativeLayout>

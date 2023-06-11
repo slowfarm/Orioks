@@ -1,7 +1,6 @@
 package ru.eva.oriokslive
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
@@ -22,11 +21,7 @@ class App : Application(), Configuration.Provider {
         app = this
         super.onCreate()
 
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
-
-        AppCompatDelegate.setDefaultNightMode(domainRepository.getDefaultTheme())
+        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
 
     override fun getWorkManagerConfiguration() =

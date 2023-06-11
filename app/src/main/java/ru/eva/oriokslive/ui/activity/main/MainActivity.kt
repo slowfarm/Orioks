@@ -62,6 +62,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             viewModel.setDefaultTheme(mode)
         }
 
+        viewModel.getDefaultTheme()
         viewModel.getStudent()
         viewModel.header.observe(this) {
             with(binding.navigationView.getHeaderView(0)) {

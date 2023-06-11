@@ -35,6 +35,10 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun getDefaultTheme() {
+        theme.postValue(domainRepository.getDefaultTheme())
+    }
+
     fun setDefaultTheme(mode: Int) {
         domainRepository.setDefaultTheme(mode)
         theme.postValue(mode)
