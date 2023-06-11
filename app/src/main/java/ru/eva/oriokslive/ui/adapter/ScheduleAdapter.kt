@@ -9,19 +9,23 @@ import ru.eva.oriokslive.ui.entity.ScheduleItem
 
 class ScheduleAdapter(
     private val schedule: List<ScheduleItem>,
-    private val listener: (ScheduleItem) -> Unit
+    private val listener: (ScheduleItem) -> Unit,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
         1 -> ScheduleSeparatorViewHolder(
             ListItemScheduleSeparatorBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
-            )
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            ),
         )
         else -> ScheduleViewHolder(
             ListItemScheduleBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
-            )
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            ),
         )
     }
 
@@ -55,4 +59,3 @@ class ScheduleViewHolder(private val binding: ListItemScheduleBinding) :
         binding.root.setOnClickListener { listener.invoke(item) }
     }
 }
-

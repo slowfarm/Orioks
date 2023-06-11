@@ -8,7 +8,6 @@ import com.chauthai.swipereveallayout.ViewBinderHelper
 import ru.eva.oriokslive.databinding.ListItemSecurityBinding
 import ru.eva.oriokslive.ui.entity.SecurityItem
 
-
 class SecurityFragmentAdapter(
     private val listener: (String, Int) -> Unit,
 ) : RecyclerView.Adapter<SecurityViewHolder>() {
@@ -16,7 +15,7 @@ class SecurityFragmentAdapter(
     private var tokens = mutableListOf<SecurityItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SecurityViewHolder(
-        ListItemSecurityBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ListItemSecurityBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
     override fun getItemCount(): Int = tokens.size

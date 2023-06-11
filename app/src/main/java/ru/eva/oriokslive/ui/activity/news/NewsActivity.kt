@@ -3,7 +3,6 @@ package ru.eva.oriokslive.ui.activity.news
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.MenuItem
-import android.webkit.CookieManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import ru.eva.oriokslive.databinding.ActivityNewsBinding

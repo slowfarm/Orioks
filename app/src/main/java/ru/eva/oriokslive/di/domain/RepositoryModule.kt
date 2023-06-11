@@ -1,7 +1,5 @@
 package ru.eva.oriokslive.di.domain
 
-import ru.eva.oriokslive.domain.repository.DomainRepository
-import ru.eva.oriokslive.domain.repository.DomainRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,6 +10,8 @@ import ru.eva.oriokslive.domain.provider.DatabaseProvider
 import ru.eva.oriokslive.domain.provider.DatabaseProviderImpl
 import ru.eva.oriokslive.domain.provider.GsonProvider
 import ru.eva.oriokslive.domain.provider.GsonProviderImpl
+import ru.eva.oriokslive.domain.repository.DomainRepository
+import ru.eva.oriokslive.domain.repository.DomainRepositoryImpl
 
 @InstallIn(
     ViewModelComponent::class,

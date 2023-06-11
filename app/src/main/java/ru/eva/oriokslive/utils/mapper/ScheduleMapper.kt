@@ -37,7 +37,7 @@ private fun mapSchedule(items: List<Data>?) = items?.map {
         time = App.get().getString(
             R.string.date_range,
             scheduleDateParser(it.time.timeFrom),
-            scheduleDateParser(it.time.timeTo)
+            scheduleDateParser(it.time.timeTo),
         ),
         dayOfWeek = getDayOfWeek(it.day),
     )

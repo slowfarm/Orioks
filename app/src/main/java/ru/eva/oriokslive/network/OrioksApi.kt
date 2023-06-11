@@ -12,7 +12,6 @@ import ru.eva.oriokslive.network.entity.orioks.Resit
 import ru.eva.oriokslive.network.entity.orioks.Security
 import ru.eva.oriokslive.network.entity.orioks.Student
 
-
 interface OrioksApi {
     @GET("/api/v1/auth")
     suspend fun getToken(@Header("Authorization") loginPass: String): AccessToken

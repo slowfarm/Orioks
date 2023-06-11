@@ -20,8 +20,8 @@ fun mapSecurity(tokens: List<Security>): MutableList<SecurityItem> {
                 App.get().getString(R.string.app, application),
                 App.get().getString(R.string.device, device),
                 containDevice,
-                App.get().getString(R.string.last_activity, dateParser(security.lastUsed))
-            )
+                App.get().getString(R.string.last_activity, dateParser(security.lastUsed)),
+            ),
         )
     }
     return result

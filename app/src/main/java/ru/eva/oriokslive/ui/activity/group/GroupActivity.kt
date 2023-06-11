@@ -55,7 +55,6 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         onBackPressed()
         return true
     }

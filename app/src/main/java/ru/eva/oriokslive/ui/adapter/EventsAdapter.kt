@@ -11,7 +11,7 @@ class EventsAdapter(private val events: List<EventItem>) :
     RecyclerView.Adapter<EventsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = EventsViewHolder(
-        ListItemEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ListItemEventBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
     override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {

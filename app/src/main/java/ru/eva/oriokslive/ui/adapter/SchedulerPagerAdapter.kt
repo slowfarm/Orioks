@@ -6,7 +6,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.ui.fragment.schedule.ScheduleFragment
 
-
 class SchedulerPagerAdapter(activity: FragmentActivity, private val group: String) :
     FragmentStateAdapter(activity) {
 

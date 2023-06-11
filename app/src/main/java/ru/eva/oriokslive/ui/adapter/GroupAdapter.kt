@@ -15,7 +15,7 @@ class GroupAdapter(
     private var groups: MutableList<String> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GroupViewHolder(
-        ListItemGroupBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ListItemGroupBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
     override fun onBindViewHolder(holder: GroupViewHolder, position: Int) {

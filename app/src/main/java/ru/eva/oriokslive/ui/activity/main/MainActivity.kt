@@ -42,8 +42,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 R.id.nav_student,
                 R.id.nav_schedule,
                 R.id.nav_news,
-                R.id.nav_security
-            ), binding.drawerLayout
+                R.id.nav_security,
+            ),
+            binding.drawerLayout,
         )
     }
 

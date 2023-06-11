@@ -22,7 +22,7 @@ class DisciplineDialog(private val context: Context, private val discipline: Dis
             context.getString(R.string.date_not_assigned)
         }
         binding.tvTeacher.text = if (discipline.teachers.isNotEmpty()) {
-            context.getString(R.string.teacher,  discipline.teachers.joinToString(","))
+            context.getString(R.string.teacher, discipline.teachers.joinToString(","))
         } else {
             context.getString(R.string.teacher_not_assigned)
         }

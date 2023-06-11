@@ -1,7 +1,5 @@
 package ru.eva.oriokslive.utils
 
-import android.content.res.Resources
-import androidx.core.content.ContextCompat
 import ru.eva.oriokslive.App
 import ru.eva.oriokslive.R
 import java.text.SimpleDateFormat

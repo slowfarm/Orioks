@@ -11,6 +11,6 @@ fun mapNews(response: NewsResponse, cookie: String?): List<NewsItem> = response.
         description = it.description,
         imageUrl = it.enclosure.url,
         date = newsDateParser(it.date),
-        cookie = cookie
+        cookie = cookie,
     )
 }

@@ -19,7 +19,6 @@ import ru.eva.oriokslive.ui.adapter.GroupAdapter
 import ru.eva.oriokslive.ui.base.BaseFragment
 import ru.eva.oriokslive.utils.showToast
 
-
 @AndroidEntryPoint
 class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
 
@@ -31,7 +30,7 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
         GroupAdapter(
             { startSchedulerActivity(it) },
             { addPinnedShortcuts(it) },
-            { group, position -> deleteItem(group, position) }
+            { group, position -> deleteItem(group, position) },
         )
     }
     private val launcher = registerForActivityResult(StartActivityForResult()) {

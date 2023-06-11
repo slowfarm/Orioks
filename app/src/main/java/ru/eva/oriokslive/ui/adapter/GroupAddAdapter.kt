@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.eva.oriokslive.databinding.ListItemGroupAddBinding
 
-
 class GroupAddAdapter(
     private val listener: (String) -> Unit,
 ) : RecyclerView.Adapter<GroupAddViewHolder>() {
@@ -13,7 +12,7 @@ class GroupAddAdapter(
     private var groups: MutableList<String> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GroupAddViewHolder(
-        ListItemGroupAddBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ListItemGroupAddBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
     override fun onBindViewHolder(holder: GroupAddViewHolder, position: Int) {
@@ -30,7 +29,6 @@ class GroupAddAdapter(
 
 class GroupAddViewHolder(private val binding: ListItemGroupAddBinding) :
     RecyclerView.ViewHolder(binding.root) {
-
 
     fun bind(item: String, listener: (String) -> Unit) {
         binding.tvGroup.text = item

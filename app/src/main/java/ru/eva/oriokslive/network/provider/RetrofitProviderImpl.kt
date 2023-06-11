@@ -26,7 +26,7 @@ import javax.inject.Singleton
 @Singleton
 class RetrofitProviderImpl @Inject constructor(
     @ApplicationContext context: Context,
-    domainRepository: DomainRepository
+    domainRepository: DomainRepository,
 ) : RetrofitProvider {
 
     private val logging = HttpLoggingInterceptor().apply { level = if (DEBUG) BODY else NONE }

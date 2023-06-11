@@ -1,4 +1,4 @@
-package ru.eva.oriokslive.ui.entity;
+package ru.eva.oriokslive.ui.entity
 
 data class NewsItem(
     val title: String,
@@ -6,5 +6,5 @@ data class NewsItem(
     val description: String,
     val imageUrl: String,
     val date: String,
-    val cookie: String?
+    val cookie: String?,
 )

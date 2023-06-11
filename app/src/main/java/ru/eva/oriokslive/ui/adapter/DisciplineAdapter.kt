@@ -13,7 +13,7 @@ class DisciplineAdapter(private val listener: (Int) -> Unit) :
     private var disciplines: List<DisciplineItem> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DisciplineViewHolder(
-        ListItemDisciplineBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ListItemDisciplineBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
     override fun onBindViewHolder(holder: DisciplineViewHolder, position: Int) {

@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import ru.eva.oriokslive.domain.Common
 import ru.eva.oriokslive.domain.Common.TABLE_DISCIPLINE
 import ru.eva.oriokslive.network.entity.orioks.Discipline
 

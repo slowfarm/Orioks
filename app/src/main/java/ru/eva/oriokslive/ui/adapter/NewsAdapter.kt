@@ -14,7 +14,7 @@ class NewsAdapter(private val listener: (String) -> Unit) : RecyclerView.Adapter
     private var newsItems = listOf<NewsItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NewsViewHolder(
-        ListItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ListItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
@@ -43,5 +43,4 @@ class NewsViewHolder(private val binding: ListItemNewsBinding) :
             .into(binding.ivPicture)
         binding.root.setOnClickListener { listener.invoke(item.link) }
     }
-
 }

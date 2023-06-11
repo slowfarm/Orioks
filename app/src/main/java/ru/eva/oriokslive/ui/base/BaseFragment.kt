@@ -18,7 +18,7 @@ abstract class BaseFragment<Binding : ViewBinding>() : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = bindingInflater.invoke(inflater, container, false)
         return requireNotNull(_binding).root

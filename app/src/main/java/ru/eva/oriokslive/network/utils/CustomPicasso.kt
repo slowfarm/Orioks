@@ -9,9 +9,11 @@ fun Picasso.Builder.cookie(cookie: String?): Picasso =
     downloader(OkHttp3Downloader(getDownloader(cookie))).build()
 
 private fun getDownloader(cookie: String?) = OkHttpClient.Builder()
-    .addInterceptor(Interceptor { chain ->
-        val builder = chain.request().newBuilder()
-        cookie?.let { builder.addHeader("Cookie", cookie) }
-        chain.proceed(builder.build())
-    })
+    .addInterceptor(
+        Interceptor { chain ->
+            val builder = chain.request().newBuilder()
+            cookie?.let { builder.addHeader("Cookie", cookie) }
+            chain.proceed(builder.build())
+        },
+    )
     .build()

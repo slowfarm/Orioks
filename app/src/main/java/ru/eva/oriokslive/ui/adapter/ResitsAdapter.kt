@@ -10,7 +10,7 @@ class ResitsAdapter(private val resits: List<ResitItem>) :
     RecyclerView.Adapter<ResitsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ResitsViewHolder(
-        ListItemResitBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ListItemResitBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
     override fun onBindViewHolder(holder: ResitsViewHolder, position: Int) {
