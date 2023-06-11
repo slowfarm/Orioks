@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
@@ -30,13 +31,18 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
         GroupAdapter(
             { startSchedulerActivity(it) },
             { addPinnedShortcuts(it) },
-            { group, position -> deleteItem(group, position)}
+            { group, position -> deleteItem(group, position) }
         )
+    }
+    private val launcher = registerForActivityResult(StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK) {
+            it.data?.getStringExtra(EXTRA_GROUP)?.let { group -> viewModel.addSchedule(group) }
+        }
     }
 
     override fun setupUI() {
         binding.btnAdd.setOnClickListener {
-            startActivityForResult(Intent(requireContext(), GroupActivity::class.java), 1)
+            launcher.launch(Intent(requireContext(), GroupActivity::class.java))
         }
         binding.rvGroups.layoutManager = LinearLayoutManager(requireContext())
         binding.rvGroups.adapter = adapter
@@ -46,23 +52,16 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
         viewModel.onError.observe(viewLifecycleOwner) { requireContext().showToast(it) }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == RESULT_OK) {
-            data?.getStringExtra(EXTRA_GROUP)?.let { viewModel.addSchedule(it) }
-        }
-    }
-
     private fun startSchedulerActivity(group: String) {
-        val intent =
-            Intent(requireContext(), SchedulerActivity::class.java).putExtra(EXTRA_GROUP, group)
+        val intent = Intent(requireContext(), SchedulerActivity::class.java)
+        intent.putExtra(EXTRA_GROUP, group)
         startActivity(intent)
     }
 
     private fun addPinnedShortcuts(group: String) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            setClass(requireContext(), SchedulerActivity::class.java)
-            putExtra(EXTRA_GROUP, group)
-        }
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.setClass(requireContext(), SchedulerActivity::class.java)
+        intent.putExtra(EXTRA_GROUP, group)
         val shortcut = ShortcutInfoCompat.Builder(requireContext(), group)
             .setShortLabel(group.split("\\s")[0])
             .setLongLabel(group)
@@ -70,6 +69,7 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding>() {
             .setIntent(intent)
             .build()
         ShortcutManagerCompat.pushDynamicShortcut(requireContext(), shortcut)
+        requireContext().showToast(R.string.shortcut_added)
     }
 
     private fun deleteItem(group: String, position: Int) {

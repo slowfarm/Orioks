@@ -85,4 +85,5 @@
     <string name="search">Посик</string>
     <string name="resits">Академические задолженности</string>
     <string name="resit_date">Дата: %s</string>
+    <string name="shortcut_added">Ядрлык добавлен</string>
 </resources>
