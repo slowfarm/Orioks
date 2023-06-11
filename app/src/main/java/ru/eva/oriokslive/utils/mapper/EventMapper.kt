@@ -24,7 +24,8 @@ fun mapEvents(events: List<Event>) = events.map {
     }
     EventItem(
         progress = progress,
-        name = it.type,
+        name = it.name ?: it.type,
+        type = it.type,
         grade = grade,
         maxGrade = it.maxGrade.toString(),
         color = when {

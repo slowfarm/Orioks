@@ -19,7 +19,7 @@ data class Event(
     val maxGrade: Double,
     @SerializedName("name")
     @ColumnInfo(name = "name")
-    val name: String,
+    val name: String?,
     @SerializedName("type")
     @ColumnInfo(name = "type")
     val type: String,

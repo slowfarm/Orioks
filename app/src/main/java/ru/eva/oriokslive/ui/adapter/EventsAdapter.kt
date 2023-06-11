@@ -27,6 +27,7 @@ class EventsViewHolder(private val binding: ListItemEventBinding) :
     fun bind(item: EventItem) {
         with(binding) {
             tvName.text = item.name
+            tvType.text = item.type
             tvGrade.text = item.grade
             tvMaxGrade.text = item.maxGrade
             tvWeek.text = item.week

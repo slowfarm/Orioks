@@ -56,7 +56,13 @@
             style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Событие" />
+            tools:text="Имя" />
+
+        <TextView
+            android:id="@+id/tvType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Тип" />
 
         <TextView
             android:id="@+id/tvWeek"
