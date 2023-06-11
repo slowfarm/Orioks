@@ -86,4 +86,9 @@
     <string name="resits">Академические задолженности</string>
     <string name="resit_date">Дата: %s</string>
     <string name="shortcut_added">Ядрлык добавлен</string>
+
+    <string name="grade_update">Обновление оценки</string>
+    <string name="grade_changed">Оценка изменена</string>
+    <string name="debts_changed">Долги изменены</string>
+    <string name="permission_not_granted">Разрешение на уведомление не предоставлено</string>
 </resources>

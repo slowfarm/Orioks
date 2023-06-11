@@ -3,6 +3,7 @@ package ru.eva.oriokslive.ui.activity.main
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
@@ -19,6 +20,7 @@ import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.ActivityMainBinding
 import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.base.BaseActivity
+import ru.eva.oriokslive.utils.checkNotificationPermission
 import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
@@ -27,6 +29,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override val bindingInflater: (LayoutInflater) -> ActivityMainBinding =
         ActivityMainBinding::inflate
     private val viewModel: MainViewModel by viewModels()
+
+    private val launcher = registerForActivityResult(RequestPermission()) {
+        if (!it) showToast(R.string.permission_not_granted)
+    }
 
     private val appBarConfiguration by lazy {
         AppBarConfiguration(
@@ -55,7 +61,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             viewModel.setDefaultTheme(mode)
         }
 
-        viewModel.getDefaultTheme()
         viewModel.getStudent()
         viewModel.header.observe(this) {
             with(binding.navigationView.getHeaderView(0)) {
@@ -74,6 +79,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             themeSwitch?.isChecked = it == MODE_NIGHT_YES
             AppCompatDelegate.setDefaultNightMode(it)
         }
+
+        checkNotificationPermission { launcher.launch(it) }
     }
 
     override fun onSupportNavigateUp(): Boolean {

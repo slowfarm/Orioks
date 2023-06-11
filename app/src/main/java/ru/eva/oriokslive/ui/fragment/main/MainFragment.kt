@@ -43,6 +43,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         viewModel.onError.observe(viewLifecycleOwner) {
             if (it is NetworkException) viewModel.getLocalDisciplines()
             requireContext().showToast(it)
+            binding.swipeRefreshLayout.isRefreshing = false
         }
     }
 }

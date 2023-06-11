@@ -36,7 +36,10 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>() {
             adapter.addItems(it)
             binding.swipeRefreshLayout.isRefreshing = false
         }
-        viewModel.onError.observe(viewLifecycleOwner) { requireContext().showToast(it) }
+        viewModel.onError.observe(viewLifecycleOwner) {
+            requireContext().showToast(it)
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
         viewModel.finishActivity.observe(viewLifecycleOwner) {
             requireContext().showToast(R.string.token_deleted)
             requireActivity().finishAffinity()

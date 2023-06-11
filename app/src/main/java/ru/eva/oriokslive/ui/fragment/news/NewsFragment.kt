@@ -36,7 +36,10 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
             adapter.addItems(it)
             binding.swipeRefreshLayout.isRefreshing = false
         }
-        viewModel.onError.observe(viewLifecycleOwner) { requireContext().showToast(it) }
+        viewModel.onError.observe(viewLifecycleOwner) {
+            requireContext().showToast(it)
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     companion object {

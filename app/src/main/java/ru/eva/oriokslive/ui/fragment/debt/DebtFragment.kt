@@ -43,6 +43,7 @@ class DebtFragment : BaseFragment<FragmentDebtBinding>() {
         viewModel.onError.observe(viewLifecycleOwner) {
             if (it is NetworkException) viewModel.getLocalDebts()
             requireContext().showToast(it)
+            binding.swipeRefreshLayout.isRefreshing = false
         }
     }
 }
