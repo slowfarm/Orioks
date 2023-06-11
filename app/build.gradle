@@ -36,6 +36,22 @@ android {
         viewBinding true
     }
 
+    signingConfigs{
+        release {
+            def props = new Properties()
+            def fileInputStream = new FileInputStream(file('../signing.properties'))
+            props.load(fileInputStream)
+            fileInputStream.close()
+
+            storeFile = file(props['STORE_FILE'])
+            storePassword = props['STORE_PASSWORD']
+            keyAlias = props['KEY_ALIAS']
+            keyPassword = props['KEY_PASSWORD']
+        }
+    }
+
+    buildTypes.release.signingConfig = signingConfigs.release
+
     packagingOptions {
         exclude 'META-INF/NOTICE.md'
         exclude 'META-INF/LICENSE.md'
