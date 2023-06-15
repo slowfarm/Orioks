@@ -10,6 +10,7 @@ import ru.eva.oriokslive.databinding.FragmentStudentBinding
 import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.activity.registration.RegistrationActivity
 import ru.eva.oriokslive.ui.base.BaseFragment
+import ru.eva.oriokslive.ui.dialog.showDescriptionDialog
 import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
@@ -23,17 +24,12 @@ class StudentFragment : BaseFragment<FragmentStudentBinding>() {
         binding.btnExit.setOnClickListener { viewModel.clearAll() }
 
         viewModel.getStudent()
-        viewModel.student.observe(viewLifecycleOwner) {
+        viewModel.student.observe(viewLifecycleOwner) { student ->
             with(binding) {
-                tvName.text = getString(R.string.name, it.fullName)
-                tvGroup.text = getString(R.string.group, it.group)
-                tvDepartment.text = getString(R.string.department, it.department)
-                tvCourse.text = getString(R.string.course, it.course)
-                tvId.text = getString(R.string.id, it.recordBookId)
-                tvSemester.text = getString(R.string.semester, it.semester)
-                tvDirection.text = getString(R.string.direction, it.studyDirection)
-                tvProfile.text = getString(R.string.profile, it.studyProfile)
-                tvYear.text = getString(R.string.year, it.year)
+                tvName.text = student.fullName
+                tvGroup.text = student.group
+                tvDirection.text = student.studyDirection
+                cvProfile.setOnClickListener { showDescriptionDialog(requireContext(), student) }
             }
         }
         viewModel.onError.observe(viewLifecycleOwner) {
