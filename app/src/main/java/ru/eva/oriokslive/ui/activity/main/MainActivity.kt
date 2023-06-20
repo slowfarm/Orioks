@@ -71,9 +71,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             showToast(it)
         }
         viewModel.theme.observe(this) { theme ->
-            AppCompatDelegate.setDefaultNightMode(theme)
             menuItem.setOnMenuItemClickListener {
-                ThemeSwitchDialog(this, theme) { viewModel.setDefaultTheme(it) }.show()
+                ThemeSwitchDialog(this, theme) {
+                    viewModel.setDefaultTheme(it)
+                    AppCompatDelegate.setDefaultNightMode(it)
+                }.show()
                 true
             }
         }

@@ -10,7 +10,6 @@
         android:id="@+id/tilLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
         app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/tilPassword"
         app:layout_constraintEnd_toEndOf="@+id/tilPassword"
@@ -20,6 +19,7 @@
             android:id="@+id/etLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:hint="@string/login"
             android:inputType="textPersonName"
             tools:text="Логин" />
@@ -30,7 +30,6 @@
         android:id="@+id/tilPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
         android:minEms="10"
         app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,6 +41,7 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:hint="@string/password"
             android:inputType="textPassword"
             tools:text="Пароль" />

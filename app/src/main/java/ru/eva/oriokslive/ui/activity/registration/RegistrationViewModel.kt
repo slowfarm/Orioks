@@ -18,6 +18,7 @@ class RegistrationViewModel @Inject constructor(
 
     val startMainActivity = MutableLiveData<Unit>()
     val noToken = MutableLiveData<Unit>()
+    val theme = MutableLiveData<Int>()
 
     fun checkAccessToken() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
@@ -35,6 +36,10 @@ class RegistrationViewModel @Inject constructor(
                 startMainActivity.postValue(Unit)
             }
         }
+    }
+
+    fun getDefaultTheme() {
+        theme.postValue(domainRepository.getDefaultTheme())
     }
 
     fun deleteToken() {

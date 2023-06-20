@@ -3,6 +3,7 @@ package ru.eva.oriokslive.ui.activity.registration
 import android.content.Intent
 import android.view.LayoutInflater
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eva.oriokslive.R
@@ -33,14 +34,14 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding>() {
             )
         }
 
+        viewModel.getDefaultTheme()
         viewModel.checkAccessToken()
+        viewModel.theme.observe(this) { AppCompatDelegate.setDefaultNightMode(it) }
         viewModel.startMainActivity.observe(this) {
             needShowSplash.set(false)
             startMainActivity()
         }
-        viewModel.noToken.observe(this) {
-            needShowSplash.set(false)
-        }
+        viewModel.noToken.observe(this) { needShowSplash.set(false) }
         viewModel.onError.observe(this) {
             needShowSplash.set(false)
             when (it) {

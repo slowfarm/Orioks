@@ -25,7 +25,7 @@ class SecurityViewModel @Inject constructor(
     fun getActiveTokens() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             remoteRepository.getAllActiveTokens().let {
-                items = mapSecurity(it)
+                items = mapSecurity(it, domainRepository.getAccessToken())
                 tokens.postValue(items)
             }
         }

@@ -14,7 +14,7 @@
     <string name="schedule">Расписание</string>
     <string name="news">Новости</string>
     <string name="security">Безопасность</string>
-    <string name="dark_theme">Темная тема</string>
+    <string name="theme">Тема</string>
 
     // Groups activity
     <string name="groups_title">Группы</string>
@@ -54,6 +54,7 @@
     <string name="hours_ago">%d часа(ов) назад</string>
     <string name="day_ago">%d день назад</string>
     <string name="days_ago">%d дня(ей) назад</string>
+    <string name="current_session">Текущая сессия</string>
 
     // Schedule
     <string name="today">Сегодня</string>
