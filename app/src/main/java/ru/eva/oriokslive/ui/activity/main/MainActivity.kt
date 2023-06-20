@@ -6,20 +6,18 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.google.android.material.switchmaterial.SwitchMaterial
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.ActivityMainBinding
 import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.base.BaseActivity
+import ru.eva.oriokslive.ui.dialog.ThemeSwitchDialog
 import ru.eva.oriokslive.utils.checkNotificationPermission
 import ru.eva.oriokslive.utils.showToast
 
@@ -33,6 +31,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private val launcher = registerForActivityResult(RequestPermission()) {
         if (!it) showToast(R.string.permission_not_granted)
     }
+
+    private val menuItem: MenuItem by lazy { binding.navigationView.menu.findItem(R.id.nav_theme_switch) }
 
     private val appBarConfiguration by lazy {
         AppBarConfiguration(
@@ -55,13 +55,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navigationView.setupWithNavController(navController)
 
-        val menuItem = binding.navigationView.menu.findItem(R.id.nav_theme_switch) as MenuItem
-        val themeSwitch = menuItem.actionView?.findViewById<SwitchMaterial>(R.id.theme_switch)
-        themeSwitch?.setOnCheckedChangeListener { _, checked ->
-            val mode = if (checked) MODE_NIGHT_YES else MODE_NIGHT_NO
-            viewModel.setDefaultTheme(mode)
-        }
-
         viewModel.getDefaultTheme()
         viewModel.getStudent()
         viewModel.header.observe(this) {
@@ -77,9 +70,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             if (it is NetworkException) viewModel.getLocalStudent()
             showToast(it)
         }
-        viewModel.theme.observe(this) {
-            themeSwitch?.isChecked = it == MODE_NIGHT_YES
-            AppCompatDelegate.setDefaultNightMode(it)
+        viewModel.theme.observe(this) { theme ->
+            AppCompatDelegate.setDefaultNightMode(theme)
+            menuItem.setOnMenuItemClickListener {
+                ThemeSwitchDialog(this, theme) { viewModel.setDefaultTheme(it) }.show()
+                true
+            }
         }
 
         checkNotificationPermission { launcher.launch(it) }

@@ -76,6 +76,11 @@
     <string name="date_not_assigned">Дата экзамена: не назначена</string>
     <string name="teacher_not_assigned">Не назначен</string>
 
+    // Theme switch dialog
+    <string name="light">Светлая</string>
+    <string name="dark">Темная</string>
+    <string name="default_as_in_system">По умолчанию (как в системе)</string>
+
     // Menu
     <string name="information">Информация</string>
     <string name="refresh">Обновить</string>

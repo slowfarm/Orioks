@@ -76,6 +76,11 @@
     <string name="date_not_assigned">Exam date: not assigned</string>
     <string name="teacher_not_assigned">Not assigned</string>
 
+    // Theme switch dialog
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="default_as_in_system">Default (follow system)</string>
+
     // Menu
     <string name="information">Information</string>
     <string name="refresh">Refresh</string>

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.FragmentStudentBinding
 import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.activity.registration.RegistrationActivity

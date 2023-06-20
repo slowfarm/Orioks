@@ -1,8 +1,8 @@
 package ru.eva.oriokslive.domain.repository
 
-import android.app.UiModeManager.MODE_NIGHT_NO
 import android.content.SharedPreferences
 import androidx.annotation.WorkerThread
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import ru.eva.oriokslive.domain.GeneralDatabase
 import ru.eva.oriokslive.domain.dao.DebtsDao
 import ru.eva.oriokslive.domain.dao.DisciplinesDao
@@ -46,7 +46,7 @@ class DomainRepositoryImpl @Inject constructor(
         preferences.edit().putInt(THEME, value).apply()
     }
 
-    override fun getDefaultTheme(): Int = preferences.getInt(THEME, MODE_NIGHT_NO)
+    override fun getDefaultTheme(): Int = preferences.getInt(THEME, MODE_NIGHT_FOLLOW_SYSTEM)
 
     @WorkerThread
     override suspend fun setStudent(student: Student) {
