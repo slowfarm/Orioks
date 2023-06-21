@@ -1,4 +1,4 @@
-package ru.eva.oriokslive.ui.fragment.student
+package ru.eva.oriokslive.ui.fragment.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -12,7 +12,7 @@ import ru.eva.oriokslive.ui.base.BaseViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class StudentViewModel @Inject constructor(
+class ProfileViewModel @Inject constructor(
     private val domainRepository: DomainRepository,
     private val remoteRepository: RemoteRepository,
 ) : BaseViewModel() {

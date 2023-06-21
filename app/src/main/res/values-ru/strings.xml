@@ -10,7 +10,7 @@
     // Main activity
     <string name="main">Главная</string>
     <string name="debts">Долги</string>
-    <string name="about_student">О студенте</string>
+    <string name="profile">Профиль</string>
     <string name="schedule">Расписание</string>
     <string name="news">Новости</string>
     <string name="security">Безопасность</string>
@@ -40,7 +40,7 @@
     <string name="id">ID: %s</string>
     <string name="semester">Семестр: %d</string>
     <string name="direction">Направление: %s</string>
-    <string name="profile">Профиль: %s</string>
+    <string name="training_profile">Профиль: %s</string>
     <string name="year">Год: %s</string>
     <string name="logout">Выйти</string>
 

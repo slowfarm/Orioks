@@ -1,4 +1,4 @@
-package ru.eva.oriokslive.ui.fragment.student
+package ru.eva.oriokslive.ui.fragment.profile
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -13,11 +13,11 @@ import ru.eva.oriokslive.ui.dialog.showDescriptionDialog
 import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
-class StudentFragment : BaseFragment<FragmentStudentBinding>() {
+class ProfileFragment : BaseFragment<FragmentStudentBinding>() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentStudentBinding =
         FragmentStudentBinding::inflate
-    private val viewModel: StudentViewModel by viewModels()
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun setupUI() {
         binding.btnExit.setOnClickListener { viewModel.clearAll() }

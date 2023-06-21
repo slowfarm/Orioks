@@ -13,7 +13,7 @@ fun showDescriptionDialog(context: Context, student: Student) {
             tvCourse.text = context.getString(R.string.course, student.course)
             tvId.text = context.getString(R.string.id, student.recordBookId)
             tvSemester.text = context.getString(R.string.semester, student.semester)
-            tvProfile.text = context.getString(R.string.profile, student.studyProfile)
+            tvProfile.text = context.getString(R.string.training_profile, student.studyProfile)
             tvYear.text = context.getString(R.string.year, student.year)
         }
         setContentView(binding.root)

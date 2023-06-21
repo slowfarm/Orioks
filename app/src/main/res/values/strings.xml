@@ -10,7 +10,7 @@
     // Main activity
     <string name="main">Home</string>
     <string name="debts">Debts</string>
-    <string name="about_student">About student</string>
+    <string name="profile">Profile</string>
     <string name="schedule">Schedule</string>
     <string name="news">News</string>
     <string name="security">Security</string>
@@ -40,7 +40,7 @@
     <string name="id">ID: %s</string>
     <string name="semester">Semester: %d</string>
     <string name="direction">Direction: %s</string>
-    <string name="profile">Profile: %s</string>
+    <string name="training_profile">Profile: %s</string>
     <string name="year">Year: %s</string>
     <string name="logout">Log out</string>
 
