@@ -7,7 +7,8 @@
     android:layout_height="86dp">
 
     <TextView
-        android:id="@+id/tvGroup"
+        android:id="@+id/tvSemester"
+        style="@style/Widget.AppCompat.TextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -17,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/group" />
+        tools:text="2022-2023" />
 
     <View
         android:id="@+id/bottomView"

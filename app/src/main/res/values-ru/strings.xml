@@ -43,6 +43,7 @@
     <string name="training_profile">Профиль: %s</string>
     <string name="year">Год: %s</string>
     <string name="logout">Выйти</string>
+    <string name="change_semester">Сменить семестр</string>
 
     // Security fragment
     <string name="token_deleted">Токен аннулирован</string>
@@ -81,6 +82,9 @@
     <string name="light">Светлая</string>
     <string name="dark">Темная</string>
     <string name="default_as_in_system">По умолчанию (как в системе)</string>
+
+    // Semester change dialog
+    <string name="semester_changed">Семестр изменен на %d</string>
 
     // Menu
     <string name="information">Информация</string>

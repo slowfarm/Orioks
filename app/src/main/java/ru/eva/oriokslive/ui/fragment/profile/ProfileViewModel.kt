@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.eva.oriokslive.domain.repository.DomainRepository
+import ru.eva.oriokslive.network.entity.Semester
 import ru.eva.oriokslive.network.entity.orioks.Student
 import ru.eva.oriokslive.network.repository.RemoteRepository
 import ru.eva.oriokslive.ui.base.BaseViewModel
@@ -18,6 +19,8 @@ class ProfileViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val student = MutableLiveData<Student>()
+    val semester = MutableLiveData<Semester>()
+    val semesterChanged = MutableLiveData<Int>()
     val finishActivity = MutableLiveData<Unit>()
 
     fun clearAll() {
@@ -36,9 +39,25 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun getSemester() {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            semester.postValue(remoteRepository.getSemester())
+        }
+    }
+
     fun getLocalStudent() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             student.postValue(domainRepository.getStudent())
+        }
+    }
+
+    fun changeSemester(id: Int) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            remoteRepository.changeSemester(id).let {
+                semesterChanged.postValue(it.semester)
+                domainRepository.clearStudy()
+                getStudent()
+            }
         }
     }
 }

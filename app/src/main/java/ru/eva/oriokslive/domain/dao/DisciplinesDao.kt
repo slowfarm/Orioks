@@ -17,4 +17,7 @@ interface DisciplinesDao {
 
     @Query("SELECT * FROM $TABLE_DISCIPLINE WHERE id=:id LIMIT 1")
     fun getDisciplineById(id: Int): Discipline
+
+    @Query("DELETE FROM $TABLE_DISCIPLINE")
+    fun clear()
 }

@@ -43,6 +43,7 @@
     <string name="training_profile">Profile: %s</string>
     <string name="year">Year: %s</string>
     <string name="logout">Log out</string>
+    <string name="change_semester">Change semester</string>
 
     // Security fragment
     <string name="token_deleted">Token cancelled</string>
@@ -81,6 +82,9 @@
     <string name="light">Light</string>
     <string name="dark">Dark</string>
     <string name="default_as_in_system">Default (follow system)</string>
+
+    // Semester change dialog
+    <string name="semester_changed">Semester changed to %d</string>
 
     // Menu
     <string name="information">Information</string>
