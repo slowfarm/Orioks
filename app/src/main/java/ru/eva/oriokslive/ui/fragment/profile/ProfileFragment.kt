@@ -5,20 +5,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import ru.eva.oriokslive.R
-import ru.eva.oriokslive.databinding.FragmentStudentBinding
+import ru.eva.oriokslive.databinding.FragmentProfileBinding
 import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.activity.registration.RegistrationActivity
 import ru.eva.oriokslive.ui.base.BaseFragment
-import ru.eva.oriokslive.ui.dialog.SemesterChangeDialog
 import ru.eva.oriokslive.ui.dialog.showProfileDialog
 import ru.eva.oriokslive.utils.showToast
 
 @AndroidEntryPoint
-class ProfileFragment : BaseFragment<FragmentStudentBinding>() {
+class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentStudentBinding =
-        FragmentStudentBinding::inflate
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProfileBinding =
+        FragmentProfileBinding::inflate
     private val viewModel: ProfileViewModel by viewModels()
 
     override fun setupUI() {
@@ -32,17 +30,6 @@ class ProfileFragment : BaseFragment<FragmentStudentBinding>() {
                 tvDirection.text = student.studyDirection
                 cvProfile.setOnClickListener { showProfileDialog(requireContext(), student) }
             }
-        }
-        viewModel.getSemester()
-        viewModel.semester.observe(viewLifecycleOwner) { semester ->
-            binding.tvChangeSemester.setOnClickListener {
-                SemesterChangeDialog(requireContext(), semester) {
-                    viewModel.changeSemester(it)
-                }.show()
-            }
-        }
-        viewModel.semesterChanged.observe(viewLifecycleOwner) {
-            requireContext().showToast(getString(R.string.semester_changed, it))
         }
         viewModel.onError.observe(viewLifecycleOwner) {
             if (it is NetworkException) viewModel.getLocalStudent()

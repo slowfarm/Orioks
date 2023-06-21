@@ -14,7 +14,4 @@ interface ResitDao {
 
     @Query("SELECT * FROM ${Common.TABLE_RESIT} WHERE id =:id")
     fun getResitById(id: Int): List<Resit>?
-
-    @Query("DELETE FROM ${Common.TABLE_RESIT}")
-    fun clear()
 }

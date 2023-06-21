@@ -26,7 +26,7 @@ interface DomainRepository {
     suspend fun getDebtsById(id: Int): Debt
     fun setResits(resits: List<Resit>)
     fun getResitsById(id: Int): List<Resit>?
-    suspend fun clearStudy()
+    suspend fun clearDisciplines()
     suspend fun clearAll()
     suspend fun getGroups(): List<String>?
     suspend fun removeGroup(group: String)

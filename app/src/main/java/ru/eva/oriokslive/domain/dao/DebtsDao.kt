@@ -17,7 +17,4 @@ interface DebtsDao {
 
     @Query("SELECT * FROM ${Common.TABLE_DEBT} WHERE id=:id LIMIT 1")
     fun getDebtsById(id: Int): Debt
-
-    @Query("DELETE FROM ${Common.TABLE_DEBT}")
-    fun clear()
 }

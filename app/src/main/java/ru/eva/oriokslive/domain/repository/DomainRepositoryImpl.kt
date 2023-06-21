@@ -96,11 +96,8 @@ class DomainRepositoryImpl @Inject constructor(
     override fun getResitsById(id: Int): List<Resit>? = resitDao.getResitById(id)
 
     @WorkerThread
-    override suspend fun clearStudy() {
+    override suspend fun clearDisciplines() {
         disciplinesDao.clear()
-        eventDao.clear()
-        debtsDao.clear()
-        resitDao.clear()
     }
 
     @WorkerThread

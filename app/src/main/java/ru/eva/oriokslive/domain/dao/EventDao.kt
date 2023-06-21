@@ -14,7 +14,4 @@ interface EventDao {
 
     @Query("SELECT * FROM ${Common.TABLE_EVENT} WHERE id =:id")
     fun getEventsById(id: Int): List<Event>?
-
-    @Query("DELETE FROM ${Common.TABLE_EVENT}")
-    fun clear()
 }
