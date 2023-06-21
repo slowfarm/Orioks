@@ -42,6 +42,6 @@ fun RapidFloatingActionContentLabelList.onRFACItemLabelClick(listener: (Int) -> 
             }
 
             override fun onRFACItemIconClick(position: Int, item: RFACLabelItem<Int>?) {}
-        }
+        },
     )
 }

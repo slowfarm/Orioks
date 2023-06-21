@@ -28,7 +28,6 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:padding="8dp"
             rfab:rfab_color_normal="?attr/colorPrimary"
             rfab:rfab_drawable="@drawable/ic_semester_change"
             rfab:rfab_size="normal" />
