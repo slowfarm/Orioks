@@ -4,6 +4,7 @@ import okhttp3.Credentials
 import ru.eva.oriokslive.network.MietApi
 import ru.eva.oriokslive.network.NewsApi
 import ru.eva.oriokslive.network.OrioksApi
+import ru.eva.oriokslive.network.entity.Semester
 import ru.eva.oriokslive.network.entity.news.NewsResponse
 import ru.eva.oriokslive.network.entity.orioks.AccessToken
 import ru.eva.oriokslive.network.entity.orioks.Debt
@@ -39,6 +40,9 @@ class RemoteRepositoryImpl @Inject constructor(
     override suspend fun getDebts(): List<Debt> = orioksApi.getDebts()
 
     override suspend fun getResits(id: Int): List<Resit> = orioksApi.getResits(id)
+    override suspend fun getSemester(): Semester = orioksApi.getSemester()
+
+    override suspend fun changeSemester(id: Int): Semester = orioksApi.changeSemester(id)
 
     override suspend fun getGroups(): List<String> = mietApi.getGroups().toList()
 

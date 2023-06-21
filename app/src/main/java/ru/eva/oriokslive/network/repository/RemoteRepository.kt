@@ -1,5 +1,6 @@
 package ru.eva.oriokslive.network.repository
 
+import ru.eva.oriokslive.network.entity.Semester
 import ru.eva.oriokslive.network.entity.news.NewsResponse
 import ru.eva.oriokslive.network.entity.orioks.AccessToken
 import ru.eva.oriokslive.network.entity.orioks.Debt
@@ -19,6 +20,8 @@ interface RemoteRepository {
     suspend fun getAllActiveTokens(): List<Security>
     suspend fun getDebts(): List<Debt>
     suspend fun getResits(id: Int): List<Resit>
+    suspend fun getSemester(): Semester
+    suspend fun changeSemester(id: Int): Semester
     suspend fun getGroups(): List<String>
     suspend fun getSchedule(group: String): Schedule
     suspend fun getNews(): NewsResponse

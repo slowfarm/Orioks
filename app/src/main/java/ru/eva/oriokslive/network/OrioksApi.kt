@@ -3,7 +3,9 @@ package ru.eva.oriokslive.network
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.PATCH
 import retrofit2.http.Path
+import ru.eva.oriokslive.network.entity.Semester
 import ru.eva.oriokslive.network.entity.orioks.AccessToken
 import ru.eva.oriokslive.network.entity.orioks.Debt
 import ru.eva.oriokslive.network.entity.orioks.Discipline
@@ -11,6 +13,7 @@ import ru.eva.oriokslive.network.entity.orioks.Event
 import ru.eva.oriokslive.network.entity.orioks.Resit
 import ru.eva.oriokslive.network.entity.orioks.Security
 import ru.eva.oriokslive.network.entity.orioks.Student
+
 
 interface OrioksApi {
     @GET("/api/v1/auth")
@@ -36,4 +39,10 @@ interface OrioksApi {
 
     @GET("/api/v1/student/academic-debts/{id}/resits")
     suspend fun getResits(@Path("id") id: Int): List<Resit>
+
+    @GET("/api/v2/semesters")
+    suspend fun getSemester(): Semester
+
+    @PATCH("/api/v2/semesters/{semesterId}")
+    suspend fun changeSemester(@Path("semesterId") id: Int): Semester
 }
