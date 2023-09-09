@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import java.util.Locale.ENGLISH
 import java.util.concurrent.TimeUnit.DAYS
 import java.util.concurrent.TimeUnit.HOURS
 import java.util.concurrent.TimeUnit.MILLISECONDS
@@ -104,11 +105,13 @@ fun scheduleDateParser(inputDate: String): String {
 
 fun newsDateParser(inputDate: String): String {
     val oldPattern = "EEE, dd MMM yyyy HH:mm:ss Z"
-    val newPattern = "MMM d, yyyy"
-    val sdf = SimpleDateFormat(oldPattern, Locale.ENGLISH)
+    val ruPattern = "d MMMM, yyyy"
+    val enPattern = "MMM d, yyyy"
+    val newPattern = if (Locale.getDefault().language == ENGLISH.language) enPattern else ruPattern
+    val sdf = SimpleDateFormat(oldPattern, ENGLISH)
     val date: Date = sdf.parse(inputDate) ?: Date()
-    sdf.applyPattern(newPattern)
-    return sdf.format(date)
+    val localSdf = SimpleDateFormat(newPattern, Locale.getDefault())
+    return localSdf.format(date)
 }
 
 private fun getCurrentWeek2Sem(): Int {
