@@ -7,11 +7,10 @@
 
     <TextView
         android:id="@+id/tvDepartment2"
-        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +19,6 @@
 
     <TextView
         android:id="@+id/tvProfile"
-        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -32,7 +30,6 @@
 
     <TextView
         android:id="@+id/tvCourse"
-        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -43,7 +40,6 @@
 
     <TextView
         android:id="@+id/tvSemester"
-        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -54,7 +50,6 @@
 
     <TextView
         android:id="@+id/tvYear"
-        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -65,11 +60,10 @@
 
     <TextView
         android:id="@+id/tvId"
-        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvDepartment2"
         app:layout_constraintStart_toStartOf="@+id/tvDepartment2"

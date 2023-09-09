@@ -21,9 +21,13 @@ class ResitActivity : BaseActivity<ActivityResitBinding>() {
         ActivityResitBinding::inflate
     private val viewModel: ResitViewModel by viewModels()
 
+    private val adapter by lazy { ResitsAdapter() }
     private val id: Int by lazy { intent.getIntExtra(EXTRA_ID, 0) }
 
     override fun setupUI() {
+        binding.rvResit.layoutManager = LinearLayoutManager(this)
+        binding.rvResit.adapter = adapter
+
         viewModel.getTitle(id)
         viewModel.getResits(id)
 
@@ -36,10 +40,7 @@ class ResitActivity : BaseActivity<ActivityResitBinding>() {
             }
         }
 
-        viewModel.resits.observe(this) {
-            binding.rvResit.layoutManager = LinearLayoutManager(this)
-            binding.rvResit.adapter = ResitsAdapter(it)
-        }
+        viewModel.resits.observe(this) { adapter.setItems(it) }
 
         viewModel.debt.observe(this) {
             DebtDialog(this, it).show()

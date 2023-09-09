@@ -45,7 +45,7 @@ class EventFragment : BaseFragment<FragmentEventBinding>() {
         viewModel.getSemester()
 
         viewModel.disciplines.observe(viewLifecycleOwner) {
-            adapter.addItems(it)
+            adapter.setItems(it)
             binding.swipeRefreshLayout.isRefreshing = false
         }
 

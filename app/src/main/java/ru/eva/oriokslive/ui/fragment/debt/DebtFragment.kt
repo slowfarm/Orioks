@@ -36,7 +36,7 @@ class DebtFragment : BaseFragment<FragmentDebtBinding>() {
         viewModel.getDebtList()
 
         viewModel.debts.observe(viewLifecycleOwner) {
-            adapter.addItems(it)
+            adapter.setItems(it)
             binding.swipeRefreshLayout.isRefreshing = false
         }
 

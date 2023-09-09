@@ -21,9 +21,13 @@ class EventsActivity : BaseActivity<ActivityEventsBinding>() {
         ActivityEventsBinding::inflate
     private val viewModel: EventsViewModel by viewModels()
 
+    private val adapter by lazy { EventsAdapter() }
     private val id: Int by lazy { intent.getIntExtra(EXTRA_ID, 0) }
 
     override fun setupUI() {
+        binding.rvEvents.layoutManager = LinearLayoutManager(this)
+        binding.rvEvents.adapter = adapter
+
         viewModel.getTitle(id)
         viewModel.getEvents(id)
 
@@ -36,14 +40,10 @@ class EventsActivity : BaseActivity<ActivityEventsBinding>() {
             }
         }
 
-        viewModel.events.observe(this) {
-            binding.rvEvents.layoutManager = LinearLayoutManager(this)
-            binding.rvEvents.adapter = EventsAdapter(it)
-        }
+        viewModel.events.observe(this) { adapter.setItems(it) }
 
-        viewModel.discipline.observe(this) {
-            DisciplineDialog(this, it).show()
-        }
+        viewModel.discipline.observe(this) { DisciplineDialog(this, it).show() }
+
         viewModel.onError.observe(this) {
             if (it is NetworkException) viewModel.getLocalEvent(id)
             showToast(it)

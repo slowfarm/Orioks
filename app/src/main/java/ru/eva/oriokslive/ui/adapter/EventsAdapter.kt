@@ -3,22 +3,31 @@ package ru.eva.oriokslive.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.eva.oriokslive.databinding.ListItemEventBinding
 import ru.eva.oriokslive.ui.entity.EventItem
+import ru.eva.oriokslive.utils.diff.EventDiffUtilCallback
 
-class EventsAdapter(private val events: List<EventItem>) :
-    RecyclerView.Adapter<EventsViewHolder>() {
+class EventsAdapter : RecyclerView.Adapter<EventsViewHolder>() {
+
+    private val items = mutableListOf<EventItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = EventsViewHolder(
         ListItemEventBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
     override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
-        holder.bind(events[position])
+        holder.bind(items[position])
     }
 
-    override fun getItemCount() = events.size
+    override fun getItemCount() = items.size
+    fun setItems(items: List<EventItem>) {
+        val diffResult = DiffUtil.calculateDiff(EventDiffUtilCallback(items, this.items))
+        this.items.clear()
+        this.items.addAll(items)
+        diffResult.dispatchUpdatesTo(this)
+    }
 }
 
 class EventsViewHolder(private val binding: ListItemEventBinding) :

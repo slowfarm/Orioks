@@ -3,28 +3,32 @@ package ru.eva.oriokslive.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.eva.oriokslive.databinding.ListItemDisciplineBinding
 import ru.eva.oriokslive.ui.entity.DisciplineItem
+import ru.eva.oriokslive.utils.diff.DisciplineDiffUtilCallback
 
 class DisciplineAdapter(private val listener: (Int) -> Unit) :
     RecyclerView.Adapter<DisciplineViewHolder?>() {
 
-    private var disciplines: List<DisciplineItem> = listOf()
+    private val items = mutableListOf<DisciplineItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DisciplineViewHolder(
         ListItemDisciplineBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
     override fun onBindViewHolder(holder: DisciplineViewHolder, position: Int) {
-        holder.bind(disciplines[position], listener)
+        holder.bind(items[position], listener)
     }
 
-    override fun getItemCount(): Int = disciplines.size
+    override fun getItemCount(): Int = items.size
 
-    fun addItems(items: List<DisciplineItem>) {
-        disciplines = items
-        notifyDataSetChanged()
+    fun setItems(items: List<DisciplineItem>) {
+        val diffResult = DiffUtil.calculateDiff(DisciplineDiffUtilCallback(items, this.items))
+        this.items.clear()
+        this.items.addAll(items)
+        diffResult.dispatchUpdatesTo(this)
     }
 }
 
