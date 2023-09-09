@@ -7,7 +7,7 @@ import ru.eva.oriokslive.databinding.DialogEventsBinding
 import ru.eva.oriokslive.network.entity.orioks.Discipline
 import ru.eva.oriokslive.ui.base.BaseDialog
 
-class DisciplineDialog(private val context: Context, private val discipline: Discipline) :
+class DisciplineDialog(context: Context, private val discipline: Discipline) :
     BaseDialog<DialogEventsBinding>(context) {
 
     override val bindingInflater: (LayoutInflater) -> DialogEventsBinding =

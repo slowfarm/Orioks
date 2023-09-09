@@ -15,6 +15,7 @@
     <string name="news">News</string>
     <string name="security">Security</string>
     <string name="theme">Theme</string>
+    <string name="about">About app</string>
 
     // Groups activity
     <string name="groups_title">Groups</string>
@@ -85,6 +86,10 @@
 
     // Semester change dialog
     <string name="semester_changed">Semester changed to %d</string>
+
+    // About app dialog
+    <string name="github"><a href="https://github.com/slowfarm/Orioks">Project on Github</a></string>
+    <string name="version">Orioks 2.0 version %s (%d)</string>
 
     // Menu
     <string name="information">Information</string>

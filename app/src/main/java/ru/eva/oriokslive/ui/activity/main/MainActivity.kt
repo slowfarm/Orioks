@@ -17,6 +17,7 @@ import ru.eva.oriokslive.R
 import ru.eva.oriokslive.databinding.ActivityMainBinding
 import ru.eva.oriokslive.network.exceptions.NetworkException
 import ru.eva.oriokslive.ui.base.BaseActivity
+import ru.eva.oriokslive.ui.dialog.AboutAppDialog
 import ru.eva.oriokslive.ui.dialog.ThemeSwitchDialog
 import ru.eva.oriokslive.utils.checkNotificationPermission
 import ru.eva.oriokslive.utils.showToast
@@ -32,7 +33,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         if (!it) showToast(R.string.permission_not_granted)
     }
 
-    private val menuItem: MenuItem by lazy { binding.navigationView.menu.findItem(R.id.nav_theme_switch) }
+    private val itemThemeSwitch: MenuItem by lazy { binding.navigationView.menu.findItem(R.id.nav_theme_switch) }
+    private val itemAbout: MenuItem by lazy { binding.navigationView.menu.findItem(R.id.nav_about) }
 
     private val appBarConfiguration by lazy {
         AppBarConfiguration(
@@ -55,6 +57,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navigationView.setupWithNavController(navController)
 
+        itemAbout.setOnMenuItemClickListener {
+            AboutAppDialog(this).show()
+            true
+        }
+
         viewModel.getDefaultTheme()
         viewModel.getStudent()
         viewModel.header.observe(this) {
@@ -71,7 +78,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             showToast(it)
         }
         viewModel.theme.observe(this) { theme ->
-            menuItem.setOnMenuItemClickListener {
+            itemThemeSwitch.setOnMenuItemClickListener {
                 ThemeSwitchDialog(this, theme) {
                     viewModel.setDefaultTheme(it)
                     AppCompatDelegate.setDefaultNightMode(it)

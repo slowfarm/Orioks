@@ -7,7 +7,7 @@ import ru.eva.oriokslive.databinding.DialogEventsBinding
 import ru.eva.oriokslive.network.entity.orioks.Debt
 import ru.eva.oriokslive.ui.base.BaseDialog
 
-class DebtDialog(private val context: Context, private val debt: Debt) :
+class DebtDialog(context: Context, private val debt: Debt) :
     BaseDialog<DialogEventsBinding>(context) {
 
     override val bindingInflater: (LayoutInflater) -> DialogEventsBinding =
