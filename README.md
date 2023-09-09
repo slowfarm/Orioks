@@ -10,6 +10,6 @@ Orioks 2.0 open repository
 
 # При разработке было использовано:
 
-    открытое API ОРИОКС - https://orioks.gitlab.io/student-api/
-    API расписания МИЭТ - https://www.miet.ru/schedule/
-    API новостей МИЭТ - https://www.miet.ru/rss/news/
+    https://orioks.gitlab.io/student-api/ - открытое API ОРИОКС
+    https://www.miet.ru/schedule/ - API расписания МИЭТ
+    https://www.miet.ru/rss/news/ - API новостей МИЭТ
